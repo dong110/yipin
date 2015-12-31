@@ -1,8 +1,10 @@
 package com.dong.yiping.activity;
 
 import com.dong.yiping.R;
+import com.dong.yiping.utils.ToastUtil;
 
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.Window;
 import android.widget.EditText;
@@ -147,26 +149,11 @@ public class RegistActivity extends BaseActivity {
         email = et_regist_email.getText().toString().trim();
         address = et_regist_address.getText().toString().trim();
         stuNum = et_regist_stunum.getText().toString().trim();
-        if (TextUtils.isEmpty(usernameStr) || TextUtils.isEmpty(pwdStr)) {
-            ToastUtils.show(LoginActivity.this, "用户名或密码不能为空");
-        } else if (!CommonUtil.isUsname(usernameStr)) {
-            ToastUtils.show(LoginActivity.this, "账号长度为3到15个字符，可使用字母、数字、下划线组成");
-        } else if (!CommonUtil.isUspwd(pwdStr)) {
-            ToastUtils.show(LoginActivity.this, "密码长度为6到15个字符，可使用字母、数字、下划线组成");
-        } else {
-            SharedPreferencesUtils.saveString(mContext, "USERNAME", usernameStr);
-            SharedPreferencesUtils.saveLong(mContext, "TIMESTRING", System.currentTimeMillis());
-            SharedPreferencesUtils.saveString(mContext, "USERPWD", pwdStr);
-
-
-            if (!isNet.equals("0")) {
-                dialog.show();
-                login();
-            } else {
-                ToastUtils.show(mContext, "请检查网络连接");
-            }
-
-        }
+        if (TextUtils.isEmpty(typeName)) {
+            ToastUtil.showToast(this, "用户名不能为空");
+        } else if(TextUtils.isEmpty(cardNum)) {
+            ToastUtil.showToast(this, "身份证号不能为空");
+        } 
 
 
     }
