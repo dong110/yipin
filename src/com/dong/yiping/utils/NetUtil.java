@@ -15,18 +15,7 @@ public class NetUtil {
 	private static String TAG = "NetUtil";
 	
 	public static String sendPost(String path, Map<String, String> paramsMap) {
-			String content ="";
-	        // DataOutputStream.writeBytes将字符串中的16位的unicode字符以8位的字符形式写到流里面
-	        for (String key : paramsMap.keySet()) {
-	        	content += key+"="+paramsMap.get(key)+"&";
-	        	
-	        }
-	        if(content != null){
-	        	content = content.substring(0, content.length()-1);
-		        
-	        }
-	        
-        
+		
 			InputStream is = null;
 			DataOutputStream out = null;
 			HttpURLConnection connection = null;
@@ -59,7 +48,18 @@ public class NetUtil {
 		                .getOutputStream());
 		        // The URL-encoded contend
 		        // 正文，正文内容其实跟get的URL中 '? '后的参数字符串一致
+		        String content ="";
+		        // DataOutputStream.writeBytes将字符串中的16位的unicode字符以8位的字符形式写到流里面
+		        for (String key : paramsMap.keySet()) {
+		        	content += key+"="+paramsMap.get(key)+"&";
+		        	
+		        }
+		        if(content != null){
+		        	content = content.substring(0, content.length()-1);
+			        out.writeBytes(content);
+		        }
 		        
+		        out.flush();
 		        
 		        
 		        int code = connection.getResponseCode();
