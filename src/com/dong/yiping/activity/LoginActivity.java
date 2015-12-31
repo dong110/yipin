@@ -81,10 +81,10 @@ public class LoginActivity extends BaseActivity implements OnClickListener{
 			break;
 
 		case R.id.tv_login_login:
-			/*mIntent = new Intent(mContext,MainActivity.class);
+			mIntent = new Intent(mContext,MainActivity.class);
 			startActivity(mIntent);
-			finish();*/
-			loginMethod();
+			finish();
+			//loginMethod();
 			break;
 		}
 		
