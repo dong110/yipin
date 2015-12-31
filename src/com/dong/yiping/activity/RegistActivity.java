@@ -151,6 +151,7 @@ public class RegistActivity extends BaseActivity {
         stuNum = et_regist_stunum.getText().toString().trim();
         if (TextUtils.isEmpty(typeName)) {
             ToastUtil.showToast(this, "用户名不能为空");
+           return;
         } else if(TextUtils.isEmpty(cardNum)) {
             ToastUtil.showToast(this, "身份证号不能为空");
         } 
