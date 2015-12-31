@@ -8,6 +8,7 @@ import roboguice.inject.InjectView;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
@@ -19,11 +20,16 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.dong.yiping.Constant;
 import com.dong.yiping.R;
 import com.dong.yiping.activity.GetJobDetailActivity;
 import com.dong.yiping.adapter.OneFragmentAdapter;
 import com.dong.yiping.bean.ADBean;
+import com.dong.yiping.bean.BannerListBean;
+import com.dong.yiping.bean.BannerListBean.BannerList;
 import com.dong.yiping.bean.OneFragmentJobBean;
+import com.dong.yiping.utils.NetRunnable;
+import com.dong.yiping.utils.ThreadPoolManager;
 import com.dong.yiping.utils.TuTu;
 
 public class OneFragment extends RoboFragment{
@@ -52,6 +58,20 @@ public class OneFragment extends RoboFragment{
 	
 	private Context mContext;
 	
+	private Handler mHandler = new Handler(){
+		public void handleMessage(android.os.Message msg) {
+			switch (msg.what) {
+			case Constant.HANDLER_BANNERLIST:
+				BannerListBean bean = (BannerListBean) msg.obj;
+				initAD(bean);
+				
+				break;
+
+			default:
+				break;
+			}
+		};
+	};
 	
 	public View onCreateView(LayoutInflater inflater,
 			@Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -65,7 +85,6 @@ public class OneFragment extends RoboFragment{
 		//initView();
 		initData();
 		init();
-		initAD();
 	}
 
 	private void initView() {
@@ -77,14 +96,12 @@ public class OneFragment extends RoboFragment{
 		tv_title_center.setText("主页");
 	}
 
-	private void initAD() {
+	private void initAD(BannerListBean bannerListBean) {
 		listADbeans = new ArrayList<ADBean>();
-		for(int i =0;i<5;i++){
+		for(BannerList banner: bannerListBean.getList()){
 			ADBean bean = new ADBean();
-			bean.setAdName(des[i]);
-			bean.setId(i+"");
-			bean.setImgUrl(urls[i]);
-			//bean.setImgPath(ids[i]);
+			bean.setId(banner.getId()+"");
+			bean.setImgUrl(banner.getPic());
 			listADbeans.add(bean);
 		}
 		tu = new TuTu(ad_viewPage, tv_msg, ll_dian, mContext, listADbeans);
@@ -93,6 +110,9 @@ public class OneFragment extends RoboFragment{
 	}
 
 	private void initData() {
+		String bannerList = Constant.HOST+Constant.BANNERLIST;
+		ThreadPoolManager.getInstance().addTask(new NetRunnable(mHandler,bannerList,Constant.TOPER_TYPE_BANNERLIST));
+		
 		listJob = new ArrayList<OneFragmentJobBean>();
 		for(int i=0;i<5;i++){
 			OneFragmentJobBean bean = new OneFragmentJobBean("医院代表--实习生","中日友好医院","2000-3000/月","朝阳区");
@@ -113,6 +133,8 @@ public class OneFragment extends RoboFragment{
 			OneFragmentJobBean bean = new OneFragmentJobBean("医院代表--实习生","中日友好医院","2000-3000/月","朝阳区");
 			listStudent.add(bean);
 		}
+		
+		
 	}
 
 	private void init() {
@@ -134,6 +156,12 @@ public class OneFragment extends RoboFragment{
 				}
 			}
 		});
+	}
+	
+	@Override
+	public void onDestroy() {
+		super.onDestroy();
+		tu.destroyView();
 	}
 	
 }
