@@ -186,6 +186,7 @@ public class TuTu implements OnItemClickListener  {
 		getNetImages();
 		
 	}
+	
 	/**
 	 * 加载网络图片
 	 */
@@ -217,13 +218,14 @@ public class TuTu implements OnItemClickListener  {
 					
 					@Override
 					public void loadImage(Bitmap bitmap, String imageUrl) {
-						Log.i(TAG, imageUrl);
+						/*Log.i(TAG, imageUrl);
 						for(ADBean bean :listADbeans){
 							if(imageUrl.equals(bean.getImgUrl())){
 								bean.getmImageView().setImageBitmap(bitmap);
 							}
-						}
-						handler.sendEmptyMessage(1);
+						}*/
+						
+						//handler.sendEmptyMessage(1);
 						
 					}
 				});

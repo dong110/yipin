@@ -63,7 +63,7 @@ public class OneFragment extends RoboFragment{
 			switch (msg.what) {
 			case Constant.HANDLER_BANNERLIST:
 				BannerListBean bean = (BannerListBean) msg.obj;
-				initAD(bean);
+				//initAD(bean);
 				
 				break;
 
