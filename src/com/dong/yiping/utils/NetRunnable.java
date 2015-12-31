@@ -14,15 +14,18 @@ public class NetRunnable implements Runnable{
 	private String result;
 	private Map<String, String> paramMap;
 	private ToperJson toperJson;
-	public NetRunnable(Handler mHandler, String url, Map<String, String> paramMap) {
+	private int type;
+	public NetRunnable(Handler mHandler, String url, Map<String, String> paramMap,int type) {
 		this.mHandler = mHandler;
 		this.url = url;
 		this.paramMap = paramMap;
+		this.type = type;
 		toperJson = new ToperJson(mHandler);
 	}
-	public NetRunnable(Handler mHandler, String url) {
+	public NetRunnable(Handler mHandler, String url,int type) {
 		this.mHandler = mHandler;
 		this.url = url;
+		this.type = type;
 		toperJson = new ToperJson(mHandler);
 	}
 	@Override
@@ -35,7 +38,7 @@ public class NetRunnable implements Runnable{
 		if(result == null){
 			mHandler.sendEmptyMessage(Constant.NET_ERROR);
 		}else{
-			toperJson.toperLoginJson(result);
+			toperJson.toperStart(type,result);
 		}
 	}
 

@@ -79,7 +79,7 @@ public class LoginActivity extends BaseActivity implements OnClickListener{
 			startActivity(mIntent);
 			finish();
 			break;
-
+			
 		case R.id.tv_login_login:
 			mIntent = new Intent(mContext,MainActivity.class);
 			startActivity(mIntent);
@@ -107,7 +107,7 @@ public class LoginActivity extends BaseActivity implements OnClickListener{
 		paramMap.put("pwd", password);
 		paramMap.put("username", username);
 		
-		ThreadPoolManager.getInstance().addTask(new NetRunnable(mHandler,url,paramMap));
+		ThreadPoolManager.getInstance().addTask(new NetRunnable(mHandler,url,paramMap,Constant.TOPER_TYPE_LOGIN));
 		
 	}
 }
