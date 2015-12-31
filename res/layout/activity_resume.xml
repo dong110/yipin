@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/common_bg"
+    android:orientation="vertical" >
+
+    <include layout="@layout/fragment_title_two" />
+
+    <com.dong.yiping.ui.BounceScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" >
+
+        <LinearLayout
+            
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:orientation="vertical"
+            android:padding="10dp" >
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" >
+
+                <TextView
+                    style="@style/resume_text_one"
+                    android:text="姓名：" />
+
+                <TextView
+                    style="@style/resume_text_two"
+                    android:text="张三" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" 
+                >
+
+                <TextView
+                    style="@style/resume_text_one"
+                    android:text="出生日期：" />
+
+                <LinearLayout
+                    android:layout_gravity="center_vertical"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="7" >
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/text_bg"
+                        android:orientation="horizontal"
+                        android:padding="3dp" >
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="1995年"
+                            android:textSize="@dimen/text_size_16" />
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="3dp"
+                            android:src="@drawable/apply_search_dropdown" />
+                    </LinearLayout>
+                    
+                    <LinearLayout
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="5dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/text_bg"
+                        android:orientation="horizontal"
+                        android:padding="3dp" >
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="8月"
+                            android:textSize="@dimen/text_size_16" />
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="3dp"
+                            android:src="@drawable/apply_search_dropdown" />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/text_bg"
+                        android:orientation="horizontal"
+                        android:padding="3dp" >
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="1号"
+                            android:textSize="@dimen/text_size_16" />
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="3dp"
+                            android:src="@drawable/apply_search_dropdown" />
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+            
+            <LinearLayout 
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="top"
+                android:layout_gravity="top"
+                >
+                <TextView
+                    android:gravity="top"
+                    style="@style/resume_text_one"
+                    android:text="自我评价：" />
+                
+                <EditText 
+                    
+                    android:padding="5dp"
+                    android:background="@drawable/text_bg"
+                    android:gravity="top"
+                    android:hint="输入自我评价（140字以内）"
+                    android:layout_gravity="bottom"
+                    android:layout_width="0dp"
+                    android:layout_height="100dp"
+                    android:layout_weight="7"
+                    />
+            </LinearLayout>
+            
+            <LinearLayout
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="10dp"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" >
+
+                <TextView
+                    style="@style/resume_text_one"
+                    android:text="求职意向：" />
+
+                <TextView
+                    style="@style/resume_text_two"
+                    android:text="平面设计/美术编辑/设计助理" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" >
+
+                <TextView
+                    style="@style/resume_text_one"
+                    android:text="工作经验：" />
+
+                <TextView
+                    style="@style/resume_text_two"
+                    android:text="某某公司志愿者" />
+            </LinearLayout>
+            
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" >
+
+                <TextView
+                    style="@style/resume_text_one"
+                    android:text="语言能力：" />
+
+                <TextView
+                    style="@style/resume_text_two"
+                    android:text="英语四级" />
+            </LinearLayout>
+            
+            <LinearLayout
+                android:layout_marginTop="20dp"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" >
+
+                <TextView
+                    style="@style/resume_text_one"
+                    android:text="上传头像：" />
+
+				<LinearLayout
+				    android:gravity="right"
+				    android:layout_width="0dp"
+				    android:layout_height="wrap_content"
+				    android:layout_weight="7" >
+
+				    <ImageView
+				        android:layout_width="60dp"
+				        android:layout_height="60dp"
+				        android:src="@drawable/resume_upload" />
+				</LinearLayout>
+               
+            </LinearLayout>
+            
+            
+        </LinearLayout>
+    </com.dong.yiping.ui.BounceScrollView>
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/yello"
+        android:gravity="center"
+        android:padding="10dp"
+        android:text="发布简历"
+        android:textSize="@dimen/text_size_18" />
+
+</LinearLayout>

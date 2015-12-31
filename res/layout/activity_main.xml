@@ -1,0 +1,70 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" 
+    android:orientation="vertical">
+	<include layout="@layout/fragment_title_one"/>
+    <com.dong.yiping.ui.ControlScrollViewPager
+        android:id="@+id/main_viewpager"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+	<LinearLayout
+        android:id="@+id/main_tabs_layout"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="#f6f6f6"
+        android:orientation="horizontal"
+        android:weightSum="4" >
+
+        <TextView
+            android:layout_margin="@dimen/text_margin"
+            android:textSize="@dimen/text_size"
+            android:clickable="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/tabs_00"
+            android:textColor="@color/writer"
+            android:background="@drawable/text_bg_selector" />
+			
+        <TextView
+            android:background="@drawable/text_bg_selector"
+            android:layout_margin="@dimen/text_margin"
+             android:textSize="@dimen/text_size"
+            android:textColor="@color/writer"
+            android:clickable="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/tabs_01"
+             />
+
+        <TextView
+            android:background="@drawable/text_bg_selector"
+            android:layout_margin="@dimen/text_margin"
+             android:textSize="@dimen/text_size"
+            android:clickable="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/tabs_02"
+            android:textColor="@color/writer" />
+
+        <TextView
+            android:background="@drawable/text_bg_selector"
+            android:layout_margin="@dimen/text_margin"
+             android:textSize="@dimen/text_size"
+            android:clickable="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/tabs_03"
+            android:textColor="@color/writer" />
+    </LinearLayout>
+
+</LinearLayout>

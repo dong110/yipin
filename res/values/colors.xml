@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#000000</color>
+    <color name="writer">#ffffff</color>
+    <color name="red">#ff0000</color>
+    <color name="title_bg">#7E6B5A</color>
+    <color name="yello">#F18101</color>
+    <color name="one_blue">#618A9C</color>
+    <color name="login_gold">#F3AE5B</color>
+    <color name="gray">#DDDDDD</color>
+    
+    <color name="fragment_one_bg">#DDE5E8</color>
+</resources>

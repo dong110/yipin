@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" 
+    android:background="@drawable/common_bg">
+    
+    <include 
+        android:id="@+id/hand"
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentTop="true"
+        layout="@layout/fragment_title_two"/>
+
+     <com.dong.yiping.ui.BounceScrollView
+         android:layout_below="@id/hand"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1" >
+        <LinearLayout 
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+            <LinearLayout
+                android:background="@color/writer"
+                android:padding="10dp"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" >
+
+                <TextView
+                    style="@style/resume_text_one"
+                    android:text="企业名称：" />
+
+                <TextView
+                    style="@style/resume_text_two"
+                    android:text="什么什么公司" />
+            </LinearLayout>
+            <LinearLayout
+                android:background="@color/writer"
+                android:padding="10dp"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" >
+
+                <TextView
+                    style="@style/resume_text_one"
+                    android:text="企业电话：" />
+
+                <TextView
+                    style="@style/resume_text_two"
+                    android:text="010-123456789" />
+            </LinearLayout>
+            
+            <LinearLayout
+                android:background="@color/writer"
+                android:padding="10dp"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" >
+
+                <TextView
+                    style="@style/resume_text_one"
+                    android:text="企业邮箱：" />
+
+                <TextView
+                    style="@style/resume_text_two"
+                    android:text="smsm@163.com" />
+            </LinearLayout>
+            <LinearLayout
+                android:background="@color/writer"
+                android:padding="10dp"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" >
+
+                <TextView
+                    style="@style/resume_text_one"
+                    android:text="联系人：" />
+
+                <TextView
+                    style="@style/resume_text_two"
+                    android:text="*  *  *" />
+            </LinearLayout>
+            
+            <LinearLayout
+                android:layout_marginTop="10dp"
+                android:background="@color/writer"
+                android:padding="10dp"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" >
+
+                <TextView
+                    style="@style/resume_text_one"
+                    android:text="招聘职位：" />
+
+                <TextView
+                    style="@style/resume_text_two"
+                    android:text="产品经理（实习生）" />
+            </LinearLayout>
+            
+            <LinearLayout
+                android:background="@color/writer"
+                android:padding="10dp"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" >
+
+                <TextView
+                    style="@style/resume_text_one"
+                    android:text="工作时间：" />
+
+                <TextView
+                    style="@style/resume_text_two"
+                    android:text="早8晚5/周一~周五" />
+            </LinearLayout>
+            <LinearLayout
+                android:background="@color/writer"
+                android:padding="10dp"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" >
+
+                <TextView
+                    style="@style/resume_text_one"
+                    android:text="工资待遇：" />
+
+                <TextView
+                    style="@style/resume_text_two"
+                    android:text="2000~2999/月" />
+            </LinearLayout>
+            <LinearLayout
+                android:background="@color/writer"
+                android:padding="10dp"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" >
+
+                <TextView
+                    style="@style/resume_text_one"
+                    android:text="福利待遇：" />
+
+                <TextView
+                    style="@style/resume_text_two"
+                    android:text="五险一金，带薪年假，旅游" />
+            </LinearLayout>
+            <LinearLayout 
+                android:padding="10dp"
+               android:background="@color/writer"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="top"
+                android:layout_gravity="top"
+                >
+                <TextView
+                    android:gravity="top"
+                    style="@style/resume_text_one"
+                    android:text="职务描述：" />
+                
+                <EditText 
+                    
+                    android:padding="5dp"
+                    android:background="@drawable/text_bg"
+                    android:gravity="top"
+                    android:hint="输入职务描述（140字以内）"
+                    android:layout_gravity="bottom"
+                    android:layout_width="0dp"
+                    android:layout_height="100dp"
+                    android:layout_weight="7"
+                    />
+            </LinearLayout>
+            
+            <LinearLayout 
+                android:padding="10dp"
+                 android:layout_marginTop="10dp"
+                android:background="@color/writer"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="top"
+                android:layout_gravity="top"
+                >
+                <TextView
+                    android:gravity="top"
+                    style="@style/resume_text_one"
+                    android:text="企业介绍：" />
+                
+                <EditText 
+                    
+                    android:padding="5dp"
+                    android:background="@drawable/text_bg"
+                    android:gravity="top"
+                    android:hint="输入企业介绍（300字以内）"
+                    android:layout_gravity="bottom"
+                    android:layout_width="0dp"
+                    android:layout_height="150dp"
+                    android:layout_weight="7"
+                    />
+            </LinearLayout>
+            <LinearLayout 
+                android:padding="10dp"
+                android:layout_marginBottom="60dp"
+                android:background="@color/writer"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="top"
+                android:layout_gravity="top"
+                >
+                <TextView
+                    android:gravity="top"
+                    style="@style/resume_text_one"
+                    android:text="企业图片：" />
+                
+               <LinearLayout 
+                   android:layout_width="0dp"
+                   android:layout_height="wrap_content"
+                   android:layout_weight="7"
+                   android:orientation="horizontal"
+                   >
+                   <ImageView 
+                       android:layout_width="60dp"
+                       android:layout_height="60dp"
+                       android:src="@drawable/resume_upload"
+                       />
+                   <ImageView 
+                       android:layout_width="60dp"
+                       android:layout_height="60dp"
+                       android:src="@drawable/resume_upload"
+                       />
+               </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+         
+         
+        </com.dong.yiping.ui.BounceScrollView>
+    <TextView 
+        android:layout_alignParentBottom="true"
+        android:gravity="center"
+        android:background="@color/one_blue"
+        android:textSize="@dimen/text_size_18"
+        android:textColor="@color/writer"
+        android:text="发布招聘信息"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        />
+</RelativeLayout>

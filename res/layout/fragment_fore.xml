@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.dong.yiping.ui.BounceScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical" 
+    android:scrollbars="none"
+    android:background="@drawable/common_bg">
+
+    <LinearLayout
+        android:padding="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:padding="10dp"
+            >
+			
+            <ImageView
+                android:layout_width="80dp"
+                android:layout_height="100dp"
+                android:background="@drawable/applyinfo_img" />
+            <LinearLayout 
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:orientation="vertical"
+                android:gravity="right"
+                >
+                <TextView 
+                    android:textSize="@dimen/text_size_18"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:text="用户名"
+                    />
+                <TextView 
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:text="123456789"
+                    />
+                <TextView 
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:text="162   积分"
+                    />
+            </LinearLayout>
+        </LinearLayout>
+        
+         <include layout="@layout/line_user_center"/>
+        
+        <TextView 
+            
+            android:id="@+id/myResume"
+            style="@style/user_center_text"
+            android:text="我的简历/公司信息"
+            />
+         <include layout="@layout/line_user_center"/>
+         
+         <TextView 
+            style="@style/user_center_text"
+            android:text="职位申请记录/面试邀请记录"
+            />
+         <include layout="@layout/line_user_center"/>
+         
+         <TextView 
+            style="@style/user_center_text"
+            android:text="收藏夹"
+            
+            />
+         <include layout="@layout/line_user_center"/>
+         
+         <TextView 
+            style="@style/user_center_text"
+            android:text="会员特权"
+            />
+         <include layout="@layout/line_user_center"/>
+         
+         <TextView 
+            style="@style/user_center_text"
+            android:text="手机号认证"
+            />
+         <include layout="@layout/line_user_center"/>
+         <TextView 
+            style="@style/user_center_text"
+            android:text="修改密码"
+            />
+         <include layout="@layout/line_user_center"/>
+         
+         <TextView 
+            style="@style/user_center_text"
+            android:text="浏览历史"
+            />
+         <include layout="@layout/line_user_center"/>
+         
+         <TextView 
+            style="@style/user_center_text"
+            android:text="设置"
+            />
+         <include layout="@layout/line_user_center"/>
+         
+    </LinearLayout>
+
+</com.dong.yiping.ui.BounceScrollView>

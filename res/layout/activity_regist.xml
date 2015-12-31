@@ -1,0 +1,415 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" 
+    android:background="@drawable/common_bg">
+
+    <include layout="@layout/fragment_title_one" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical" >
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="10dp"
+                android:background="@color/gray" />
+
+            <LinearLayout 
+                  android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@color/writer"
+                >
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    style="@style/regist_left"
+                    android:text="类型："
+                    android:textSize="@dimen/text_size_14" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="5"
+                    android:orientation="horizontal" >
+
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="2" >
+
+                         <CheckBox
+                            android:id="@+id/cb_regist_stu"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                             android:layout_centerInParent="true"
+                             />
+                         
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_weight="2"
+                            android:gravity="center"
+                            android:text="学生"
+                            android:layout_toRightOf="@id/cb_regist_stu"
+                            android:textSize="@dimen/text_size_14" />
+
+                       
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="2"
+                        android:layout_marginRight="15dp" >
+
+                       
+                        <CheckBox
+                            android:id="@+id/cb_regist_qiye"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true"/>
+                        
+                         <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                           android:layout_toRightOf="@id/cb_regist_qiye"
+                            android:layout_weight="2"
+                            android:gravity="center"
+                            android:text="企业"
+                            android:textSize="@dimen/text_size_14" />
+                        
+                    </RelativeLayout>
+                </LinearLayout>
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginLeft="80dp"
+                android:background="@color/gray" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:orientation="horizontal" >
+
+                <TextView
+                    style="@style/regist_left"
+                    android:id="@+id/tv_regist_type"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    android:text="用户名："
+                    android:textSize="@dimen/text_size_14" />
+
+                <EditText
+                    android:background="@null"
+                    android:id="@+id/tv_regist_typename"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="5"
+                    style="@style/regist_right"
+                    android:text="用户名"
+                    android:textSize="@dimen/text_size_14" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginLeft="80dp"
+                android:background="@color/gray" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    style="@style/regist_left"
+                    android:text="身份证号码："
+                    android:textSize="@dimen/text_size_14" />
+
+                  <EditText
+                    android:background="@null"
+                    android:id="@+id/tv_regist_card_num"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="5"
+                      style="@style/regist_right"
+                    android:text="身份证号码"
+                    android:textSize="@dimen/text_size_14" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginLeft="80dp"
+                android:background="@color/gray" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    style="@style/regist_left"
+                    android:text="密码："
+                    android:textSize="@dimen/text_size_14" />
+
+                <EditText
+                    android:id="@+id/tv_regist_pwd"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="5"
+                    android:background="@null"
+                     style="@style/regist_right"
+                    android:inputType="textPassword"
+                    android:text="09988"
+                    android:textSize="@dimen/text_size_14" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginLeft="80dp"
+                android:background="@color/gray" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+               
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    style="@style/regist_left"
+                    android:text="确认密码："
+                    android:textSize="@dimen/text_size_14" />
+
+                   <EditText
+                    android:background="@null"
+                    android:id="@+id/tv_regist_pwd_confirm"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="5"
+                    style="@style/regist_right"
+                    android:text="确认密码"
+                    android:textSize="@dimen/text_size_14" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginLeft="80dp"
+                android:layout_marginBottom="10dp"
+                android:background="@color/gray" />
+</LinearLayout>
+             <LinearLayout 
+                  android:layout_marginTop="15dp"
+                  android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@color/writer"
+                >
+            <LinearLayout
+               
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    style="@style/regist_left"
+                    android:text="联系电话："
+                    android:textSize="@dimen/text_size_14" />
+
+                   <EditText
+                    android:background="@null"
+                    android:id="@+id/tv_regist_phonenum"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="5"
+                      style="@style/regist_right"
+                    android:text="联系电话"
+                    android:textSize="@dimen/text_size_14" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginLeft="80dp"
+                android:background="@color/gray" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    style="@style/regist_left"
+                    android:text="电子邮箱："
+                    android:textSize="@dimen/text_size_14" />
+
+                  <EditText
+                    android:background="@null"
+                    android:id="@+id/tv_regist_email"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="5"
+                     style="@style/regist_right"
+                    android:text="电子邮箱"
+                    android:textSize="@dimen/text_size_14" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginLeft="80dp"
+                android:background="@color/gray" />
+
+            <LinearLayout
+                android:id="@+id/ll_regist_address"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    style="@style/regist_left"
+                    android:text="公司地址："
+                    android:textSize="@dimen/text_size_14" />
+
+                   <EditText
+                    android:background="@null"
+                    android:id="@+id/tv_regist_address"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="5"
+                    style="@style/regist_right"
+                    android:text="公司地址"
+                    android:textSize="@dimen/text_size_14" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_regist_school"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    style="@style/regist_left"
+                    android:text="所在院校："
+                    android:textSize="@dimen/text_size_14" />
+
+                <LinearLayout
+                    android:id="@+id/ll_regist_typename"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="5"
+                    android:orientation="horizontal" >
+
+                    <Spinner
+                        android:id="@+id/sp_1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2" />
+
+                    <Spinner
+                        android:id="@+id/sp_2"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1" />
+
+                    <Spinner
+                        android:id="@+id/sp_3"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginLeft="80dp"
+                android:background="@color/gray" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    style="@style/regist_left"
+                    android:text="学号："
+                    android:textSize="@dimen/text_size_14" />
+
+                 <EditText
+                    android:background="@null"
+                    android:id="@+id/tv_regist_stunum"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="5"
+                     style="@style/regist_right"
+                    android:text="学号"
+                    android:textSize="@dimen/text_size_14" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginLeft="80dp"
+                android:background="@color/gray" />
+
+            </LinearLayout>
+                 
+            
+
+            <TextView
+                android:layout_marginTop="60dp"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:background="@color/gray"
+                android:gravity="center"
+                android:text="确认注册"
+                android:textColor="@color/writer"
+                android:textSize="@dimen/text_size_15" />
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

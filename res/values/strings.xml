@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">易聘</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+	
+    <string name="tabs_00">主  页</string>
+    <string name="tabs_01">我要求职</string>
+    <string name="tabs_02">我要招聘</string>
+    <string name="tabs_03">个人中心</string>
+    
+    
+</resources>
