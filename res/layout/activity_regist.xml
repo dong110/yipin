@@ -16,12 +16,8 @@
             android:layout_height="match_parent"
             android:orientation="vertical" >
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="10dp"
-                android:background="@color/gray" />
-
             <LinearLayout
+                android:layout_marginTop="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/writer"
@@ -47,6 +43,7 @@
                         android:orientation="horizontal" >
 
                         <RelativeLayout
+                            android:id="@+id/rl_regist_stu"
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             android:layout_weight="2" >
@@ -70,6 +67,7 @@
                         </RelativeLayout>
 
                         <RelativeLayout
+                              android:id="@+id/rl_regist_qiye"
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             android:layout_marginRight="15dp"
@@ -81,7 +79,7 @@
                                 android:layout_height="match_parent"
                                 android:layout_centerInParent="true"
                                 android:scaleType="center"
-                                android:src="@drawable/common_checkbox_seleted" />
+                                android:src="@drawable/common_checkbox_unselect" />
 
                             <TextView
                                 android:layout_width="wrap_content"
@@ -116,13 +114,13 @@
                         android:textSize="@dimen/text_size_14" />
 
                     <EditText
-                        android:id="@+id/tv_regist_typename"
+                        android:id="@+id/et_regist_typename"
                         style="@style/regist_right"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="5"
                         android:background="@null"
-                        android:text="用户名"
+                        android:hint="用户名"
                         android:textSize="@dimen/text_size_14" />
                 </LinearLayout>
 
@@ -146,13 +144,13 @@
                         android:textSize="@dimen/text_size_14" />
 
                     <EditText
-                        android:id="@+id/tv_regist_card_num"
+                        android:id="@+id/et_regist_card_num"
                         style="@style/regist_right"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="5"
                         android:background="@null"
-                        android:text="身份证号码"
+                        android:hint="身份证号码"
                         android:textSize="@dimen/text_size_14" />
                 </LinearLayout>
 
@@ -176,14 +174,14 @@
                         android:textSize="@dimen/text_size_14" />
 
                     <EditText
-                        android:id="@+id/tv_regist_pwd"
+                        android:id="@+id/et_regist_pwd"
                         style="@style/regist_right"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="5"
                         android:background="@null"
                         android:inputType="textPassword"
-                        android:text="09988"
+                        android:hint="09988"
                         android:textSize="@dimen/text_size_14" />
                 </LinearLayout>
 
@@ -207,13 +205,13 @@
                         android:textSize="@dimen/text_size_14" />
 
                     <EditText
-                        android:id="@+id/tv_regist_pwd_confirm"
+                        android:id="@+id/et_regist_pwd_confirm"
                         style="@style/regist_right"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="5"
                         android:background="@null"
-                        android:text="确认密码"
+                        android:hint="确认密码"
                         android:textSize="@dimen/text_size_14" />
                 </LinearLayout>
 
@@ -246,13 +244,13 @@
                         android:textSize="@dimen/text_size_14" />
 
                     <EditText
-                        android:id="@+id/tv_regist_phonenum"
+                        android:id="@+id/et_regist_phonenum"
                         style="@style/regist_right"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="5"
                         android:background="@null"
-                        android:text="联系电话"
+                        android:hint="联系电话"
                         android:textSize="@dimen/text_size_14" />
                 </LinearLayout>
 
@@ -276,13 +274,13 @@
                         android:textSize="@dimen/text_size_14" />
 
                     <EditText
-                        android:id="@+id/tv_regist_email"
+                        android:id="@+id/et_regist_email"
                         style="@style/regist_right"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="5"
                         android:background="@null"
-                        android:text="电子邮箱"
+                        android:hint="电子邮箱"
                         android:textSize="@dimen/text_size_14" />
                 </LinearLayout>
 
@@ -296,7 +294,8 @@
                     android:id="@+id/ll_regist_address"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
-                    android:orientation="horizontal" >
+                    android:orientation="horizontal" 
+                    android:visibility="gone">
 
                     <TextView
                         style="@style/regist_left"
@@ -307,13 +306,13 @@
                         android:textSize="@dimen/text_size_14" />
 
                     <EditText
-                        android:id="@+id/tv_regist_address"
+                        android:id="@+id/et_regist_address"
                         style="@style/regist_right"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="5"
                         android:background="@null"
-                        android:text="公司地址"
+                        android:hint="公司地址"
                         android:textSize="@dimen/text_size_14" />
                 </LinearLayout>
 
@@ -322,7 +321,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
                     android:orientation="horizontal" 
-                    android:visibility="gone">
+                    >
 
                     <TextView
                         style="@style/regist_left"
@@ -379,13 +378,13 @@
                         android:textSize="@dimen/text_size_14" />
 
                     <EditText
-                        android:id="@+id/tv_regist_stunum"
+                        android:id="@+id/et_regist_stunum"
                         style="@style/regist_right"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="5"
                         android:background="@null"
-                        android:text="学号"
+                        android:hint="学号"
                         android:textSize="@dimen/text_size_14" />
                 </LinearLayout>
 
@@ -397,8 +396,9 @@
             </LinearLayout>
 
             <TextView
+                android:id="@+id/tv_regist_regist_confirm"
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
+                android:layout_height="45dp"
                 android:layout_marginTop="60dp"
                 android:background="@drawable/common_menu_cur"
                 android:gravity="center"
