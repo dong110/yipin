@@ -28,18 +28,19 @@ public class ToperJson {
 	public  void toperLoginJson(String result){
 		try {
 			JSONObject jsonObject = new JSONObject(result);
-			int status = jsonObject.getInt("status");
-			if(status == 0){
-				handler.sendEmptyMessage(Constant.NET_ERROR);
-			}
-			if(status == 1){
+			boolean status = jsonObject.getBoolean("status");
+			
+			if(status){
 				UserBean bean = gson.fromJson(result, UserBean.class);
 				Message msg = handler.obtainMessage();
 				msg.what = Constant.NET_SUCCESS;
 				msg.obj = bean;
 				handler.sendMessage(msg);
+			}else{
+				handler.sendEmptyMessage(Constant.NET_ERROR);
 			}
 		} catch (Exception e) {
+			handler.sendEmptyMessage(Constant.NET_ERROR);
 			e.printStackTrace();
 		}
 		

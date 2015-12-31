@@ -27,7 +27,7 @@ public class NetRunnable implements Runnable{
 	}
 	@Override
 	public void run() {
-		if(paramMap != null || paramMap.size() != 0){
+		if(paramMap != null && paramMap.size() != 0){
 			result = NetUtil.sendPost(url, paramMap);
 		}else{
 			result = NetUtil.doGet(url);

@@ -42,6 +42,7 @@ public class LoginActivity extends BaseActivity implements OnClickListener{
 		public void handleMessage(android.os.Message msg) {
 			switch (msg.what) {
 			case Constant.NET_ERROR:
+				util.hideDialog();
 				ToastUtil.showToast(mContext, "登录失败！");
 				break;
 			case Constant.NET_SUCCESS:
@@ -80,10 +81,10 @@ public class LoginActivity extends BaseActivity implements OnClickListener{
 			break;
 
 		case R.id.tv_login_login:
-			mIntent = new Intent(mContext,MainActivity.class);
+			/*mIntent = new Intent(mContext,MainActivity.class);
 			startActivity(mIntent);
-			finish();
-			//loginMethod();
+			finish();*/
+			loginMethod();
 			break;
 		}
 		
@@ -103,8 +104,9 @@ public class LoginActivity extends BaseActivity implements OnClickListener{
 		}
 		String url = Constant.HOST+Constant.LOGIN;
 		Map<String, String> paramMap = new HashMap<String, String>();
-		paramMap.put("username", username);
 		paramMap.put("pwd", password);
+		paramMap.put("username", username);
+		
 		ThreadPoolManager.getInstance().addTask(new NetRunnable(mHandler,url,paramMap));
 		
 	}

@@ -20,7 +20,7 @@ public class NetUtil {
 			DataOutputStream out = null;
 			HttpURLConnection connection = null;
 			try {// Post请求的url，与get不同的是不需要带参数
-		        URL postUrl = new URL("http://passport2.chaoxing.com/api/searchunits");
+		        URL postUrl = new URL(path);
 		        // 打开连接
 		        connection = (HttpURLConnection) postUrl.openConnection();
 		        
@@ -48,7 +48,7 @@ public class NetUtil {
 		                .getOutputStream());
 		        // The URL-encoded contend
 		        // 正文，正文内容其实跟get的URL中 '? '后的参数字符串一致
-		        String content =null;
+		        String content ="";
 		        // DataOutputStream.writeBytes将字符串中的16位的unicode字符以8位的字符形式写到流里面
 		        for (String key : paramsMap.keySet()) {
 		        	content += key+"="+paramsMap.get(key)+"&";
@@ -60,7 +60,7 @@ public class NetUtil {
 		        }
 		        
 		        out.flush();
-		        out.close();
+		        
 		        
 		        int code = connection.getResponseCode();
 		        

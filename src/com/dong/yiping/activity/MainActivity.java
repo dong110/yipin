@@ -29,6 +29,13 @@ public class MainActivity extends RoboFragmentActivity {
 	@InjectView(R.id.ll_title_center) LinearLayout ll_title_center;
 	
 	private boolean exiting = false;
+	
+	private Handler mHandler = new Handler(){
+		public void handleMessage(android.os.Message msg) {
+			
+		};
+	};
+	
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
