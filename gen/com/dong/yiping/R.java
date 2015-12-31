@@ -59,26 +59,31 @@ public final class R {
         public static final int dialog_bg=0x7f020010;
         public static final int ic_launcher=0x7f020011;
         public static final int index_sharp_right=0x7f020012;
-        public static final int login_bg=0x7f020013;
-        public static final int login_btn=0x7f020014;
-        public static final int login_btn_cur=0x7f020015;
-        public static final int login_content_bg=0x7f020016;
-        public static final int point_normal=0x7f020017;
-        public static final int point_seletor=0x7f020018;
-        public static final int ponit_focus=0x7f020019;
-        public static final int resume_content_line=0x7f02001a;
-        public static final int resume_upload=0x7f02001b;
-        public static final int search_bg=0x7f02001c;
-        public static final int star=0x7f02001d;
-        public static final int text_bg=0x7f02001e;
-        public static final int text_bg_selector=0x7f02001f;
-        public static final int text_bg_two=0x7f020020;
-        public static final int usercenter_content_line=0x7f020021;
+        public static final int load_loading=0x7f020013;
+        public static final int loading_background=0x7f020014;
+        public static final int login_bg=0x7f020015;
+        public static final int login_btn=0x7f020016;
+        public static final int login_btn_cur=0x7f020017;
+        public static final int login_content_bg=0x7f020018;
+        public static final int point_normal=0x7f020019;
+        public static final int point_seletor=0x7f02001a;
+        public static final int ponit_focus=0x7f02001b;
+        public static final int request_loading=0x7f02001c;
+        public static final int resume_content_line=0x7f02001d;
+        public static final int resume_upload=0x7f02001e;
+        public static final int search_bg=0x7f02001f;
+        public static final int star=0x7f020020;
+        public static final int text_bg=0x7f020021;
+        public static final int text_bg_selector=0x7f020022;
+        public static final int text_bg_two=0x7f020023;
+        public static final int usercenter_content_line=0x7f020024;
     }
     public static final class id {
         public static final int ad_viewPage=0x7f080019;
         public static final int cb_regist_qiye=0x7f080009;
         public static final int cb_regist_stu=0x7f080008;
+        public static final int dialog=0x7f08002a;
+        public static final int dialog_text=0x7f08002b;
         public static final int et_login_pwd=0x7f080002;
         public static final int et_login_username=0x7f080001;
         public static final int hand=0x7f080000;
@@ -144,6 +149,7 @@ public final class R {
         public static final int item_fragmenttwo=0x7f030015;
         public static final int item_fragmenttwo_head=0x7f030016;
         public static final int line_user_center=0x7f030017;
+        public static final int progressdialog_item=0x7f030018;
     }
     public static final class string {
         public static final int action_settings=0x7f060002;
