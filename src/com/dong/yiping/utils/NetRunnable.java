@@ -36,7 +36,6 @@ public class NetRunnable implements Runnable{
 			msg.what = Constant.NET_SUCCESS;
 			msg.obj = result;
 			mHandler.sendMessage(msg);
-			
 		}
 	}
 

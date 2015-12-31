@@ -5,6 +5,7 @@ import java.util.Map;
 
 import com.dong.yiping.Constant;
 import com.dong.yiping.R;
+import com.dong.yiping.bean.UserBean;
 import com.dong.yiping.utils.LoadingUtil;
 import com.dong.yiping.utils.NetRunnable;
 import com.dong.yiping.utils.ThreadPoolManager;
@@ -44,9 +45,12 @@ public class LoginActivity extends BaseActivity implements OnClickListener{
 				ToastUtil.showToast(mContext, "登录失败！");
 				break;
 			case Constant.NET_SUCCESS:
-				String result = (String) msg.obj;
-				
+				UserBean bean = (UserBean) msg.obj;
+				util.hideDialog();
 				ToastUtil.showToast(mContext, "登录成功！");
+				mIntent = new Intent(mContext,MainActivity.class);
+				startActivity(mIntent);
+				finish();
 				break;
 			}
 			
@@ -76,8 +80,10 @@ public class LoginActivity extends BaseActivity implements OnClickListener{
 			break;
 
 		case R.id.tv_login_login:
-			
-			loginMethod();
+			mIntent = new Intent(mContext,MainActivity.class);
+			startActivity(mIntent);
+			finish();
+			//loginMethod();
 			break;
 		}
 		
