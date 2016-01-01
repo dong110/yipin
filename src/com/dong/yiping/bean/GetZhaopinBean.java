@@ -3,44 +3,51 @@ package com.dong.yiping.bean;
 import java.util.ArrayList;
 
 public class GetZhaopinBean {
-
-	private ArrayList<Zhaopin> list;
+	private ArrayList<ZhaoPin> list;
 	
-	public class Zhaopin{
-		private String conpany;
-		private String content;
+	public class ZhaoPin{
+		private String anble;
+		private String cards;
 		private String createtime;
+		private String email;
 		private String gscontent;
-        private int id;
-        private String  job;
-        private String quxian;
-        private String recruittime;
-        private String sheng;
-        private String shi;
-        private int status;
-        private String subdate;
-        private String updatetime;
-        private int userid;
-        private String wage;
-        private String welfare;
-        private String workdate;
-		public String getConpany() {
-			return conpany;
+		private int id;
+		private String intention;
+		private String lange;
+		private String name;
+		private String quxian;
+		private String resumetime;
+		private String sheng;
+		private String shi;
+		private int status;
+		private String subdate;
+		private String tel;
+		private String updatetime;
+		private int userid;
+		private String working;
+		public String getAnble() {
+			return anble;
 		}
-		public void setConpany(String conpany) {
-			this.conpany = conpany;
+		public void setAnble(String anble) {
+			this.anble = anble;
 		}
-		public String getContent() {
-			return content;
+		public String getCards() {
+			return cards;
 		}
-		public void setContent(String content) {
-			this.content = content;
+		public void setCards(String cards) {
+			this.cards = cards;
 		}
 		public String getCreatetime() {
 			return createtime;
 		}
 		public void setCreatetime(String createtime) {
 			this.createtime = createtime;
+		}
+		public String getEmail() {
+			return email;
+		}
+		public void setEmail(String email) {
+			this.email = email;
 		}
 		public String getGscontent() {
 			return gscontent;
@@ -54,11 +61,23 @@ public class GetZhaopinBean {
 		public void setId(int id) {
 			this.id = id;
 		}
-		public String getJob() {
-			return job;
+		public String getIntention() {
+			return intention;
 		}
-		public void setJob(String job) {
-			this.job = job;
+		public void setIntention(String intention) {
+			this.intention = intention;
+		}
+		public String getLange() {
+			return lange;
+		}
+		public void setLange(String lange) {
+			this.lange = lange;
+		}
+		public String getName() {
+			return name;
+		}
+		public void setName(String name) {
+			this.name = name;
 		}
 		public String getQuxian() {
 			return quxian;
@@ -66,11 +85,11 @@ public class GetZhaopinBean {
 		public void setQuxian(String quxian) {
 			this.quxian = quxian;
 		}
-		public String getRecruittime() {
-			return recruittime;
+		public String getResumetime() {
+			return resumetime;
 		}
-		public void setRecruittime(String recruittime) {
-			this.recruittime = recruittime;
+		public void setResumetime(String resumetime) {
+			this.resumetime = resumetime;
 		}
 		public String getSheng() {
 			return sheng;
@@ -96,6 +115,12 @@ public class GetZhaopinBean {
 		public void setSubdate(String subdate) {
 			this.subdate = subdate;
 		}
+		public String getTel() {
+			return tel;
+		}
+		public void setTel(String tel) {
+			this.tel = tel;
+		}
 		public String getUpdatetime() {
 			return updatetime;
 		}
@@ -108,34 +133,21 @@ public class GetZhaopinBean {
 		public void setUserid(int userid) {
 			this.userid = userid;
 		}
-		public String getWage() {
-			return wage;
+		public String getWorking() {
+			return working;
 		}
-		public void setWage(String wage) {
-			this.wage = wage;
+		public void setWorking(String working) {
+			this.working = working;
 		}
-		public String getWelfare() {
-			return welfare;
-		}
-		public void setWelfare(String welfare) {
-			this.welfare = welfare;
-		}
-		public String getWorkdate() {
-			return workdate;
-		}
-		public void setWorkdate(String workdate) {
-			this.workdate = workdate;
-		}
-        
-        
+		
 	}
 	
 	private int status;
 	private int total;
-	public ArrayList<Zhaopin> getList() {
+	public ArrayList<ZhaoPin> getList() {
 		return list;
 	}
-	public void setList(ArrayList<Zhaopin> list) {
+	public void setList(ArrayList<ZhaoPin> list) {
 		this.list = list;
 	}
 	public int getStatus() {
@@ -151,4 +163,5 @@ public class GetZhaopinBean {
 		this.total = total;
 	}
 	
+
 }

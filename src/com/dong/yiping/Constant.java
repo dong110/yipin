@@ -29,8 +29,8 @@ public class Constant {
 	public static final String MODIFYPWD = "/userPwdUpdate";//修改密码
 	public static final String PHONEINDENTIFICATION = "/";//手机号验证
 	
-	public static final String GET_JOB = "/resumeList?status=1&currentNum=0&pageNum=5";//我要求职
-	public static final String GET_ZHAOPING = "/recruitList?userId=1&status=1&currentNum=0&pageNum=5";//我要招聘
+	public static final String GET_JOB = "/recruitList?status=1&currentNum=0&pageNum=5";//我要求职
+	public static final String GET_ZHAOPING = "/resumeList?status=1&currentNum=0&pageNum=5";//我要招聘
 	public static final String BANNERLIST = "/bannerList";//轮播图
 	public static final String STAR_COMPANY = "/companyUserList?recommend=1&currentNum=0&pageNum=5";//明星企业
 	public static final String STAR_STUDENT = "/studentUserList?recommend=1&currentNum=0&pageNum=5";//明星学生

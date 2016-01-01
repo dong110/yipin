@@ -1,28 +1,30 @@
 package com.dong.yiping.fragment;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import roboguice.inject.InjectView;
-
-import com.dong.yiping.Constant;
-import com.dong.yiping.R;
-import com.dong.yiping.adapter.ThreeFragmentAdapter;
-import com.dong.yiping.utils.NetRunnable;
-import com.dong.yiping.utils.ThreadPoolManager;
-import com.dong.yiping.view.LJListView;
-import com.dong.yiping.view.LJListView.IXListViewListener;
-
 import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.LinearLayout;
-import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+
+import com.dong.yiping.Constant;
+import com.dong.yiping.R;
+import com.dong.yiping.adapter.ThreeFragmentAdapter;
+import com.dong.yiping.bean.GetZhaopinBean;
+import com.dong.yiping.bean.GetZhaopinBean.ZhaoPin;
+import com.dong.yiping.utils.NetRunnable;
+import com.dong.yiping.utils.ThreadPoolManager;
+import com.dong.yiping.view.LJListView;
+import com.dong.yiping.view.LJListView.IXListViewListener;
 
 public class ThreeFragment extends BaseFragment implements IXListViewListener{
 
@@ -30,12 +32,26 @@ public class ThreeFragment extends BaseFragment implements IXListViewListener{
 	private TextView tv_title_center;
 	private LinearLayout ll_title_center;
 	private ThreeFragmentAdapter adapter;
+	private List<ZhaoPin> listZhaopin;
 	private Context mContext;
 	
 	private Handler mHandler = new Handler(){
 		public void handleMessage(android.os.Message msg) {
+			switch (msg.what) {
+			case Constant.HANDLER_TYPE_GETZHAOPIN:
+				GetZhaopinBean getZhaopin = (GetZhaopinBean) msg.obj;
+				for(ZhaoPin zhaopin : getZhaopin.getList()){
+					listZhaopin.add(zhaopin);
+				}
+				notifyAdapter(listZhaopin);
+				break;
+				
+			default:
+				break;
+			}
 			
-		};
+		}
+
 	};
 	
 	public View onCreateView(LayoutInflater inflater,
@@ -52,6 +68,9 @@ public class ThreeFragment extends BaseFragment implements IXListViewListener{
 		initData();
 	}
 	private void initView() {
+		listZhaopin = new ArrayList<ZhaoPin>();
+		adapter = new ThreeFragmentAdapter(mContext,listZhaopin);
+		lv_listview.setAdapter(adapter);
 		lv_listview.setPullLoadEnable(false,""); //如果不想让脚标显示数据可以mListView.setPullLoadEnable(false,null)或者mListView.setPullLoadEnable(false,"")
 		lv_listview.setPullRefreshEnable(true);
 		//lv_listview.setPullLoadEnable(false, "加载完成");
@@ -67,14 +86,18 @@ public class ThreeFragment extends BaseFragment implements IXListViewListener{
 	}
 	private void initData() {
 		String url = Constant.HOST+getLoadUrl(0, 10);
-		ThreadPoolManager.getInstance().addTask(new NetRunnable(mHandler,url,Constant.TOPER_TYPE_GETJOB));
+		ThreadPoolManager.getInstance().addTask(new NetRunnable(mHandler,url,Constant.TOPER_TYPE_GETZHAOPIN));
 		
 	}
 	private String getLoadUrl(int currentNum,int pageNum){
-		String str = "/recruitList?status=1&currentNum="+currentNum+"&pageNum="+pageNum;
+		String str = "/resumeList?status=1&currentNum="+currentNum+"&pageNum="+pageNum;
 		return str;
 	}
 
+	private void notifyAdapter(List<ZhaoPin> listZhaopin) {
+		adapter.notyfyList(listZhaopin);
+		
+	};
 	@Override
 	public void onRefresh() {
 		mHandler.postDelayed(new Runnable() {

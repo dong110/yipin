@@ -1,18 +1,5 @@
 package com.dong.yiping.adapter;
 
-import java.util.List;
-
-import com.dong.yiping.R;
-import com.dong.yiping.bean.GetJobBean;
-import com.dong.yiping.bean.GetJobBean.GetJob;
-import com.dong.yiping.bean.GetZhaopinBean.Zhaopin;
-import com.dong.yiping.bean.GetZhaopinBean;
-import com.dong.yiping.bean.OneFragmentJobBean;
-import com.dong.yiping.bean.StarCompanyBean;
-import com.dong.yiping.bean.StarCompanyBean.StarCom;
-import com.dong.yiping.bean.StarStudentBean;
-import com.dong.yiping.bean.StarStudentBean.Student;
-
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,6 +8,16 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.TextView;
+
+import com.dong.yiping.R;
+import com.dong.yiping.bean.GetJobBean;
+import com.dong.yiping.bean.GetJobBean.GetJob;
+import com.dong.yiping.bean.GetZhaopinBean;
+import com.dong.yiping.bean.GetZhaopinBean.ZhaoPin;
+import com.dong.yiping.bean.StarCompanyBean;
+import com.dong.yiping.bean.StarCompanyBean.StarCom;
+import com.dong.yiping.bean.StarStudentBean;
+import com.dong.yiping.bean.StarStudentBean.Student;
 
 public class OneFragmentAdapter extends BaseAdapter{
 	private GetJobBean getJobBean;
@@ -204,6 +201,7 @@ public class OneFragmentAdapter extends BaseAdapter{
 				break;
 			}
 		}
+		
 		if(isGetJob){
 			//显示内容
 			if(position == 0){
@@ -214,11 +212,13 @@ public class OneFragmentAdapter extends BaseAdapter{
 				viewHolderTwo.tv_cp_name.setVisibility(View.VISIBLE);
 				viewHolderTwo.tv_salary.setVisibility(View.VISIBLE);
 				
-				viewHolderTwo.tv_cp_name.setText(getJob.getName());
-				viewHolderTwo.tv_salary.setText(getJob.getSubdate());
 				
-				viewHolderTwo.tv_group_name.setText(getJob.getIntention());
+				viewHolderTwo.tv_cp_name.setText(getJob.getJob());
+				viewHolderTwo.tv_salary.setText(getJob.getWage());
+				
+				viewHolderTwo.tv_group_name.setText(getJob.getConpany());
 				viewHolderTwo.tv_arrer.setText(getJob.getQuxian());
+
 				
 			}else if(position==getJobBean.getList().size()+1){
 			}else if(position==getJobBean.getList().size()+2){
@@ -250,16 +250,17 @@ public class OneFragmentAdapter extends BaseAdapter{
 			if(position == 0){
 			}else if(position<getZhaopin.getList().size()+1){
 				//我要招聘
-				Zhaopin zhaopin = getZhaopin.getList().get(position-1);
-				
+				ZhaoPin zhaopin = getZhaopin.getList().get(position-1);
 				viewHolderTwo.tv_cp_name.setVisibility(View.VISIBLE);
 				viewHolderTwo.tv_salary.setVisibility(View.VISIBLE);
 				
-				viewHolderTwo.tv_cp_name.setText(zhaopin.getJob());
-				viewHolderTwo.tv_salary.setText(zhaopin.getWage());
+				viewHolderTwo.tv_cp_name.setText(zhaopin.getName());
+				viewHolderTwo.tv_salary.setText(zhaopin.getSubdate());
 				
-				viewHolderTwo.tv_group_name.setText(zhaopin.getConpany());
+				viewHolderTwo.tv_group_name.setText(zhaopin.getIntention());
 				viewHolderTwo.tv_arrer.setText(zhaopin.getQuxian());
+				
+				
 				
 			}else if(position==getZhaopin.getList().size()+1){
 			}else if(position==getZhaopin.getList().size()+2){
