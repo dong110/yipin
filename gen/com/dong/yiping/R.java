@@ -10,7 +10,9 @@ package com.dong.yiping;
 public final class R {
     public static final class anim {
         public static final int center_to_left=0x7f040000;
-        public static final int right_to_center=0x7f040001;
+        public static final int center_to_right=0x7f040001;
+        public static final int left_to_center=0x7f040002;
+        public static final int right_to_center=0x7f040003;
     }
     public static final class attr {
     }

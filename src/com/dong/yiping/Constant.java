@@ -11,6 +11,7 @@ public class Constant {
 	public static final int TOPER_TYPE_GETZHAOPIN = 103;
 	public static final int TOPER_TYPE_STARCOM = 104;
 	public static final int TOPER_TYPE_STARTSTU = 105;
+	public static final int TOPER_TYPE_REGIST = 106;
 	
 	public static final int HANDLER_BANNERLIST = 120;
 	public static final int HANDLER_TYPE_GETJOB = 121;
@@ -21,6 +22,8 @@ public class Constant {
 	public static final String HOST = "http://123.57.75.34:8080/users/api";
 	
 	public static final String LOGIN = "/userLogin";//登录
+	public static final String REGIST = "/register";//注册
+
 	public static final String GET_JOB = "/resumeList?status=1&currentNum=0&pageNum=5";//我要求职
 	public static final String GET_ZHAOPING = "/recruitList?userId=1&status=1&currentNum=0&pageNum=5";//我要招聘
 	public static final String BANNERLIST = "/bannerList";//轮播图
