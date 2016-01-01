@@ -12,6 +12,8 @@ public class Constant {
 	public static final int TOPER_TYPE_STARCOM = 104;
 	public static final int TOPER_TYPE_STARTSTU = 105;
 	public static final int TOPER_TYPE_REGIST = 106;
+	public static final int TOPER_TYPE_FINDPWD = 107;
+	
 	
 	public static final int HANDLER_BANNERLIST = 120;
 	public static final int HANDLER_TYPE_GETJOB = 121;
@@ -23,7 +25,9 @@ public class Constant {
 	
 	public static final String LOGIN = "/userLogin";//登录
 	public static final String REGIST = "/register";//注册
-
+	public static final String FINDPWD = "/userPwdUpdate";//修改密码
+	
+	
 	public static final String GET_JOB = "/resumeList?status=1&currentNum=0&pageNum=5";//我要求职
 	public static final String GET_ZHAOPING = "/recruitList?userId=1&status=1&currentNum=0&pageNum=5";//我要招聘
 	public static final String BANNERLIST = "/bannerList";//轮播图

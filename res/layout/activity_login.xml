@@ -73,7 +73,8 @@
             android:text="忘记密码？"
             android:autoLink="email"
             android:textColor="@color/login_gold"
-            android:textSize="15sp" />
+            android:textSize="15sp" 
+            android:visibility="gone"/>
 
         <RelativeLayout
             android:layout_width="match_parent"

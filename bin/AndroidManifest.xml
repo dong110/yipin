@@ -38,6 +38,13 @@
             android:launchMode="singleTask"
             android:windowSoftInputMode="adjustUnspecified|stateHidden"
             android:screenOrientation="portrait"/>
+         
+           <activity 
+            android:name="com.dong.yiping.activity.FindPwdActivity"
+            android:launchMode="singleTask"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden"
+            android:screenOrientation="portrait"/>
+           
         <activity 
             android:name="com.dong.yiping.activity.ResumeActivity"
             android:launchMode="singleTask"

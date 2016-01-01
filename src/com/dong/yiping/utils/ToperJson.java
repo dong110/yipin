@@ -52,7 +52,36 @@ public class ToperJson {
 			LogUtil.i("注册成功返回的数据==", result);
 			toperRegist(result);
 			break;
+			
+		case Constant.TOPER_TYPE_FINDPWD:
+			LogUtil.i("修改密码返回的数据==", result);
+			toperFindPwd(result);
+			break;
 		}
+	}
+	
+	
+	/**
+	 * 解析修改密码返回的数据
+	 */
+	private void toperFindPwd(String result) {
+		try {//{"messages":"修改密码成功","status":0}
+
+			JSONObject jsonObject = new JSONObject(result);
+			int status = jsonObject.optInt("status");
+			
+			if(status == 0){//修改密码成功
+				Message msg = handler.obtainMessage();
+				msg.what = Constant.NET_SUCCESS;
+				handler.sendMessage(msg);
+			}else{
+				handler.sendEmptyMessage(Constant.NET_ERROR);
+			}
+		} catch (Exception e) {
+			handler.sendEmptyMessage(Constant.NET_ERROR);
+			e.printStackTrace();
+		}
+		
 	}
 	
 	/**
