@@ -33,6 +33,7 @@ import com.dong.yiping.bean.GetZhaopinBean;
 import com.dong.yiping.bean.StarCompanyBean;
 import com.dong.yiping.bean.StarStudentBean;
 import com.dong.yiping.utils.LoadingUtil;
+import com.dong.yiping.utils.LogUtil;
 import com.dong.yiping.utils.NetRunnable;
 import com.dong.yiping.utils.ThreadPoolManager;
 
@@ -65,6 +66,7 @@ public class OneFragment extends RoboFragment{
 				if(bannerListBean == null){
 					bannerListBean = new BannerListBean();
 				}
+				LogUtil.i(TAG, bannerListBean.getList().size()+"轮播图");
 				banner.update(GetBannerData.getBannerData(bannerListBean),bannerListBean);
 				setAdapter(++netNum);
 				break;
@@ -72,25 +74,36 @@ public class OneFragment extends RoboFragment{
 				getJobBean = (GetJobBean) msg.obj;
 				if(getJobBean == null){
 					getJobBean = new GetJobBean();
+					getJobBean.setList(new ArrayList<GetJobBean.GetJob>());
 				}
+				LogUtil.i(TAG, getJobBean.getList().size()+"工作");
 				setAdapter(++netNum);
 				break;
 			case Constant.HANDLER_TYPE_GETZHAOPIN:
 				getZhaopin = (GetZhaopinBean) msg.obj;
 				if(getZhaopin == null){
 					getZhaopin = new GetZhaopinBean();
+					getZhaopin.setList(new ArrayList<GetZhaopinBean.ZhaoPin>());
 				}
+				LogUtil.i(TAG, getZhaopin.getList().size()+"招聘");
 				setAdapter(++netNum);
 				break;
 			case Constant.HANDLER_TYPE_STARCOM:
 				starCompanyBean = (StarCompanyBean) msg.obj;
-				if(getZhaopin == null){
-					getZhaopin = new GetZhaopinBean();
+				if(starCompanyBean == null){
+					starCompanyBean = new StarCompanyBean();
+					starCompanyBean.setList(new ArrayList<StarCompanyBean.StarCom>());
 				}
+				//LogUtil.i(TAG, starCompanyBean.getList().size()+"明星企业");
 				setAdapter(++netNum);
 				break;
 			case Constant.HANDLER_TYPE_STARTSTU:
 				starStudentBean = (StarStudentBean) msg.obj;
+				if(starStudentBean == null){
+					starStudentBean = new StarStudentBean();
+					starStudentBean.setList(new ArrayList<StarStudentBean.Student>());
+				}
+				//LogUtil.i(TAG, starStudentBean.getList().size()+"明星学生");
 				setAdapter(++netNum);
 				break;
 			}
@@ -115,17 +128,11 @@ public class OneFragment extends RoboFragment{
 
 	private void initView() {
 		loadingUtil = new LoadingUtil(mContext);
-		/*tv_title_center = (TextView) getActivity().findViewById(R.id.tv_title_center);
-		ll_title_center = (LinearLayout) getActivity().findViewById(R.id.ll_title_center);
-		
-		tv_title_center.setVisibility(View.VISIBLE);
-		ll_title_center.setVisibility(View.GONE);
-		tv_title_center.setText("主页");*/
 	}
 
 
 	private void initData() {
-		//loadingUtil.showDialog();
+		loadingUtil.showDialog();
 		String bannerList = Constant.HOST+Constant.BANNERLIST;
 		String getJob = Constant.HOST+Constant.GET_JOB;
 		String getZhaopin = Constant.HOST+Constant.GET_ZHAOPING;
@@ -142,8 +149,10 @@ public class OneFragment extends RoboFragment{
 		
 	}
 	
-	private void setAdapter(int netNum){
+	private synchronized  void setAdapter(int netNum){
+		LogUtil.i(TAG, netNum+"netNum");
 		if(netNum == 5){
+			loadingUtil.hideDialog();
 			adapter = new OneFragmentAdapter(mContext,getJobBean,getZhaopin,starCompanyBean,starStudentBean);
 			lv_listview.setAdapter(adapter);
 		}

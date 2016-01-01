@@ -8,6 +8,7 @@ import com.dong.yiping.R;
 import com.dong.yiping.bean.UserBean;
 import com.dong.yiping.utils.LoadingUtil;
 import com.dong.yiping.utils.NetRunnable;
+import com.dong.yiping.utils.SPUtil;
 import com.dong.yiping.utils.ThreadPoolManager;
 import com.dong.yiping.utils.ToastUtil;
 import com.google.inject.Inject;
@@ -47,6 +48,7 @@ public class LoginActivity extends BaseActivity implements OnClickListener{
 				break;
 			case Constant.NET_SUCCESS:
 				UserBean bean = (UserBean) msg.obj;
+				SPUtil.saveUser(mContext, bean);
 				util.hideDialog();
 				ToastUtil.showToast(mContext, "登录成功！");
 				mIntent = new Intent(mContext,MainActivity.class);
@@ -82,9 +84,9 @@ public class LoginActivity extends BaseActivity implements OnClickListener{
 			
 		case R.id.tv_login_login:
 			mIntent = new Intent(mContext,MainActivity.class);
-			startActivity(mIntent);
-			finish();
-			//loginMethod();
+			/*startActivity(mIntent);
+			finish();*/
+			loginMethod();
 			break;
 		}
 		

@@ -243,9 +243,9 @@ public class ToperJson {
 	private  void toperLoginJson(String result){
 		try {
 			JSONObject jsonObject = new JSONObject(result);
-			boolean status = jsonObject.getBoolean("status");
+			int status = jsonObject.getInt("status");
 			
-			if(status){
+			if(status==0){
 				UserBean bean = gson.fromJson(result, UserBean.class);
 				Message msg = handler.obtainMessage();
 				msg.what = Constant.NET_SUCCESS;

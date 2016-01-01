@@ -1,0 +1,86 @@
+package com.dong.yiping.utils;
+
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
+
+import com.dong.yiping.bean.UserBean;
+import com.dong.yiping.bean.StarStudentBean.Student;
+
+public class SPUtil {
+
+	private static final String SP_NAME = "config";
+	private static SharedPreferences sp;
+
+	public static void saveBoolean(Context context, String key, boolean value) {
+		if (sp == null)
+			sp = context.getSharedPreferences(SP_NAME, 0);
+		sp.edit().putBoolean(key, value).commit();
+	}
+
+	public static boolean getBoolean(Context context, String key,
+			boolean defValue) {
+		if (sp == null)
+			sp = context.getSharedPreferences(SP_NAME, 0);
+		return sp.getBoolean(key, defValue);
+	}
+
+	public static void saveString(Context context, String key, String value) {
+		if (sp == null)
+			sp = context.getSharedPreferences(SP_NAME, 0);
+		sp.edit().putString(key, value).commit();
+	}
+
+	public static String getString(Context context, String key, String defValue) {
+		if (sp == null)
+			sp = context.getSharedPreferences(SP_NAME, 0);
+		return sp.getString(key, defValue);
+	}
+
+	public static void saveInt(Context context, String key, int value) {
+		if (sp == null)
+			sp = context.getSharedPreferences(SP_NAME, 0);
+		sp.edit().putInt(key, value).commit();
+	}
+
+	public static int getInt(Context context, String key, int defValue) {
+		if (sp == null)
+			sp = context.getSharedPreferences(SP_NAME, 0);
+		return sp.getInt(key, defValue);
+	}
+	/**
+	 * 保存用户信息
+	 * @param context
+	 * @param bean
+	 */
+	public static void saveUser(Context context,UserBean bean) {
+		if (sp == null){
+			sp = context.getSharedPreferences(SP_NAME, 0);
+		}
+		Editor editor = sp.edit();
+		editor.putInt("id", bean.getId());
+		editor.putString("username", bean.getUsername());
+		editor.putString("password", bean.getPwd());
+		editor.putInt("type", bean.getType());
+		editor.commit();
+	}
+	public static void clearStusent(Context context) {
+		if (sp == null){
+			sp = context.getSharedPreferences(SP_NAME, 0);
+		}
+		
+			Editor editor = sp.edit();
+			editor.putString("cxid", "");
+			editor.putString("email", "");
+			editor.putString("phone", "");
+			editor.putString("realname", "");
+			editor.putString("roleid", "");
+			editor.putBoolean("result", false);
+			editor.putString("schoolid", "");
+			editor.putString("status", "");
+			editor.putString("uid", "");
+			editor.putString("uname", "");
+			editor.putString("touxiang", "");
+			editor.commit();
+	}
+}

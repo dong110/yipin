@@ -11,6 +11,7 @@ import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -27,9 +28,10 @@ import com.dong.yiping.utils.ThreadPoolManager;
 import com.dong.yiping.view.LJListView;
 import com.dong.yiping.view.LJListView.IXListViewListener;
 
-public class TwoFragment extends RoboFragment implements IXListViewListener{
+public class TwoFragment extends RoboFragment implements IXListViewListener, OnClickListener{
 	
 	@InjectView(R.id.lv_listview) LJListView lv_listview; 
+	@InjectView(R.id.ll_time) LinearLayout ll_time; 
 	
 	private TextView tv_title_center;
 	private LinearLayout ll_title_center;
@@ -65,17 +67,25 @@ public class TwoFragment extends RoboFragment implements IXListViewListener{
 		super.onActivityCreated(savedInstanceState);
 		mContext = getActivity();
 		initView();
+		setListener();
 		initData();
 		
 		
 	}
+	
+
 	private void initData() {
 		String url = Constant.HOST+getLoadUrl(0, 10);
 		ThreadPoolManager.getInstance().addTask(new NetRunnable(mHandler,url,Constant.TOPER_TYPE_GETJOB));
 		
 	}
-
+	private void setListener() {
+		ll_time.setOnClickListener(this);
+		
+	}
 	private void initView() {
+		
+		
 		listGetJob = new ArrayList<GetJobBean.GetJob>();
 		adapter = new TwoFragmentAdapter(mContext,listGetJob);
 		lv_listview.setAdapter(adapter);
@@ -89,7 +99,6 @@ public class TwoFragment extends RoboFragment implements IXListViewListener{
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
 					long arg3) {
-				// TODO Auto-generated method stub
 				System.out.println(arg0 + "------" + arg2);
 			}
 		});
@@ -125,6 +134,18 @@ public class TwoFragment extends RoboFragment implements IXListViewListener{
 				lv_listview.setPullLoadEnable(false, null);
 			}
 		}, 2000);
+		
+	}
+
+	@Override
+	public void onClick(View v) {
+		switch (v.getId()) {
+		case R.id.ll_time:
+			
+			break;
+		default:
+			break;
+		}
 		
 	}
 }

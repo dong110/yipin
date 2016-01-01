@@ -42,8 +42,13 @@ public class ForeFragment extends BaseFragment implements OnClickListener{
 		super.onActivityCreated(savedInstanceState);
 		mContext = getActivity();
 		initView();
+		initData();
 	}
 	
+	private void initData() {
+		
+	}
+
 	private void initView() {
 		myResume.setOnClickListener(this);
 		modify_pwd.setOnClickListener(this);
