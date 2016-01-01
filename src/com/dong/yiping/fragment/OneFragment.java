@@ -62,19 +62,31 @@ public class OneFragment extends RoboFragment{
 			switch (msg.what) {
 			case Constant.HANDLER_BANNERLIST:
 				bannerListBean = (BannerListBean) msg.obj;
+				if(bannerListBean == null){
+					bannerListBean = new BannerListBean();
+				}
 				banner.update(GetBannerData.getBannerData(bannerListBean),bannerListBean);
 				setAdapter(++netNum);
 				break;
 			case Constant.HANDLER_TYPE_GETJOB:
 				getJobBean = (GetJobBean) msg.obj;
+				if(getJobBean == null){
+					getJobBean = new GetJobBean();
+				}
 				setAdapter(++netNum);
 				break;
 			case Constant.HANDLER_TYPE_GETZHAOPIN:
 				getZhaopin = (GetZhaopinBean) msg.obj;
+				if(getZhaopin == null){
+					getZhaopin = new GetZhaopinBean();
+				}
 				setAdapter(++netNum);
 				break;
 			case Constant.HANDLER_TYPE_STARCOM:
 				starCompanyBean = (StarCompanyBean) msg.obj;
+				if(getZhaopin == null){
+					getZhaopin = new GetZhaopinBean();
+				}
 				setAdapter(++netNum);
 				break;
 			case Constant.HANDLER_TYPE_STARTSTU:

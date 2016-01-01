@@ -25,6 +25,6 @@ public class Constant {
 	public static final String GET_ZHAOPING = "/recruitList?userId=1&status=1&currentNum=0&pageNum=5";//我要招聘
 	public static final String BANNERLIST = "/bannerList";//轮播图
 	public static final String STAR_COMPANY = "/companyUserList?recommend=1&currentNum=0&pageNum=5";//明星企业
-	public static final String STAR_STUDENT = "/studentUserList?recommend=1&currentNum=0&pageNum=5";//明星企业
+	public static final String STAR_STUDENT = "/studentUserList?recommend=1&currentNum=0&pageNum=5";//明星学生
 	public static final String GET_ALL_ZHAOPING = "/recruitList?status=1&currentNum=0&pageNum=5";//所有招聘
 }

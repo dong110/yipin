@@ -5,8 +5,10 @@
     android:orientation="horizontal" >
     
     <Button 
+        
+        android:id="@+id/bt_getJob"
         android:textColor="@color/writer"
-        android:background="@color/yello"
+        android:background="@drawable/but_bg_selector"
         android:padding="5dp"
         android:gravity="center"
         android:text="我要求职"
@@ -15,8 +17,9 @@
         android:layout_weight="1"
         />
 	<Button 
+	    android:id="@+id/get_Zhaopin"
 	    android:textColor="@color/writer"
-	    android:background="@color/one_blue"
+	    android:background="@drawable/but_bg_selector"
 	    android:padding="5dp"
 	    android:gravity="center"
 	    android:text="我要招聘"
