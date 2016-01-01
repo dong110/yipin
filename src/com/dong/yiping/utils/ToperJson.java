@@ -48,7 +48,34 @@ public class ToperJson {
 		case Constant.TOPER_TYPE_STARTSTU:
 			toperStarStudent(result);
 			break;
+		case Constant.TOPER_TYPE_REGIST:
+			LogUtil.i("注册成功返回的数据==", result);
+			toperRegist(result);
+			break;
 		}
+	}
+	
+	/**
+	 * 解析注册返回的数据
+	 */
+	private void toperRegist(String result) {
+		try {//{"messages":"注册成功","status":0}
+
+			JSONObject jsonObject = new JSONObject(result);
+			int status = jsonObject.optInt("status");
+			
+			if(status == 0){//注册成功
+				Message msg = handler.obtainMessage();
+				msg.what = Constant.NET_SUCCESS;
+				handler.sendMessage(msg);
+			}else{
+				handler.sendEmptyMessage(Constant.NET_ERROR);
+			}
+		} catch (Exception e) {
+			handler.sendEmptyMessage(Constant.NET_ERROR);
+			e.printStackTrace();
+		}
+		
 	}
 	/**
 	 * 解析明星学生

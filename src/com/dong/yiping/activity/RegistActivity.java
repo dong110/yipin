@@ -1,10 +1,19 @@
 package com.dong.yiping.activity;
 
+import java.util.HashMap;
+import java.util.Map;
+
+import com.dong.yiping.Constant;
 import com.dong.yiping.R;
+import com.dong.yiping.bean.UserBean;
 import com.dong.yiping.utils.FormatUtils;
+import com.dong.yiping.utils.NetRunnable;
+import com.dong.yiping.utils.ThreadPoolManager;
 import com.dong.yiping.utils.ToastUtil;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.Window;
@@ -58,9 +67,9 @@ public class RegistActivity extends BaseActivity {
 	private String email;
 	private String address;
 	private String stuNum;
-	private String sheng;
-	private String shi;
-	private String qu;
+	private String sheng = "北京";
+	private String shi = "北京";
+	private String qu = "北京";
 
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -206,10 +215,7 @@ public class RegistActivity extends BaseActivity {
 		} else if (!FormatUtils.isMobileNO(phoneNum)) {
 			ToastUtil.showToast(this, "手机号格式不正确");
 			return;
-		} else if (TextUtils.isEmpty(email)) {
-			ToastUtil.showToast(this, "邮箱号不能为空");
-			return;
-		} else if (!FormatUtils.isEmail(email)) {
+		}else if (!TextUtils.isEmpty(email)&&!FormatUtils.isEmail(email)) {
 			ToastUtil.showToast(this, "邮箱格式不正确");
 			return;
 		} else if (!isStu && TextUtils.isEmpty(address)) {
@@ -226,5 +232,61 @@ public class RegistActivity extends BaseActivity {
 			return;
 		}
 
+		//regist
+		registMethod();
 	}
+	
+
+	private void registMethod() {
+		String url = Constant.HOST+Constant.REGIST;
+		Map<String, String> paramMap = new HashMap<String, String>();
+		
+		if(isStu){
+			paramMap.put("username", typeName);
+			paramMap.put("type","0");//0 学生 1 企业
+		
+		}else{
+			paramMap.put("type","1");
+			paramMap.put("company", typeName);
+		}
+		paramMap.put("pwd", pwd);
+		paramMap.put("name", "xx");//
+		paramMap.put("cards", cardNum);
+		paramMap.put("tel", phoneNum);
+		paramMap.put("email", email);
+		paramMap.put("sheng", sheng);
+		paramMap.put("shi", shi);
+		paramMap.put("quxian", qu);
+		paramMap.put("numbers", stuNum);
+		
+		
+		
+		
+		ThreadPoolManager.getInstance().addTask(new NetRunnable(mHandler,url,paramMap,Constant.TOPER_TYPE_REGIST));
+		
+	}
+	
+	
+	private Handler mHandler = new Handler(){
+		public void handleMessage(android.os.Message msg) {
+			switch (msg.what) {
+			case Constant.NET_ERROR:
+				ToastUtil.showToast(mContext, "注册失败！");
+				break;
+			case Constant.NET_SUCCESS:
+				UserBean bean = (UserBean) msg.obj;
+				ToastUtil.showToast(mContext, "注册成功！");
+				
+				startToActivity(LoginActivity.class);
+				
+				finish();
+				
+				  // 当前页面向右退出
+                overridePendingTransition(R.anim.left_to_center,
+                        R.anim.center_to_right);
+				break;
+			}
+			
+		};
+	};
 }
