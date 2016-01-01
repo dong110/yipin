@@ -13,10 +13,8 @@ public class Constant {
 	public static final int TOPER_TYPE_STARTSTU = 105;
 	public static final int TOPER_TYPE_REGIST = 106;
 	public static final int TOPER_TYPE_FINDPWD = 107;
-<<<<<<< HEAD
 	public static final int TOPER_TYPE_MODIFYPWD = 108;
-=======
->>>>>>> origin/master
+
 	
 	public static final int HANDLER_BANNERLIST = 120;
 	public static final int HANDLER_TYPE_GETJOB = 121;
@@ -31,8 +29,8 @@ public class Constant {
 	public static final String FINDPWD = "/";//找回密码
 	public static final String MODIFYPWD = "/userPwdUpdate";//修改密码
 	
-	public static final String GET_JOB = "/resumeList?status=1&currentNum=0&pageNum=5";//我要求职
-	public static final String GET_ZHAOPING = "/recruitList?userId=1&status=1&currentNum=0&pageNum=5";//我要招聘
+	public static final String GET_JOB = "/recruitList?status=1&currentNum=0&pageNum=5";//我要求职
+	public static final String GET_ZHAOPING = "/resumeList?status=1&currentNum=0&pageNum=5";//我要招聘
 	public static final String BANNERLIST = "/bannerList";//轮播图
 	public static final String STAR_COMPANY = "/companyUserList?recommend=1&currentNum=0&pageNum=5";//明星企业
 	public static final String STAR_STUDENT = "/studentUserList?recommend=1&currentNum=0&pageNum=5";//明星学生

@@ -98,7 +98,7 @@ public class TwoFragment extends RoboFragment implements IXListViewListener{
 		adapter.notifyList(listGetJob);
 	}
 	private String getLoadUrl(int currentNum,int pageNum){
-		String str = "/resumeList?status=1&currentNum="+currentNum+"&pageNum="+pageNum;
+		String str = "/recruitList?status=1&currentNum="+currentNum+"&pageNum="+pageNum;
 		return str;
 	}
 	@Override

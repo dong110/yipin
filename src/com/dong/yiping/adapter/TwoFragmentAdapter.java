@@ -47,13 +47,11 @@ public class TwoFragmentAdapter extends BaseAdapter{
 		
 		GetJob getJob = listGetJob.get(position);
 		
-		viewHolderTwo.tv_cp_name.setVisibility(View.VISIBLE);
-		viewHolderTwo.tv_salary.setVisibility(View.VISIBLE);
 		
-		viewHolderTwo.tv_cp_name.setText(getJob.getName());
-		viewHolderTwo.tv_salary.setText(getJob.getSubdate());
+		viewHolderTwo.tv_cp_name.setText(getJob.getJob());
+		viewHolderTwo.tv_salary.setText(getJob.getWage());
 		
-		viewHolderTwo.tv_group_name.setText(getJob.getIntention());
+		viewHolderTwo.tv_group_name.setText(getJob.getConpany());
 		viewHolderTwo.tv_arrer.setText(getJob.getQuxian());
 		return convertView;
 	}

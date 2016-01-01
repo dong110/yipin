@@ -128,8 +128,7 @@ public class OneFragment extends RoboFragment{
 		//loadingUtil.showDialog();
 		String bannerList = Constant.HOST+Constant.BANNERLIST;
 		String getJob = Constant.HOST+Constant.GET_JOB;
-		//String getZhaopin = Constant.HOST+Constant.GET_ZHAOPING;
-		String getZhaopin = Constant.HOST+Constant.GET_ALL_ZHAOPING;
+		String getZhaopin = Constant.HOST+Constant.GET_ZHAOPING;
 		String starCom = Constant.HOST+Constant.STAR_COMPANY;
 		String starStu = Constant.HOST+Constant.STAR_STUDENT;
 		

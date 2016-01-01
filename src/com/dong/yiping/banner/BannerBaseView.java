@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Handler;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
@@ -16,12 +17,14 @@ import android.widget.ImageView.ScaleType;
 import com.dong.yiping.banner.bean.BaseBannerBean;
 import com.dong.yiping.banner.utils.GetBannerData;
 import com.dong.yiping.bean.BannerListBean;
+import com.dong.yiping.utils.LogUtil;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
 public class BannerBaseView extends RelativeLayout implements BannerViewBehavior {
-
+	
+	private static String TAG = "BannerBaseView";
 	/**
 	 * banner默认高宽比  height/width = 420/640
 	 */
@@ -203,8 +206,11 @@ public class BannerBaseView extends RelativeLayout implements BannerViewBehavior
             imageView.setScaleType(ScaleType.FIT_XY);
             
             final BaseBannerBean d = (BaseBannerBean) datas.get(position);
-			Picasso.with(context).load(d.getUrl()).into(imageView);
-			Log.e("-----------", "" + position);
+            if(d.getUrl() != null && !TextUtils.isEmpty(d.getUrl())){
+            	Picasso.with(context).load(d.getUrl()).into(imageView);
+            }
+			
+			LogUtil.i(TAG, "" + d.getUrl());
 //			((ViewPager)container).addView(imageView, position);
 			((ViewPager)container).addView(imageView);
 			imageView.setOnClickListener(new OnClickListener() {
