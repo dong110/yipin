@@ -26,6 +26,7 @@
         
         >
         <LinearLayout 
+            android:gravity="center_vertical"
             android:padding="5dp"
             android:background="@drawable/text_bg"
             android:layout_width="wrap_content"
@@ -47,6 +48,7 @@
                 />
         </LinearLayout>
         <LinearLayout 
+            android:gravity="center_vertical"
             android:layout_marginLeft="3sp"
             android:layout_marginRight="3dp"
             android:padding="5dp"
@@ -69,6 +71,7 @@
                 />
         </LinearLayout>
         <LinearLayout 
+            android:gravity="center_vertical"
             android:layout_marginRight="3dp"
             android:padding="5dp"
             android:background="@drawable/text_bg"

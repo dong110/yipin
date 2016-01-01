@@ -93,8 +93,8 @@ public final class R {
     public static final class id {
         public static final int banner_cont=0x7f09001f;
         public static final int bt_getJob=0x7f090029;
-        public static final int dialog=0x7f090030;
-        public static final int dialog_text=0x7f090031;
+        public static final int dialog=0x7f090031;
+        public static final int dialog_text=0x7f090032;
         public static final int et_login_pwd=0x7f090007;
         public static final int et_login_username=0x7f090006;
         public static final int et_regist_address=0x7f090015;
@@ -107,7 +107,7 @@ public final class R {
         public static final int et_regist_typename=0x7f090002;
         public static final int get_Zhaopin=0x7f09002a;
         public static final int hand=0x7f090000;
-        public static final int iv_index=0x7f09002b;
+        public static final int iv_index=0x7f09002c;
         public static final int iv_regist_qiye=0x7f090010;
         public static final int iv_regist_stu=0x7f09000e;
         public static final int iv_title_left=0x7f090025;
@@ -127,9 +127,9 @@ public final class R {
         public static final int rl_regist_sheng=0x7f090018;
         public static final int rl_regist_shi=0x7f09001a;
         public static final int rl_regist_stu=0x7f09000d;
-        public static final int tv_arrer=0x7f09002f;
-        public static final int tv_cp_name=0x7f09002c;
-        public static final int tv_group_name=0x7f09002d;
+        public static final int tv_arrer=0x7f090030;
+        public static final int tv_cp_name=0x7f09002d;
+        public static final int tv_group_name=0x7f09002e;
         public static final int tv_login_findpwd=0x7f090008;
         public static final int tv_login_login=0x7f09000a;
         public static final int tv_login_regist=0x7f090009;
@@ -138,7 +138,8 @@ public final class R {
         public static final int tv_regist_sheng=0x7f090019;
         public static final int tv_regist_shi=0x7f09001b;
         public static final int tv_regist_type=0x7f090001;
-        public static final int tv_salary=0x7f09002e;
+        public static final int tv_salary=0x7f09002f;
+        public static final int tv_textview=0x7f09002b;
         public static final int tv_title=0x7f090021;
         public static final int tv_title_center=0x7f090026;
     }

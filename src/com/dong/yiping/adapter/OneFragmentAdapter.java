@@ -27,7 +27,7 @@ public class OneFragmentAdapter extends BaseAdapter{
 	private GetZhaopinBean getZhaopin;
 	private StarCompanyBean starCompanyBean;
 	private StarStudentBean starStudentBean;
-	private boolean isGetJob = true;
+	public boolean isGetJob = true;
 	private int TYPE_ONE = 0;
 	private int type_two = 1;
 	private int type_three = 2;
@@ -165,6 +165,13 @@ public class OneFragmentAdapter extends BaseAdapter{
 				break;
 			case 2:
 				convertView = LayoutInflater.from(mContext).inflate(R.layout.item_fragmentone_three, null);
+				TextView tv_textview = (TextView) convertView.findViewById(R.id.tv_textview);
+				if(isGetJob){
+					tv_textview.setText("更多求职");
+				}else{
+					tv_textview.setText("更多招聘");
+				}
+				
 				break;
 			case 3:
 				convertView = LayoutInflater.from(mContext).inflate(R.layout.item_fragmentone_fore, null);
@@ -182,7 +189,12 @@ public class OneFragmentAdapter extends BaseAdapter{
 				viewHolderTwo = (ViewHolderTwo) convertView.getTag();
 				break;
 			case 2:
-				
+				TextView tv_textview = (TextView) convertView.findViewById(R.id.tv_textview);
+				if(isGetJob){
+					tv_textview.setText("更多求职");
+				}else{
+					tv_textview.setText("更多招聘");
+				}
 				break;
 			case 3:
 				

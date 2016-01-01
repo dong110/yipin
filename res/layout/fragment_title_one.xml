@@ -9,7 +9,7 @@
     
     <ImageView 
         android:id="@+id/iv_title_left"
-        android:paddingLeft="10dp"
+        android:padding="10dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/common_hearder_sharp_left"
@@ -74,8 +74,8 @@
 	
 	<ImageView 
 	    android:id="@+id/iv_title_right"
-	    android:paddingTop="8dp"
-	    android:paddingBottom="8dp"
+	    android:paddingTop="10dp"
+	    android:paddingBottom="10dp"
 	    
 	    android:layout_width="wrap_content"
 	    android:layout_height="wrap_content"

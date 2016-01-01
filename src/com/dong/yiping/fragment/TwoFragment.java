@@ -35,19 +35,21 @@ public class TwoFragment extends RoboFragment{
 	public void onActivityCreated(@Nullable Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
 		mContext = getActivity();
-		//initView();
-		init();
+		initView();
+		initData();
+		
 		
 	}
-	private void initView() {
-		tv_title_center = (TextView) getActivity().findViewById(R.id.tv_title_center);
-		ll_title_center = (LinearLayout) getActivity().findViewById(R.id.ll_title_center);
+	private void initData() {
 		
-		tv_title_center.setVisibility(View.GONE);
-		ll_title_center.setVisibility(View.VISIBLE);
+		
+	}
+
+	private void initView() {
+		adapter = new TwoFragmentAdapter(mContext);
 	}
 	private void init() {
-		adapter = new TwoFragmentAdapter(mContext);
+		
 		lv_listview.setAdapter(adapter);
 	}
 }
