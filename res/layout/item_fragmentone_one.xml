@@ -4,9 +4,9 @@
     android:layout_height="match_parent"
     android:orientation="horizontal" >
     
-    <TextView 
+    <Button 
         android:textColor="@color/writer"
-        android:background="@color/one_blue"
+        android:background="@color/yello"
         android:padding="5dp"
         android:gravity="center"
         android:text="我要求职"
@@ -14,9 +14,9 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         />
-	<TextView 
+	<Button 
 	    android:textColor="@color/writer"
-	    android:background="@color/yello"
+	    android:background="@color/one_blue"
 	    android:padding="5dp"
 	    android:gravity="center"
 	    android:text="我要招聘"

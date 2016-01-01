@@ -3,7 +3,11 @@ package com.dong.yiping.adapter;
 import java.util.List;
 
 import com.dong.yiping.R;
+import com.dong.yiping.bean.GetJobBean;
+import com.dong.yiping.bean.GetZhaopinBean;
 import com.dong.yiping.bean.OneFragmentJobBean;
+import com.dong.yiping.bean.StarCompanyBean;
+import com.dong.yiping.bean.StarStudentBean;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -12,10 +16,10 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
 public class OneFragmentAdapter extends BaseAdapter{
-	private List<OneFragmentJobBean> listJob;
-	private List<OneFragmentJobBean> listZhaoPin;
-	private List<OneFragmentJobBean> listGroup;
-	private List<OneFragmentJobBean> listStudent;
+	private GetJobBean getJobBean;
+	private GetZhaopinBean getZhaopin;
+	private StarCompanyBean starCompanyBean;
+	private StarStudentBean starStudentBean;
 	
 	private int TYPE_ONE = 0;
 	private int type_two = 1;
@@ -25,43 +29,50 @@ public class OneFragmentAdapter extends BaseAdapter{
 	
 	private Context mContext;
 	
-	public OneFragmentAdapter(Context mContext, List<OneFragmentJobBean> listJob, List<OneFragmentJobBean> listZhaoPin, List<OneFragmentJobBean> listGroup, List<OneFragmentJobBean> listStudent) {
-		this.listJob = listJob;
-		this.listZhaoPin = listZhaoPin;
-		this.listGroup = listGroup;
-		this.listStudent = listStudent;
+	public OneFragmentAdapter(Context mContext, GetJobBean getJobBean, GetZhaopinBean getZhaopin, StarCompanyBean starCompanyBean, StarStudentBean starStudentBean) {
+		this.getJobBean = getJobBean;
+		this.getZhaopin = getZhaopin;
+		this.starCompanyBean = starCompanyBean;
+		this.starStudentBean = starStudentBean;
 		this.mContext = mContext;
 	}
 
 	@Override
 	public int getCount() {
 		// TODO Auto-generated method stub
-		return listJob.size()+listGroup.size()+listStudent.size()+4;
+		return getJobBean.getList().size()+starCompanyBean.getList().size()+starStudentBean.getList().size()+3;
 	}
 	
 	@Override
 	public int getItemViewType(int position) {
 		if(position == 0){
+			
 			return TYPE_ONE;
-		}
-		if(position>=1 && position<listJob.size()+1){
+			
+		}else if(position<getJobBean.getList().size()+1){
+			
 			return type_two;
-		}
-		if(position==listJob.size()+1){
+			
+		}else if(position==getJobBean.getList().size()+1){
+			
 			return type_three;
-		}
-		if(position==listJob.size()+2){
+			
+		}else if(position==getJobBean.getList().size()+2){
+			
 			return type_fore;
-		}
-		if(position>listJob.size()+2 && position<listJob.size()+listGroup.size()+2){
+			
+		}else if(position<getJobBean.getList().size()+starCompanyBean.getList().size()+2){
+			
 			return type_two;
-		}
-		if(position==listJob.size()+listGroup.size()+2){
+			
+		}else if(position==getJobBean.getList().size()+starCompanyBean.getList().size()+2){
 			return type_five;
-		}
-		if(position>listJob.size()+listGroup.size()+2 && position<listJob.size()+listGroup.size()+listStudent.size()+4){
+		}else if(position<getJobBean.getList().size()+starCompanyBean.getList().size()+starStudentBean.getList().size()+3){
+			
 			return type_two;
+			
 		}
+		
 		
 		return 0;
 	}

@@ -223,9 +223,9 @@ public class TuTu implements OnItemClickListener  {
 							if(imageUrl.equals(bean.getImgUrl())){
 								bean.getmImageView().setImageBitmap(bitmap);
 							}
-						}*/
+						}
 						
-						//handler.sendEmptyMessage(1);
+						handler.sendEmptyMessage(1);*/
 						
 					}
 				});
