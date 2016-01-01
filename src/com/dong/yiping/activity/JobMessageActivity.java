@@ -13,16 +13,20 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-public class GetJobDetailActivity extends BaseActivity{
+public class JobMessageActivity extends BaseActivity {
 
+	private RelativeLayout bannerContent;
+	private BannerBaseView banner;
+	private GetJobBean getJobBean;
 
 	private TextView tv_title_center;
 	private ImageView iv_title_left;
 	private ImageView iv_title_right;
 
-	private ImageView iv_resume_icon;
-	private TextView tv_resume_invite;
-	private TextView tv_resume_collect;
+	private TextView tv_jobmessage_jobname;
+	private TextView tv_jobmessage_salary;
+	private TextView tv_jobmessage_applyjob;
+	private TextView tv_jobmessage_collect;
 
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -33,26 +37,28 @@ public class GetJobDetailActivity extends BaseActivity{
 		// 当前页面从右往左进入
 		overridePendingTransition(R.anim.right_to_center, R.anim.center_to_left);
 
-		setContentView(R.layout.activity_getjobdetail);
+		setContentView(R.layout.activity_job_message);
 		initView();
 	}
 
 	private void initView() {
 		tv_title_center = $(R.id.tv_title_center);
+		tv_title_center.setText("招聘信息");
 		iv_title_left = $(R.id.iv_title_left, true);
 		iv_title_right = $(R.id.iv_title_right, true);
-		tv_title_center.setText("求职详情");
+
+		// 轮播图
+		bannerContent = $(R.id.banner_cont);
+		banner = new MainBannerView(this);
+		bannerContent.addView(banner);
 
 		//
-		iv_resume_icon = $(R.id.iv_resume_icon);
-		
-		
-		tv_resume_invite = $(R.id.tv_resume_invite, true);
-		tv_resume_collect = $(R.id.tv_resume_collect, true);
+		tv_jobmessage_jobname = $(R.id.tv_jobmessage_jobname);
+		tv_jobmessage_salary = $(R.id.tv_jobmessage_salary);
+		tv_jobmessage_applyjob = $(R.id.tv_jobmessage_applyjob, true);
+		tv_jobmessage_collect = $(R.id.tv_jobmessage_collect, true);
 	}
 
-	
-	
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
@@ -68,11 +74,11 @@ public class GetJobDetailActivity extends BaseActivity{
 			// TODO
 			break;
 
-		case R.id.tv_resume_invite:// 邀请面试
+		case R.id.tv_jobmessage_applyjob:// 申请职位
 
 			break;
 
-		case R.id.tv_resume_collect:// 收藏简历
+		case R.id.tv_jobmessage_collect:// 收藏职位
 
 			break;
 		}

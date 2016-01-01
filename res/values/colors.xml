@@ -8,6 +8,6 @@
     <color name="one_blue">#618A9C</color>
     <color name="login_gold">#F3AE5B</color>
     <color name="gray">#DDDDDD</color>
-    
+    <color name="gray_writer">#eeeeee</color>
     <color name="fragment_one_bg">#DDE5E8</color>
 </resources>

@@ -27,6 +27,7 @@ public class Constant {
 	public static final String REGIST = "/register";//注册
 	public static final String FINDPWD = "/";//找回密码
 	public static final String MODIFYPWD = "/userPwdUpdate";//修改密码
+	public static final String PHONEINDENTIFICATION = "/";//手机号验证
 	
 	public static final String GET_JOB = "/resumeList?status=1&currentNum=0&pageNum=5";//我要求职
 	public static final String GET_ZHAOPING = "/recruitList?userId=1&status=1&currentNum=0&pageNum=5";//我要招聘

@@ -46,7 +46,7 @@ public class PhoneIdentificationActivity extends BaseActivity {
 		// 当前页面从右往左进入
 		overridePendingTransition(R.anim.right_to_center, R.anim.center_to_left);
 		mContext = this;
-		setContentView(R.layout.activity_modifypwd);
+		setContentView(R.layout.activity_phone_identification);
 
 		initTitleBar();
 		initView();
@@ -113,9 +113,9 @@ public class PhoneIdentificationActivity extends BaseActivity {
 			return;
 		} 
 
-		String url = Constant.HOST + Constant.FINDPWD;
+		//提交手机号验证
+		String url = Constant.HOST + Constant.PHONEINDENTIFICATION;
 		Map<String, String> paramMap = new HashMap<String, String>();
-		// userId??
 		// TODO
 		paramMap.put("userId", "1");
 		paramMap.put("pwd", "xx");
@@ -130,10 +130,10 @@ public class PhoneIdentificationActivity extends BaseActivity {
 		public void handleMessage(android.os.Message msg) {
 			switch (msg.what) {
 			case Constant.NET_ERROR:
-				ToastUtil.showToast(mContext, "密码修改失败！");
+				ToastUtil.showToast(mContext, "手机号验证失败！");
 				break;
 			case Constant.NET_SUCCESS:
-				ToastUtil.showToast(mContext, "密码修改成功！");
+				ToastUtil.showToast(mContext, "手机号验证成功！");
 
 				startToActivity(LoginActivity.class);
 
