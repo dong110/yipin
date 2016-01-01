@@ -13,7 +13,10 @@ public class Constant {
 	public static final int TOPER_TYPE_STARTSTU = 105;
 	public static final int TOPER_TYPE_REGIST = 106;
 	public static final int TOPER_TYPE_FINDPWD = 107;
+<<<<<<< HEAD
 	public static final int TOPER_TYPE_MODIFYPWD = 108;
+=======
+>>>>>>> origin/master
 	
 	public static final int HANDLER_BANNERLIST = 120;
 	public static final int HANDLER_TYPE_GETJOB = 121;

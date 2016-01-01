@@ -31,7 +31,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            
+            android:gravity="center_vertical"
             >
             <TextView 
                 android:textSize="@dimen/text_size_18"
@@ -47,6 +47,7 @@
                 />
         </LinearLayout>
         <LinearLayout 
+            android:gravity="center_vertical"
             android:layout_marginLeft="3sp"
             android:layout_marginRight="3dp"
             android:padding="5dp"
@@ -69,6 +70,7 @@
                 />
         </LinearLayout>
         <LinearLayout 
+            android:gravity="center_vertical"
             android:layout_marginRight="3dp"
             android:padding="5dp"
             android:background="@drawable/text_bg"

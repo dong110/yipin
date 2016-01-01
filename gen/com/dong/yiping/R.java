@@ -54,6 +54,7 @@ public final class R {
         public static final int applyinfo_btn_cur=0x7f020005;
         public static final int applyinfo_img=0x7f020006;
         public static final int applyinfo_line=0x7f020007;
+<<<<<<< HEAD
         public static final int border_roundedcorners_gray=0x7f020008;
         public static final int but_bg_selector=0x7f020009;
         public static final int common_bg=0x7f02000a;
@@ -97,6 +98,50 @@ public final class R {
         public static final int bt_getJob=0x7f09002f;
         public static final int dialog=0x7f090036;
         public static final int dialog_text=0x7f090037;
+=======
+        public static final int but_bg_selector=0x7f020008;
+        public static final int common_bg=0x7f020009;
+        public static final int common_checkbox_seleted=0x7f02000a;
+        public static final int common_checkbox_unselect=0x7f02000b;
+        public static final int common_footer_bg=0x7f02000c;
+        public static final int common_hearder_sharp_left=0x7f02000d;
+        public static final int common_menu=0x7f02000e;
+        public static final int common_menu_cur=0x7f02000f;
+        public static final int common_menu_cur2=0x7f020010;
+        public static final int common_set_btn=0x7f020011;
+        public static final int common_set_btn2=0x7f020012;
+        public static final int common_sharp_right=0x7f020013;
+        public static final int dialog_bg=0x7f020014;
+        public static final int ic_launcher=0x7f020015;
+        public static final int index_sharp_right=0x7f020016;
+        public static final int index_title_bg=0x7f020017;
+        public static final int load_loading=0x7f020018;
+        public static final int loading_background=0x7f020019;
+        public static final int login_bg=0x7f02001a;
+        public static final int login_btn=0x7f02001b;
+        public static final int login_btn_cur=0x7f02001c;
+        public static final int login_content_bg=0x7f02001d;
+        public static final int point_normal=0x7f02001e;
+        public static final int point_seletor=0x7f02001f;
+        public static final int ponit_focus=0x7f020020;
+        public static final int request_loading=0x7f020021;
+        public static final int resume_btn=0x7f020022;
+        public static final int resume_content_line=0x7f020023;
+        public static final int resume_upload=0x7f020024;
+        public static final int search_bg=0x7f020025;
+        public static final int star=0x7f020026;
+        public static final int text_bg=0x7f020027;
+        public static final int text_bg_selector=0x7f020028;
+        public static final int text_bg_two=0x7f020029;
+        public static final int usercenter_content_line=0x7f02002a;
+        public static final int xlistview_arrow=0x7f02002b;
+    }
+    public static final class id {
+        public static final int banner_cont=0x7f09001f;
+        public static final int bt_getJob=0x7f090029;
+        public static final int dialog=0x7f09003f;
+        public static final int dialog_text=0x7f090040;
+>>>>>>> origin/master
         public static final int et_login_pwd=0x7f090007;
         public static final int et_login_username=0x7f090006;
         public static final int et_phone_code=0x7f09000e;
@@ -111,6 +156,7 @@ public final class R {
         public static final int et_regist_typename=0x7f090002;
         public static final int get_Zhaopin=0x7f090030;
         public static final int hand=0x7f090000;
+<<<<<<< HEAD
         public static final int iv_index=0x7f090031;
         public static final int iv_regist_qiye=0x7f090014;
         public static final int iv_regist_stu=0x7f090012;
@@ -134,6 +180,33 @@ public final class R {
         public static final int tv_arrer=0x7f090035;
         public static final int tv_cp_name=0x7f090032;
         public static final int tv_group_name=0x7f090033;
+=======
+        public static final int iv_index=0x7f09002c;
+        public static final int iv_regist_qiye=0x7f090010;
+        public static final int iv_regist_stu=0x7f09000e;
+        public static final int iv_title_left=0x7f090025;
+        public static final int iv_title_right=0x7f090028;
+        public static final int list_item_textview=0x7f090031;
+        public static final int listview=0x7f090024;
+        public static final int ll_regist_address=0x7f090014;
+        public static final int ll_regist_school=0x7f090016;
+        public static final int ll_regist_typename=0x7f090017;
+        public static final int ll_title_center=0x7f090027;
+        public static final int lv_listview=0x7f090023;
+        public static final int main_tabs_layout=0x7f09000c;
+        public static final int main_viewpager=0x7f09000b;
+        public static final int myResume=0x7f090022;
+        public static final int progressBar1=0x7f090020;
+        public static final int rl_regist_qiye=0x7f09000f;
+        public static final int rl_regist_qu=0x7f09001c;
+        public static final int rl_regist_sheng=0x7f090018;
+        public static final int rl_regist_shi=0x7f09001a;
+        public static final int rl_regist_stu=0x7f09000d;
+        public static final int textview=0x7f09003e;
+        public static final int tv_arrer=0x7f090030;
+        public static final int tv_cp_name=0x7f09002d;
+        public static final int tv_group_name=0x7f09002e;
+>>>>>>> origin/master
         public static final int tv_login_findpwd=0x7f090008;
         public static final int tv_login_login=0x7f09000a;
         public static final int tv_login_regist=0x7f090009;
@@ -146,9 +219,28 @@ public final class R {
         public static final int tv_regist_sheng=0x7f09001d;
         public static final int tv_regist_shi=0x7f09001f;
         public static final int tv_regist_type=0x7f090001;
+<<<<<<< HEAD
         public static final int tv_salary=0x7f090034;
         public static final int tv_title=0x7f090025;
         public static final int tv_title_center=0x7f09002c;
+=======
+        public static final int tv_salary=0x7f09002f;
+        public static final int tv_textview=0x7f09002b;
+        public static final int tv_title=0x7f090021;
+        public static final int tv_title_center=0x7f090026;
+        public static final int xListView=0x7f090032;
+        public static final int xlistview_footer_content=0x7f090033;
+        public static final int xlistview_footer_hint_textview=0x7f090035;
+        public static final int xlistview_footer_progressbar=0x7f090034;
+        public static final int xlistview_header_arrow=0x7f09003b;
+        public static final int xlistview_header_content=0x7f090036;
+        public static final int xlistview_header_hint_textview=0x7f090038;
+        public static final int xlistview_header_last_time=0x7f090039;
+        public static final int xlistview_header_progressbar=0x7f09003c;
+        public static final int xlistview_header_text=0x7f090037;
+        public static final int xlistview_header_text_finished=0x7f09003d;
+        public static final int xlistview_header_time=0x7f09003a;
+>>>>>>> origin/master
     }
     public static final class layout {
         public static final int activity_companyinfo=0x7f030000;
@@ -156,6 +248,7 @@ public final class R {
         public static final int activity_getjobdetail=0x7f030002;
         public static final int activity_login=0x7f030003;
         public static final int activity_main=0x7f030004;
+<<<<<<< HEAD
         public static final int activity_modifypwd=0x7f030005;
         public static final int activity_phone_identification=0x7f030006;
         public static final int activity_regist=0x7f030007;
@@ -179,6 +272,34 @@ public final class R {
         public static final int item_fragmenttwo_head=0x7f030019;
         public static final int line_user_center=0x7f03001a;
         public static final int progressdialog_item=0x7f03001b;
+=======
+        public static final int activity_regist=0x7f030005;
+        public static final int activity_resume=0x7f030006;
+        public static final int ad_layout=0x7f030007;
+        public static final int dialog=0x7f030008;
+        public static final int fragment_fore=0x7f030009;
+        public static final int fragment_one=0x7f03000a;
+        public static final int fragment_three=0x7f03000b;
+        public static final int fragment_title_one=0x7f03000c;
+        public static final int fragment_title_two=0x7f03000d;
+        public static final int fragment_two=0x7f03000e;
+        public static final int item_fragmentone_five=0x7f03000f;
+        public static final int item_fragmentone_fore=0x7f030010;
+        public static final int item_fragmentone_one=0x7f030011;
+        public static final int item_fragmentone_three=0x7f030012;
+        public static final int item_fragmentone_two=0x7f030013;
+        public static final int item_fragmentthree=0x7f030014;
+        public static final int item_fragmentthree_head=0x7f030015;
+        public static final int item_fragmenttwo=0x7f030016;
+        public static final int item_fragmenttwo_head=0x7f030017;
+        public static final int line_user_center=0x7f030018;
+        public static final int list_item=0x7f030019;
+        public static final int ljlistview=0x7f03001a;
+        public static final int ljlistview_footer=0x7f03001b;
+        public static final int ljlistview_header=0x7f03001c;
+        public static final int ljlistview_infohint=0x7f03001d;
+        public static final int progressdialog_item=0x7f03001e;
+>>>>>>> origin/master
     }
     public static final class string {
         public static final int action_settings=0x7f070002;
@@ -188,6 +309,13 @@ public final class R {
         public static final int tabs_01=0x7f070004;
         public static final int tabs_02=0x7f070005;
         public static final int tabs_03=0x7f070006;
+        public static final int xlistview_footer_hint_normal=0x7f07000c;
+        public static final int xlistview_footer_hint_ready=0x7f07000d;
+        public static final int xlistview_header_hint_finifshed=0x7f07000a;
+        public static final int xlistview_header_hint_loading=0x7f070009;
+        public static final int xlistview_header_hint_normal=0x7f070007;
+        public static final int xlistview_header_hint_ready=0x7f070008;
+        public static final int xlistview_header_last_time=0x7f07000b;
     }
     public static final class style {
         public static final int regist_left=0x7f080004;

@@ -57,6 +57,7 @@ public class MainActivity extends RoboFragmentActivity {
         main_viewpager.setAdapter(pagerAdapter);
         main_viewpager.setScrollable(false);//设置ViewPage不可滚动
         changeTabs(0);
+        changeTitle(0);
     }
 	private void changeTabs(int index){
         for (int i = 0;i<main_tabs_layout.getChildCount();i++){
@@ -77,22 +78,23 @@ public class MainActivity extends RoboFragmentActivity {
                 @Override
                 public void onClick(View v) {
                 	main_viewpager.setCurrentItem(finalI,false);
-                	changeTitle(finalI);
+                	
                 }
             });
         }
     }
 	private void changeTitle(int index){
+		System.out.println(index+"");
 		if(index==0){
     		tv_title_center.setVisibility(View.VISIBLE);
     		ll_title_center.setVisibility(View.GONE);
     		tv_title_center.setText("主页");
         }
-        if(index==1 && index==2){
+        if(index==1 || index==2){
     		tv_title_center.setVisibility(View.GONE);
     		ll_title_center.setVisibility(View.VISIBLE);
         }
-        if(index==0){
+        if(index==3){
     		tv_title_center.setVisibility(View.VISIBLE);
     		ll_title_center.setVisibility(View.GONE);
     		tv_title_center.setText("个人中心");
@@ -108,6 +110,7 @@ public class MainActivity extends RoboFragmentActivity {
         @Override
         public void onPageSelected(int i) {
             changeTabs(i);
+            changeTitle(i);
 //            if (i == 1){
 //                mViewPager.setScrollable(false);
 //            }else {

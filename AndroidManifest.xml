@@ -31,6 +31,7 @@
         <activity 
             android:name="com.dong.yiping.activity.MainActivity"
             android:launchMode="singleTask"
+            android:windowSoftInputMode="adjustPan"
             android:screenOrientation="portrait"></activity>
         
          <activity 
