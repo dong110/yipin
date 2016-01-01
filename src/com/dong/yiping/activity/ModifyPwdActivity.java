@@ -23,7 +23,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-public class FindPwdActivity extends BaseActivity {
+public class ModifyPwdActivity extends BaseActivity {
 
 	private TextView tv_title_center;
 	private ImageView iv_title_left;
