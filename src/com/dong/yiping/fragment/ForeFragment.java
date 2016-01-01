@@ -4,6 +4,8 @@ import roboguice.inject.InjectView;
 
 import com.dong.yiping.R;
 import com.dong.yiping.activity.CompanyInfoActivity;
+import com.dong.yiping.activity.ModifyPwdActivity;
+import com.dong.yiping.activity.PhoneIdentificationActivity;
 import com.dong.yiping.activity.ResumeActivity;
 
 import android.content.Context;
@@ -21,6 +23,9 @@ import android.widget.TextView;
 public class ForeFragment extends BaseFragment implements OnClickListener{
 	
 	@InjectView(R.id.myResume) TextView myResume;
+	
+	@InjectView(R.id.tv_mine_modifypwd) TextView modify_pwd;
+	@InjectView(R.id.tv_mine_phone) TextView phone;
 	
 	private TextView tv_title_center;
 	private LinearLayout ll_title_center;
@@ -41,6 +46,9 @@ public class ForeFragment extends BaseFragment implements OnClickListener{
 	
 	private void initView() {
 		myResume.setOnClickListener(this);
+		modify_pwd.setOnClickListener(this);
+		phone.setOnClickListener(this);
+		
 	}
 	
 
@@ -52,6 +60,15 @@ public class ForeFragment extends BaseFragment implements OnClickListener{
 			mContext.startActivity(mIntent);
 			break;
 
+		case R.id.tv_mine_modifypwd:
+			mIntent = new Intent(mContext,ModifyPwdActivity.class);
+			mContext.startActivity(mIntent);
+			break;
+			
+		case R.id.tv_mine_phone:
+			mIntent = new Intent(mContext,PhoneIdentificationActivity.class);
+			mContext.startActivity(mIntent);
+			break;
 		default:
 			break;
 		}

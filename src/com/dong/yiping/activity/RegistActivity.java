@@ -155,6 +155,9 @@ public class RegistActivity extends BaseActivity {
 		case R.id.iv_title_left:
 			startToActivity(LoginActivity.class);
 			this.finish();
+			// 当前页面向右退出
+			overridePendingTransition(R.anim.left_to_center,
+					R.anim.center_to_right);
 			break;
 
 		case R.id.iv_title_right:

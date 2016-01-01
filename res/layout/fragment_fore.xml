@@ -81,11 +81,13 @@
          <include layout="@layout/line_user_center"/>
          
          <TextView 
+             android:id="@+id/tv_mine_phone"
             style="@style/user_center_text"
             android:text="手机号认证"
             />
          <include layout="@layout/line_user_center"/>
          <TextView 
+             android:id="@+id/tv_mine_modifypwd"
             style="@style/user_center_text"
             android:text="修改密码"
             />

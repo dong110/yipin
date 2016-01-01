@@ -53,9 +53,9 @@ public class ToperJson {
 			toperRegist(result);
 			break;
 			
-		case Constant.TOPER_TYPE_FINDPWD:
+		case Constant.TOPER_TYPE_MODIFYPWD:
 			LogUtil.i("修改密码返回的数据==", result);
-			toperFindPwd(result);
+			toperModifyPwd(result);
 			break;
 		}
 	}
@@ -64,7 +64,7 @@ public class ToperJson {
 	/**
 	 * 解析修改密码返回的数据
 	 */
-	private void toperFindPwd(String result) {
+	private void toperModifyPwd(String result) {
 		try {//{"messages":"修改密码成功","status":0}
 
 			JSONObject jsonObject = new JSONObject(result);

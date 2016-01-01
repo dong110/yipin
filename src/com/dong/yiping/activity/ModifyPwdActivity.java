@@ -49,7 +49,7 @@ public class ModifyPwdActivity extends BaseActivity {
 		// 当前页面从右往左进入
 		overridePendingTransition(R.anim.right_to_center, R.anim.center_to_left);
 		mContext = this;
-		setContentView(R.layout.activity_regist);
+		setContentView(R.layout.activity_modifypwd);
 
 		initTitleBar();
 		initView();
@@ -60,7 +60,7 @@ public class ModifyPwdActivity extends BaseActivity {
 		iv_title_left = $(R.id.iv_title_left, true);
 		iv_title_right = $(R.id.iv_title_right, true);
 
-		tv_title_center.setText("找回密码");
+		tv_title_center.setText("修改密码");
 
 	}
 
@@ -78,8 +78,10 @@ public class ModifyPwdActivity extends BaseActivity {
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.iv_title_left:
-			startToActivity(LoginActivity.class);
 			this.finish();
+			// 当前页面向右退出
+			overridePendingTransition(R.anim.left_to_center,
+					R.anim.center_to_right);
 			break;
 
 		case R.id.iv_title_right:
@@ -101,16 +103,16 @@ public class ModifyPwdActivity extends BaseActivity {
 		pwdComfirm = et_regist_pwd_confirm.getText().toString().trim();
 
 		if (TextUtils.isEmpty(typeName)) {
-			ToastUtil.showToast(this, "用户名不能为空");
+			ToastUtil.showToast(this, "旧密码不能为空");
 			return;
 		} else if (TextUtils.isEmpty(pwd)) {
-			ToastUtil.showToast(this, "密码不能为空");
+			ToastUtil.showToast(this, "新密码不能为空");
 			return;
 		} else if (TextUtils.isEmpty(pwdComfirm)) {
 			ToastUtil.showToast(this, "确认密码不能为空");
 			return;
 		} else if (!pwd.equals(pwdComfirm)) {
-			ToastUtil.showToast(this, "密码和确认密码不一致");
+			ToastUtil.showToast(this, "新密码和确认密码不一致");
 			return;
 		}
 
@@ -123,7 +125,7 @@ public class ModifyPwdActivity extends BaseActivity {
 
 		ThreadPoolManager.getInstance().addTask(
 				new NetRunnable(mHandler, url, paramMap,
-						Constant.TOPER_TYPE_REGIST));
+						Constant.TOPER_TYPE_MODIFYPWD));
 
 	}
 

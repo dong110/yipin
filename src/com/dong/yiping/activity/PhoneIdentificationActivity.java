@@ -23,23 +23,20 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-public class FindPwdActivity extends BaseActivity {
+public class PhoneIdentificationActivity extends BaseActivity {
 
 	private TextView tv_title_center;
 	private ImageView iv_title_left;
 	private ImageView iv_title_right;
 
-	private EditText et_regist_typename;
-	private EditText et_regist_pwd;
-	private EditText et_regist_pwd_confirm;
+	private EditText et_phone_phone;
+	private EditText et_phone_code;
 
-	private TextView tv_regist_regist_confirm;
-
-	private boolean isStu = true;
-
-	private String typeName;
-	private String pwd;
-	private String pwdComfirm;
+	private TextView tv_phone_submit;
+	private TextView tv_phone_getcode;
+	
+	private String phoneNum;
+	private String codeString;
 
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -49,7 +46,7 @@ public class FindPwdActivity extends BaseActivity {
 		// 当前页面从右往左进入
 		overridePendingTransition(R.anim.right_to_center, R.anim.center_to_left);
 		mContext = this;
-		setContentView(R.layout.activity_findpwd);
+		setContentView(R.layout.activity_modifypwd);
 
 		initTitleBar();
 		initView();
@@ -60,25 +57,22 @@ public class FindPwdActivity extends BaseActivity {
 		iv_title_left = $(R.id.iv_title_left, true);
 		iv_title_right = $(R.id.iv_title_right, true);
 
-		tv_title_center.setText("找回密码");
+		tv_title_center.setText("手机号认证");
 
 	}
 
 	private void initView() {
-		et_regist_typename = $(R.id.et_regist_typename);
+		et_phone_code = $(R.id.et_phone_code);
+		et_phone_phone = $(R.id.et_phone_phone);
 
-		et_regist_pwd = $(R.id.et_regist_pwd);
-		et_regist_pwd_confirm = $(R.id.et_regist_pwd_confirm);
-
-		tv_regist_regist_confirm = $(R.id.tv_regist_regist_confirm, true);
-
+		tv_phone_getcode = $(R.id.tv_phone_getcode, true);
+		tv_phone_submit = $(R.id.tv_phone_submit, true);
 	}
 
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.iv_title_left:
-			startToActivity(LoginActivity.class);
 			this.finish();
 			// 当前页面向右退出
 			overridePendingTransition(R.anim.left_to_center,
@@ -90,43 +84,45 @@ public class FindPwdActivity extends BaseActivity {
 			// TODO
 			break;
 
-		case R.id.tv_regist_regist_confirm:
-			// 找回密码
-			findPwdMethod();
+		case R.id.tv_phone_getcode:
+			//获取验证码
+			
+			getCode();
+			break;
+		case R.id.tv_phone_submit:
+			// 手机号认证提交
+			phoneSubmit();
 			break;
 
 		}
 	}
 
-	private void findPwdMethod() {
-		typeName = et_regist_typename.getText().toString().trim();
-		pwd = et_regist_pwd.getText().toString().trim();
-		pwdComfirm = et_regist_pwd_confirm.getText().toString().trim();
+	private void getCode() {
+		
+	}
 
-		if (TextUtils.isEmpty(typeName)) {
-			ToastUtil.showToast(this, "用户名不能为空");
+	private void phoneSubmit() {
+		phoneNum = et_phone_phone.getText().toString().trim();
+		codeString = et_phone_code.getText().toString().trim();
+
+		if (TextUtils.isEmpty(phoneNum)) {
+			ToastUtil.showToast(this, "手机号不能为空");
 			return;
-		} else if (TextUtils.isEmpty(pwd)) {
-			ToastUtil.showToast(this, "密码不能为空");
+		} else if (TextUtils.isEmpty(codeString)) {
+			ToastUtil.showToast(this, "验证码不能为空");
 			return;
-		} else if (TextUtils.isEmpty(pwdComfirm)) {
-			ToastUtil.showToast(this, "确认密码不能为空");
-			return;
-		} else if (!pwd.equals(pwdComfirm)) {
-			ToastUtil.showToast(this, "密码和确认密码不一致");
-			return;
-		}
+		} 
 
 		String url = Constant.HOST + Constant.FINDPWD;
 		Map<String, String> paramMap = new HashMap<String, String>();
 		// userId??
 		// TODO
 		paramMap.put("userId", "1");
-		paramMap.put("pwd", pwd);
+		paramMap.put("pwd", "xx");
 
 		ThreadPoolManager.getInstance().addTask(
 				new NetRunnable(mHandler, url, paramMap,
-						Constant.TOPER_TYPE_FINDPWD));
+						Constant.TOPER_TYPE_MODIFYPWD));
 
 	}
 
