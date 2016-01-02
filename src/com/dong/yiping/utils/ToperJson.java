@@ -8,6 +8,7 @@ import com.dong.yiping.bean.DictListBean;
 import com.dong.yiping.bean.DictListBean.DictBean;
 import com.dong.yiping.bean.GetJobBean;
 import com.dong.yiping.bean.GetZhaopinBean;
+import com.dong.yiping.bean.HangYeBean;
 import com.dong.yiping.bean.StarCompanyBean;
 import com.dong.yiping.bean.StarStudentBean;
 import com.dong.yiping.bean.UserBean;
@@ -62,16 +63,38 @@ public class ToperJson {
 		case Constant.TOPER_TYPE_GETDICT:
 			toperDictList(result);
 			break;
+		case Constant.TOPER_TYPE_GETHANGYE:
+			toperGetHangYe(result);
+			break;
 		}
 	}
 	
+	private void toperGetHangYe(String result) {
+		try {
+			JSONObject jsonObject = new JSONObject(result);
+			int status = jsonObject.optInt("status");
+			
+			if(status == 0){
+				HangYeBean hangYeBean = gson.fromJson(result, HangYeBean.class);
+				Message msg = handler.obtainMessage();
+				msg.obj = hangYeBean;
+				msg.what = Constant.HANDLER_TYPE_GETHANGYE;
+				handler.sendMessage(msg);
+			}else{
+				handler.sendEmptyMessage(Constant.HANDLER_TYPE_GETHANGYE);
+			}
+		} catch (Exception e) {
+			handler.sendEmptyMessage(Constant.HANDLER_TYPE_GETHANGYE);
+			e.printStackTrace();
+		}
+		
+	}
 	/**
 	 * 解析数据字典
 	 * @param result
 	 */
 	private void toperDictList(String result) {
 		try {
-
 			JSONObject jsonObject = new JSONObject(result);
 			int status = jsonObject.optInt("status");
 			

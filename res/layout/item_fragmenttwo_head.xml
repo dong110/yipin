@@ -49,6 +49,7 @@
                 />
         </LinearLayout>
         <LinearLayout 
+            android:id="@+id/ll_area"
             android:gravity="center_vertical"
             android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
@@ -71,6 +72,7 @@
                 />
         </LinearLayout>
         <LinearLayout 
+            android:id="@+id/ll_hangye"
             android:gravity="center_vertical"
             android:layout_marginRight="5dp"
             android:padding="5dp"
@@ -92,6 +94,7 @@
                 />
         </LinearLayout>
         <TextView 
+            android:id="@+id/tv_serach"
             android:paddingLeft="20dp"
             android:paddingRight="20dp"
             android:paddingTop="5dp"

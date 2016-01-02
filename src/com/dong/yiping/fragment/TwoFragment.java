@@ -19,12 +19,18 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.dong.yiping.Constant;
+import com.dong.yiping.MyApplication;
 import com.dong.yiping.R;
 import com.dong.yiping.activity.MainActivity;
 import com.dong.yiping.adapter.TwoFragmentAdapter;
+import com.dong.yiping.bean.DictListBean.DictBean;
 import com.dong.yiping.bean.GetJobBean;
 import com.dong.yiping.bean.GetJobBean.GetJob;
+import com.dong.yiping.bean.HangYeBean;
+import com.dong.yiping.bean.HangYeBean.HangYe;
+import com.dong.yiping.utils.LoadingUtil;
 import com.dong.yiping.utils.NetRunnable;
+import com.dong.yiping.utils.PopUtil;
 import com.dong.yiping.utils.ThreadPoolManager;
 import com.dong.yiping.utils.ToastUtil;
 import com.dong.yiping.view.LJListView;
@@ -36,6 +42,9 @@ public class TwoFragment extends RoboFragment implements IXListViewListener, OnC
 	@InjectView(R.id.lv_listview) LJListView lv_listview; 
 	@InjectView(R.id.ll_time) LinearLayout ll_time; 
 	@InjectView(R.id.tv_fragmenttwo_time) TextView publishTime;
+	@InjectView(R.id.ll_area) LinearLayout ll_area;
+	@InjectView(R.id.ll_hangye) LinearLayout ll_hangye;
+	@InjectView(R.id.tv_serach) TextView tv_serach;
 	
 	private TextView tv_title_center;
 	private LinearLayout ll_title_center;
@@ -50,7 +59,9 @@ public class TwoFragment extends RoboFragment implements IXListViewListener, OnC
 	private int pagerNum=10;//每页的条数
 	
 	private TimeDialog timeDialog;
-
+	private PopUtil popUtil;
+	private LoadingUtil loadingUtil;
+	
     private TimeDialog.CustomTimeListener customTimeListener = new TimeDialog.CustomTimeListener() {
         @Override
         public void setTime(String time) {
@@ -78,6 +89,22 @@ public class TwoFragment extends RoboFragment implements IXListViewListener, OnC
 				ToastUtil.showToast(mContext, "网络错误！");
 				lv_listview.stopRefresh();
 				lv_listview.stopLoadMore();
+				
+				break;
+			case Constant.HANDLER_TYPE_GETHANGYE:
+				HangYeBean hangYeBean = (HangYeBean) msg.obj;
+				List<String> listStr = new ArrayList<String>();
+				for(HangYe hangYe:hangYeBean.getList()){
+					listStr.add(hangYe.getName());
+				}
+				listStr.add("1111111");
+				listStr.add("22222222222");
+				listStr.add("333333333");
+				listStr.add("44444444444");
+				listStr.add("55555555555");
+				loadingUtil.hideDialog();
+				popUtil.createPop(listStr);
+				
 				
 				break;
 			}
@@ -118,12 +145,14 @@ public class TwoFragment extends RoboFragment implements IXListViewListener, OnC
 	}
 	private void setListener() {
 		ll_time.setOnClickListener(this);
-		
+		ll_hangye.setOnClickListener(this);
+		tv_serach.setOnClickListener(this);
 	}
 	private void initView() {
 		
 		timeDialog = new TimeDialog(mContext,customTimeListener);
-		
+		popUtil = new PopUtil(mContext);
+		loadingUtil = new LoadingUtil(mContext);
 		listGetJob = new ArrayList<GetJobBean.GetJob>();
 		adapter = new TwoFragmentAdapter(mContext,listGetJob);
 		lv_listview.setAdapter(adapter);
@@ -249,9 +278,27 @@ public class TwoFragment extends RoboFragment implements IXListViewListener, OnC
 		case R.id.ll_time:
 			   timeDialog.show();
 			break;
-		default:
+		case R.id.ll_hangye:
+				loadingUtil.showDialog();
+				getHangyeData();
+			
+			break;
+		case R.id.tv_serach:
+			
 			break;
 		}
 		
+	}
+
+	private void getHangyeData() {
+		List<DictBean> listDictBean = MyApplication.getApplication().getDictBean().getList();
+		String code = "";
+		for(DictBean dictBean : listDictBean){
+			if(dictBean.getCode().equals("HANGYE")){
+				code = dictBean.getCode();
+			}
+		}
+		String url = Constant.HOST + Constant.GET_DICT_INFO+code;
+		ThreadPoolManager.getInstance().addTask(new NetRunnable(mHandler,url,Constant.TOPER_TYPE_GETHANGYE));
 	}
 }
