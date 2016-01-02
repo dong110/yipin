@@ -21,7 +21,7 @@ import android.widget.Scroller;
 import android.widget.TextView;
 
 import com.dong.yiping.R;
-import com.dong.yiping.utils.DensityUtil;
+import com.dong.yiping.utils.DisplayUtils;
 
 /**
  * 改编自XListView
@@ -503,7 +503,7 @@ public class LJListView extends RelativeLayout implements OnScrollListener{
 			mListViewListener.onRefresh();
 		}
 		resetHeaderHeight();
-		int finalHeight = DensityUtil.dip2px(context, 60);  //XListViewHeader中的高度
+		int finalHeight = DisplayUtils.dip2px(context, 60);  //XListViewHeader中的高度
 
 		mScrollBack = SCROLLBACK_HEADER;
 		mScroller.startScroll(0, 0, 0, finalHeight,

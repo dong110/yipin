@@ -20,9 +20,11 @@ import com.dong.yiping.Constant;
 import com.dong.yiping.R;
 import com.dong.yiping.adapter.ThreeFragmentAdapter;
 import com.dong.yiping.bean.GetZhaopinBean;
+import com.dong.yiping.bean.GetJobBean.GetJob;
 import com.dong.yiping.bean.GetZhaopinBean.ZhaoPin;
 import com.dong.yiping.utils.NetRunnable;
 import com.dong.yiping.utils.ThreadPoolManager;
+import com.dong.yiping.utils.ToastUtil;
 import com.dong.yiping.view.LJListView;
 import com.dong.yiping.view.LJListView.IXListViewListener;
 
@@ -34,19 +36,31 @@ public class ThreeFragment extends BaseFragment implements IXListViewListener{
 	private ThreeFragmentAdapter adapter;
 	private List<ZhaoPin> listZhaopin;
 	private Context mContext;
+	private boolean isRefush = true;
+	private int total;//总的条数
+	private int totalPages=0;//总的页数
+	private int currentPage = 1;;//当前是第几页
+	private int currentNum=0;//当前第几条
+	private int pagerNum=10;//每页的条数
 	
 	private Handler mHandler = new Handler(){
 		public void handleMessage(android.os.Message msg) {
 			switch (msg.what) {
 			case Constant.HANDLER_TYPE_GETZHAOPIN:
 				GetZhaopinBean getZhaopin = (GetZhaopinBean) msg.obj;
-				for(ZhaoPin zhaopin : getZhaopin.getList()){
-					listZhaopin.add(zhaopin);
+				if(isRefush){
+					resolveRefushData(getZhaopin);
+				}else{
+					resolveLoadData(getZhaopin);
 				}
-				notifyAdapter(listZhaopin);
 				break;
 				
-			default:
+			case Constant.NET_ERROR:
+				//网络错误
+				ToastUtil.showToast(mContext, "网络错误！");
+				lv_listview.stopRefresh();
+				lv_listview.stopLoadMore();
+				
 				break;
 			}
 			
@@ -84,8 +98,16 @@ public class ThreeFragment extends BaseFragment implements IXListViewListener{
 			}
 		});
 	}
+	/**
+	 * 初始化数据
+	 */
 	private void initData() {
-		String url = Constant.HOST+getLoadUrl(0, 10);
+		isRefush = true;
+		currentPage = 1;
+		currentNum = 0;
+		pagerNum = 10;
+		totalPages=0;
+		String url = Constant.HOST+getLoadUrl(currentNum, pagerNum);
 		ThreadPoolManager.getInstance().addTask(new NetRunnable(mHandler,url,Constant.TOPER_TYPE_GETZHAOPIN));
 		
 	}
@@ -98,29 +120,90 @@ public class ThreeFragment extends BaseFragment implements IXListViewListener{
 		adapter.notyfyList(listZhaopin);
 		
 	};
+	
+	/**
+	 * 解析加载数据
+	 * @param getZhaopin
+	 */
+	private void resolveLoadData(GetZhaopinBean getZhaopin) {
+		if(getZhaopin!=null && getZhaopin.getList()!=null &&getZhaopin.getList().size()>0){
+			for(ZhaoPin zhaoPin : getZhaopin.getList()){
+				listZhaopin.add(zhaoPin);
+			}
+			adapter.addList(listZhaopin);
+			lv_listview.stopRefresh();
+			lv_listview.stopLoadMore();
+			lv_listview.setRefreshTime("刚刚");
+			if(currentPage < totalPages){
+				lv_listview.setPullLoadEnable(true,"加载更多");
+			}else{
+				lv_listview.setPullLoadEnable(false,"没有更多数据");
+			}
+			
+			
+		}else{
+			
+			lv_listview.stopRefresh();
+			lv_listview.stopLoadMore();
+			lv_listview.setRefreshTime("刚刚");
+			lv_listview.setPullLoadEnable(false, null);
+		}
+		
+	}
+	
+	/**
+	 * 解析刷新数据
+	 * @param getZhaopin
+	 */
+	private void resolveRefushData(GetZhaopinBean getZhaopin) {
+		if(getZhaopin!=null && getZhaopin.getList()!=null &&getZhaopin.getList().size()>0){
+			total = getZhaopin.getTotal();
+			listZhaopin.clear();
+			for(ZhaoPin zhaoPin : getZhaopin.getList()){
+				listZhaopin.add(zhaoPin);
+			}
+			notifyAdapter(listZhaopin);
+			setListView(total);
+		}
+		
+	}
+
+	private void setListView(int total) {
+		if(total<=10){
+			lv_listview.stopRefresh();
+			lv_listview.stopLoadMore();
+			lv_listview.setRefreshTime("刚刚");
+			lv_listview.setPullLoadEnable(false, "");
+		}else{
+			totalPages = total/pagerNum +1;
+			
+			lv_listview.stopRefresh();
+			lv_listview.stopLoadMore();
+			lv_listview.setRefreshTime("刚刚");
+			lv_listview.setPullLoadEnable(true,"加载更多");
+		}
+		
+	};
+	
+	private void getLoadData() {
+		isRefush = false;
+		currentPage++;
+		currentNum = (currentPage-1)*pagerNum;
+		String url = Constant.HOST + getLoadUrl(currentNum, pagerNum);
+		ThreadPoolManager.getInstance().addTask(new NetRunnable(mHandler,url,Constant.TOPER_TYPE_GETZHAOPIN));
+		
+	}
+	
 	@Override
 	public void onRefresh() {
-		mHandler.postDelayed(new Runnable() {
-			@Override
-			public void run() {
-				lv_listview.stopRefresh();
-				lv_listview.stopLoadMore();
-				lv_listview.setRefreshTime("刚刚");
-			}
-		}, 2000);
+		initData();
 	}
 
 	@Override
 	public void onLoadMore() {
-		mHandler.postDelayed(new Runnable() {
-			@Override
-			public void run() {
-				lv_listview.stopRefresh();
-				lv_listview.stopLoadMore();
-				lv_listview.setRefreshTime("刚刚");
-				lv_listview.setPullLoadEnable(false, null);
-			}
-		}, 2000);
+		getLoadData();
 		
 	}
+
+	
 }

@@ -72,6 +72,12 @@ public class TwoFragmentAdapter extends BaseAdapter{
 		this.listGetJob = listGetJob;
 		notifyDataSetChanged();
 	}
+	
+	public void addList(List<GetJob> listGetJob){
+		this.listGetJob = listGetJob;
+		notifyDataSetChanged();
+	}
+	
 	static class ViewHolderTwo{
 		TextView tv_cp_name;
 		TextView tv_group_name;

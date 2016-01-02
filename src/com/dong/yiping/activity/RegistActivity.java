@@ -86,6 +86,7 @@ public class RegistActivity extends BaseActivity {
 	}
 
 	private void initTitleBar() {
+		
 		tv_title_center = $(R.id.tv_title_center);
 		iv_title_left = $(R.id.iv_title_left, true);
 		iv_title_right = $(R.id.iv_title_right, true);

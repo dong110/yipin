@@ -71,8 +71,15 @@ public class ThreeFragmentAdapter extends BaseAdapter{
 		TextView tv_arrer;
 	}
 	
+	public void addList(List<ZhaoPin> listZhaopin){
+		this.listZhaopin = listZhaopin;
+		notifyDataSetChanged();
+		
+	}
+	
 	public void notyfyList(List<ZhaoPin> listZhaopin){
 		this.listZhaopin = listZhaopin;
+		notifyDataSetChanged();
 	}
 
 }

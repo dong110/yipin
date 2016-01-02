@@ -21,6 +21,8 @@ public class Constant {
 	public static final int HANDLER_TYPE_STARCOM = 123;
 	public static final int HANDLER_TYPE_STARTSTU = 124;
 	
+	public static final int HANDLER_REFESH_FINISH = 130;
+	
 	public static final String HOST = "http://123.57.75.34:8080/users/api";
 	
 	public static final String LOGIN = "/userLogin";//登录
@@ -36,6 +38,7 @@ public class Constant {
 	public static final String STAR_STUDENT = "/studentUserList?recommend=1&currentNum=0&pageNum=5";//明星学生
 	public static final String GET_ALL_ZHAOPING = "/recruitList?status=1&currentNum=0&pageNum=5";//所有招聘
 	
+	public static final String GET_dictList = "/api/dictList?type=";//获取字典列表
 	
 	public static final String USER_INFO = "/userInfo?id=";
 	
