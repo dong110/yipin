@@ -5,8 +5,11 @@ import roboguice.inject.InjectView;
 import com.dong.yiping.R;
 import com.dong.yiping.activity.CompanyInfoActivity;
 import com.dong.yiping.activity.ModifyPwdActivity;
+import com.dong.yiping.activity.MyResumesActivity;
 import com.dong.yiping.activity.PhoneIdentificationActivity;
 import com.dong.yiping.activity.ResumeActivity;
+import com.dong.yiping.utils.LogUtil;
+import com.dong.yiping.utils.SPUtil;
 
 import android.content.Context;
 import android.content.Intent;
@@ -23,14 +26,22 @@ import android.widget.TextView;
 public class ForeFragment extends BaseFragment implements OnClickListener{
 	
 	@InjectView(R.id.myResume) TextView myResume;
+	@InjectView(R.id.tv_fragment_jilu) TextView tv_fragment_jilu;
 	
 	@InjectView(R.id.tv_mine_modifypwd) TextView modify_pwd;
 	@InjectView(R.id.tv_mine_phone) TextView phone;
+	@InjectView(R.id.tv_fragmentfore_username) TextView tv_fragmentfore_username;
+	
 	
 	private TextView tv_title_center;
 	private LinearLayout ll_title_center;
 	private Intent mIntent;
 	private Context mContext;
+	private int Type;
+	private String username ; 
+	
+	
+	
 	public View onCreateView(LayoutInflater inflater,
 			@Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -53,7 +64,21 @@ public class ForeFragment extends BaseFragment implements OnClickListener{
 		myResume.setOnClickListener(this);
 		modify_pwd.setOnClickListener(this);
 		phone.setOnClickListener(this);
-		
+		tv_fragment_jilu.setOnClickListener(this);
+		username = SPUtil.getString(mContext,"username","");
+		tv_fragmentfore_username.setText(username);
+		LogUtil.i("username====",username + "");
+		Type = SPUtil.getInt(mContext, "type", 0);
+		LogUtil.i("type====",Type + "");
+		if(Type == 0){//学生用户
+			myResume.setText("我的简历");
+			tv_fragment_jilu.setText("职位申请记录");
+			
+		}else{//公司用户
+			myResume.setText("公司信息");
+			tv_fragment_jilu.setText("面试邀请记录");
+			
+		}
 	}
 	
 
@@ -61,7 +86,13 @@ public class ForeFragment extends BaseFragment implements OnClickListener{
 	public void onClick(View view) {
 		switch (view.getId()) {
 		case R.id.myResume:
-			mIntent = new Intent(mContext,CompanyInfoActivity.class);
+			if(Type == 0){//学生用户
+				mIntent = new Intent(mContext,MyResumesActivity.class);
+				
+			}else{//公司用户
+				mIntent = new Intent(mContext,CompanyInfoActivity.class);
+			}
+			
 			mContext.startActivity(mIntent);
 			break;
 

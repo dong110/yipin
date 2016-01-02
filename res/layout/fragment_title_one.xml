@@ -59,5 +59,6 @@
 	    android:layout_width="wrap_content"
 	    android:layout_height="wrap_content"
 	    android:src="@drawable/common_set_btn2"
+	    android:visibility="invisible"
 	    />
 </RelativeLayout>

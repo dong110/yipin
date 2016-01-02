@@ -13,7 +13,6 @@
         android:layout_weight="1" >
 
         <LinearLayout
-            
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:orientation="vertical"
@@ -28,132 +27,67 @@
                     style="@style/resume_text_one"
                     android:text="姓名：" />
 
-                <TextView
+                <EditText
                     style="@style/resume_text_two"
                     android:text="张三" />
             </LinearLayout>
 
             <LinearLayout
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal" 
-                >
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal" >
 
                 <TextView
                     style="@style/resume_text_one"
                     android:text="出生日期：" />
 
-                <LinearLayout
-                    android:layout_gravity="center_vertical"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="7" >
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/text_bg"
-                        android:orientation="horizontal"
-                        android:padding="3dp" >
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="1995年"
-                            android:textSize="@dimen/text_size_16" />
-
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="3dp"
-                            android:src="@drawable/apply_search_dropdown" />
-                    </LinearLayout>
-                    
-                    <LinearLayout
-                        android:layout_marginLeft="5dp"
-                        android:layout_marginRight="5dp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/text_bg"
-                        android:orientation="horizontal"
-                        android:padding="3dp" >
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="8月"
-                            android:textSize="@dimen/text_size_16" />
-
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="3dp"
-                            android:src="@drawable/apply_search_dropdown" />
-                    </LinearLayout>
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/text_bg"
-                        android:orientation="horizontal"
-                        android:padding="3dp" >
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="1号"
-                            android:textSize="@dimen/text_size_16" />
-
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="3dp"
-                            android:src="@drawable/apply_search_dropdown" />
-                    </LinearLayout>
-                </LinearLayout>
+                <TextView
+                    android:id="@+id/tv_resume_birthday"
+                    style="@style/resume_text_two"
+                    android:text="出生日期" />
             </LinearLayout>
-            
-            <LinearLayout 
+
+            <LinearLayout
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="top"
                 android:layout_gravity="top"
-                >
+                android:gravity="top"
+                android:orientation="horizontal" >
+
                 <TextView
-                    android:gravity="top"
                     style="@style/resume_text_one"
+                    android:gravity="top"
                     android:text="自我评价：" />
-                
-                <EditText 
-                    
-                    android:padding="5dp"
+
+                <EditText
+                    android:layout_width="0dp"
+                    android:layout_height="100dp"
+                    android:layout_gravity="bottom"
+                    android:layout_weight="7"
                     android:background="@drawable/text_bg"
                     android:gravity="top"
                     android:hint="输入自我评价（140字以内）"
-                    android:layout_gravity="bottom"
-                    android:layout_width="0dp"
-                    android:layout_height="100dp"
-                    android:layout_weight="7"
-                    />
+                    android:padding="5dp" />
             </LinearLayout>
-            
+
             <LinearLayout
-                android:layout_marginTop="20dp"
-                android:layout_marginBottom="10dp"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="20dp"
                 android:orientation="horizontal" >
 
                 <TextView
                     style="@style/resume_text_one"
                     android:text="求职意向：" />
 
-                <TextView
+                <EditText
                     style="@style/resume_text_two"
                     android:text="平面设计/美术编辑/设计助理" />
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
@@ -163,11 +97,11 @@
                     style="@style/resume_text_one"
                     android:text="工作经验：" />
 
-                <TextView
+                <EditText
                     style="@style/resume_text_two"
                     android:text="某某公司志愿者" />
             </LinearLayout>
-            
+
             <LinearLayout
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
@@ -177,40 +111,38 @@
                     style="@style/resume_text_one"
                     android:text="语言能力：" />
 
-                <TextView
+                <EditText
                     style="@style/resume_text_two"
                     android:text="英语四级" />
             </LinearLayout>
-            
+
             <LinearLayout
-                android:layout_marginTop="20dp"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
                 android:orientation="horizontal" >
 
                 <TextView
                     style="@style/resume_text_one"
                     android:text="上传头像：" />
 
-				<LinearLayout
-				    android:gravity="right"
-				    android:layout_width="0dp"
-				    android:layout_height="wrap_content"
-				    android:layout_weight="7" >
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="7"
+                    android:gravity="right" >
 
-				    <ImageView
-				        android:layout_width="60dp"
-				        android:layout_height="60dp"
-				        android:src="@drawable/resume_upload" />
-				</LinearLayout>
-               
+                    <ImageView
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:src="@drawable/resume_upload" />
+                </LinearLayout>
             </LinearLayout>
-            
-            
         </LinearLayout>
     </com.dong.yiping.ui.BounceScrollView>
 
     <TextView
+        android:id="@+id/tv_resume_publish"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:background="@color/yello"

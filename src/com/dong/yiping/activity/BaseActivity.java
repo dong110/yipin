@@ -28,10 +28,6 @@ public class BaseActivity extends RoboFragmentActivity implements OnClickListene
 
 public static final String DATA = "data";
 private long[] times = { 0, 0 };
-/**
- * 全局的context
- */
-protected Context mContext;
 
 
 // /////////////////////////////////////////查找子view\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
@@ -146,12 +142,6 @@ private void back() {
 	}
 }
 
-/**
- * 填充布局
- */
-public View inflate(int resId) {
-	return View.inflate(mContext, resId, null);
-}
 
 /**
  * 安全退出app

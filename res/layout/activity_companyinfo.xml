@@ -33,7 +33,7 @@
                     style="@style/resume_text_one"
                     android:text="企业名称：" />
 
-                <TextView
+                <EditText
                     style="@style/resume_text_two"
                     android:text="什么什么公司" />
             </LinearLayout>
@@ -48,7 +48,7 @@
                     style="@style/resume_text_one"
                     android:text="企业电话：" />
 
-                <TextView
+                <EditText
                     style="@style/resume_text_two"
                     android:text="010-123456789" />
             </LinearLayout>
@@ -64,7 +64,7 @@
                     style="@style/resume_text_one"
                     android:text="企业邮箱：" />
 
-                <TextView
+                <EditText
                     style="@style/resume_text_two"
                     android:text="smsm@163.com" />
             </LinearLayout>
@@ -79,7 +79,7 @@
                     style="@style/resume_text_one"
                     android:text="联系人：" />
 
-                <TextView
+                <EditText
                     style="@style/resume_text_two"
                     android:text="*  *  *" />
             </LinearLayout>
@@ -96,7 +96,7 @@
                     style="@style/resume_text_one"
                     android:text="招聘职位：" />
 
-                <TextView
+                <EditText
                     style="@style/resume_text_two"
                     android:text="产品经理（实习生）" />
             </LinearLayout>
@@ -112,7 +112,7 @@
                     style="@style/resume_text_one"
                     android:text="工作时间：" />
 
-                <TextView
+                <EditText
                     style="@style/resume_text_two"
                     android:text="早8晚5/周一~周五" />
             </LinearLayout>
@@ -127,7 +127,7 @@
                     style="@style/resume_text_one"
                     android:text="工资待遇：" />
 
-                <TextView
+                <EditText
                     style="@style/resume_text_two"
                     android:text="2000~2999/月" />
             </LinearLayout>
@@ -142,7 +142,7 @@
                     style="@style/resume_text_one"
                     android:text="福利待遇：" />
 
-                <TextView
+                <EditText
                     style="@style/resume_text_two"
                     android:text="五险一金，带薪年假，旅游" />
             </LinearLayout>

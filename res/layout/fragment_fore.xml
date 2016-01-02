@@ -30,18 +30,20 @@
                 android:gravity="right"
                 >
                 <TextView 
+                    android:id="@+id/tv_fragmentfore_username"
                     android:textSize="@dimen/text_size_18"
                     android:layout_width="wrap_content"
                     android:layout_height="0dp"
                     android:layout_weight="1"
                     android:text="用户名"
                     />
-                <TextView 
+
+                <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="0dp"
                     android:layout_weight="1"
-                    android:text="123456789"
-                    />
+                    android:text="123456789" />
+
                 <TextView 
                     android:layout_width="wrap_content"
                     android:layout_height="0dp"
@@ -62,6 +64,7 @@
          <include layout="@layout/line_user_center"/>
          
          <TextView 
+             android:id="@+id/tv_fragment_jilu"
             style="@style/user_center_text"
             android:text="职位申请记录/面试邀请记录"
             />
@@ -96,12 +99,6 @@
          <TextView 
             style="@style/user_center_text"
             android:text="浏览历史"
-            />
-         <include layout="@layout/line_user_center"/>
-         
-         <TextView 
-            style="@style/user_center_text"
-            android:text="设置"
             />
          <include layout="@layout/line_user_center"/>
          

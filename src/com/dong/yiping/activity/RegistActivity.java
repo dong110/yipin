@@ -11,6 +11,7 @@ import com.dong.yiping.utils.NetRunnable;
 import com.dong.yiping.utils.ThreadPoolManager;
 import com.dong.yiping.utils.ToastUtil;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -60,7 +61,7 @@ public class RegistActivity extends BaseActivity {
 	private RelativeLayout rl_regist_qu;
 
 	private boolean isStu = true;
-
+	private Context mContext;
 	private String typeName;
 	private String name;
 	private String cardNum;

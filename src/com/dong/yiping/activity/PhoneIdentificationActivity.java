@@ -11,6 +11,7 @@ import com.dong.yiping.utils.NetRunnable;
 import com.dong.yiping.utils.ThreadPoolManager;
 import com.dong.yiping.utils.ToastUtil;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -37,7 +38,7 @@ public class PhoneIdentificationActivity extends BaseActivity {
 	
 	private String phoneNum;
 	private String codeString;
-
+	private Context mContext;
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		// 设置没有标题

@@ -11,6 +11,7 @@ import com.dong.yiping.utils.NetRunnable;
 import com.dong.yiping.utils.ThreadPoolManager;
 import com.dong.yiping.utils.ToastUtil;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -40,6 +41,7 @@ public class FindPwdActivity extends BaseActivity {
 	private String typeName;
 	private String pwd;
 	private String pwdComfirm;
+	private Context mContext;
 
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
