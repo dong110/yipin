@@ -20,17 +20,19 @@ public class MyResumesActivity extends BaseActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-
 		// 设置没有标题
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
-
 		// 当前页面从右往左进入
 		overridePendingTransition(R.anim.right_to_center, R.anim.center_to_left);
-
 		setContentView(R.layout.activity_myresumes);
-
 		initTitleBar();
 		initView();
+		initData();
+	}
+
+	private void initData() {
+		// TODO Auto-generated method stub
+		
 	}
 
 	public void initTitleBar() {
@@ -59,7 +61,7 @@ public class MyResumesActivity extends BaseActivity {
 
 		case R.id.tv_myresumes_addresume:
 			// 添加简历
-
+			
 			startToActivity(ResumeActivity.class);
 			break;
 

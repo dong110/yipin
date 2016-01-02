@@ -1,7 +1,5 @@
 package com.dong.yiping.utils;
 
-import com.dong.yiping.R;
-
 import android.content.Context;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -9,6 +7,8 @@ import android.view.View;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.PopupWindow;
 import android.widget.TextView;
+
+import com.dong.yiping.R;
 
 public class LoadingUtil {
 	

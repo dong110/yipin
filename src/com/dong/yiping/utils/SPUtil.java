@@ -58,10 +58,10 @@ public class SPUtil {
 			sp = context.getSharedPreferences(SP_NAME, 0);
 		}
 		Editor editor = sp.edit();
-		editor.putInt("id", bean.getId());
-		editor.putString("username", bean.getUsername());
-		editor.putString("password", bean.getPwd());
-		editor.putInt("type", bean.getType());
+		editor.putInt("id", bean.getObj().getId());
+		editor.putString("username", bean.getObj().getUsername());
+		editor.putString("password", bean.getObj().getPwd());
+		editor.putInt("type", bean.getObj().getType());
 		editor.commit();
 	}
 	public static void clearStusent(Context context) {
