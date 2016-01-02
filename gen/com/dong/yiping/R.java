@@ -99,12 +99,21 @@ public final class R {
     }
     public static final class id {
         public static final int banner_cont=0x7f090009;
+<<<<<<< HEAD
         public static final int bt_getJob=0x7f09003e;
         public static final int btn_timepicker_cancel=0x7f09005e;
         public static final int btn_timepicker_ok=0x7f09005f;
         public static final int day=0x7f09005b;
         public static final int dialog=0x7f090056;
         public static final int dialog_text=0x7f090057;
+=======
+        public static final int bt_getJob=0x7f090038;
+        public static final int btn_timepicker_cancel=0x7f09005d;
+        public static final int btn_timepicker_ok=0x7f09005e;
+        public static final int day=0x7f09005a;
+        public static final int dialog=0x7f090055;
+        public static final int dialog_text=0x7f090056;
+>>>>>>> origin/master
         public static final int et_login_pwd=0x7f09000f;
         public static final int et_login_username=0x7f09000e;
         public static final int et_phone_code=0x7f090018;
@@ -120,6 +129,7 @@ public final class R {
         public static final int et_regist_typename=0x7f090002;
         public static final int get_Zhaopin=0x7f09003f;
         public static final int hand=0x7f090000;
+<<<<<<< HEAD
         public static final int hour=0x7f09005c;
         public static final int iv_index=0x7f090041;
         public static final int iv_regist_qiye=0x7f09001e;
@@ -156,6 +166,44 @@ public final class R {
         public static final int tv_fragmentfore_username=0x7f090033;
         public static final int tv_fragmenttwo_time=0x7f090047;
         public static final int tv_group_name=0x7f090043;
+=======
+        public static final int hour=0x7f09005b;
+        public static final int iv_index=0x7f09003b;
+        public static final int iv_regist_qiye=0x7f09001c;
+        public static final int iv_regist_stu=0x7f09001a;
+        public static final int iv_resume_icon=0x7f090006;
+        public static final int iv_title_left=0x7f090037;
+        public static final int iv_title_right=0x7f090036;
+        public static final int list_item_textview=0x7f090046;
+        public static final int listview=0x7f090033;
+        public static final int ll_area=0x7f090042;
+        public static final int ll_hangye=0x7f090043;
+        public static final int ll_regist_address=0x7f090021;
+        public static final int ll_regist_school=0x7f090023;
+        public static final int ll_regist_stunum=0x7f09002b;
+        public static final int ll_regist_typename=0x7f090024;
+        public static final int ll_time=0x7f090040;
+        public static final int ll_title_center=0x7f090035;
+        public static final int lv_listview=0x7f090032;
+        public static final int main_tabs_layout=0x7f090014;
+        public static final int main_viewpager=0x7f090013;
+        public static final int min=0x7f09005c;
+        public static final int month=0x7f090059;
+        public static final int myResume=0x7f09002f;
+        public static final int pop_listview=0x7f090054;
+        public static final int progressBar1=0x7f09002d;
+        public static final int rl_regist_qiye=0x7f09001b;
+        public static final int rl_regist_qu=0x7f090029;
+        public static final int rl_regist_sheng=0x7f090025;
+        public static final int rl_regist_shi=0x7f090027;
+        public static final int rl_regist_stu=0x7f090019;
+        public static final int textview=0x7f090053;
+        public static final int timePicker1=0x7f090057;
+        public static final int tv_arrer=0x7f09003f;
+        public static final int tv_cp_name=0x7f09003c;
+        public static final int tv_fragmenttwo_time=0x7f090041;
+        public static final int tv_group_name=0x7f09003d;
+>>>>>>> origin/master
         public static final int tv_jobmessage_applyjob=0x7f09000c;
         public static final int tv_jobmessage_collect=0x7f09000d;
         public static final int tv_jobmessage_jobname=0x7f09000a;
@@ -163,12 +211,21 @@ public final class R {
         public static final int tv_login_findpwd=0x7f090010;
         public static final int tv_login_login=0x7f090012;
         public static final int tv_login_regist=0x7f090011;
+<<<<<<< HEAD
         public static final int tv_mine_modifypwd=0x7f090037;
         public static final int tv_mine_phone=0x7f090036;
         public static final int tv_myresumes_addresume=0x7f090016;
         public static final int tv_phone_getcode=0x7f090019;
         public static final int tv_phone_submit=0x7f09001a;
         public static final int tv_regist_qu=0x7f09002c;
+=======
+        public static final int tv_mine_modifypwd=0x7f090031;
+        public static final int tv_mine_phone=0x7f090030;
+        public static final int tv_phone_getcode=0x7f090017;
+        public static final int tv_phone_submit=0x7f090018;
+        public static final int tv_pop_item=0x7f090045;
+        public static final int tv_regist_qu=0x7f09002a;
+>>>>>>> origin/master
         public static final int tv_regist_regist_confirm=0x7f090005;
         public static final int tv_regist_sheng=0x7f090028;
         public static final int tv_regist_shi=0x7f09002a;
@@ -176,6 +233,7 @@ public final class R {
         public static final int tv_resume_birthday=0x7f09002f;
         public static final int tv_resume_collect=0x7f090008;
         public static final int tv_resume_invite=0x7f090007;
+<<<<<<< HEAD
         public static final int tv_resume_publish=0x7f090030;
         public static final int tv_salary=0x7f090044;
         public static final int tv_textview=0x7f090040;
@@ -194,6 +252,26 @@ public final class R {
         public static final int xlistview_header_text_finished=0x7f090054;
         public static final int xlistview_header_time=0x7f090051;
         public static final int year=0x7f090059;
+=======
+        public static final int tv_salary=0x7f09003e;
+        public static final int tv_serach=0x7f090044;
+        public static final int tv_textview=0x7f09003a;
+        public static final int tv_title=0x7f09002e;
+        public static final int tv_title_center=0x7f090034;
+        public static final int xListView=0x7f090047;
+        public static final int xlistview_footer_content=0x7f090048;
+        public static final int xlistview_footer_hint_textview=0x7f09004a;
+        public static final int xlistview_footer_progressbar=0x7f090049;
+        public static final int xlistview_header_arrow=0x7f090050;
+        public static final int xlistview_header_content=0x7f09004b;
+        public static final int xlistview_header_hint_textview=0x7f09004d;
+        public static final int xlistview_header_last_time=0x7f09004e;
+        public static final int xlistview_header_progressbar=0x7f090051;
+        public static final int xlistview_header_text=0x7f09004c;
+        public static final int xlistview_header_text_finished=0x7f090052;
+        public static final int xlistview_header_time=0x7f09004f;
+        public static final int year=0x7f090058;
+>>>>>>> origin/master
     }
     public static final class layout {
         public static final int activity_companyinfo=0x7f030000;
@@ -203,6 +281,7 @@ public final class R {
         public static final int activity_login=0x7f030004;
         public static final int activity_main=0x7f030005;
         public static final int activity_modifypwd=0x7f030006;
+<<<<<<< HEAD
         public static final int activity_myresumes=0x7f030007;
         public static final int activity_phone_identification=0x7f030008;
         public static final int activity_regist=0x7f030009;
@@ -224,14 +303,43 @@ public final class R {
         public static final int item_fragmentthree_head=0x7f030019;
         public static final int item_fragmenttwo=0x7f03001a;
         public static final int item_fragmenttwo_head=0x7f03001b;
+=======
+        public static final int activity_phone_identification=0x7f030007;
+        public static final int activity_regist=0x7f030008;
+        public static final int activity_resume=0x7f030009;
+        public static final int ad_layout=0x7f03000a;
+        public static final int dialog=0x7f03000b;
+        public static final int fragment_fore=0x7f03000c;
+        public static final int fragment_one=0x7f03000d;
+        public static final int fragment_three=0x7f03000e;
+        public static final int fragment_title_one=0x7f03000f;
+        public static final int fragment_title_two=0x7f030010;
+        public static final int fragment_two=0x7f030011;
+        public static final int item_fragmentone_five=0x7f030012;
+        public static final int item_fragmentone_fore=0x7f030013;
+        public static final int item_fragmentone_one=0x7f030014;
+        public static final int item_fragmentone_three=0x7f030015;
+        public static final int item_fragmentone_two=0x7f030016;
+        public static final int item_fragmentthree=0x7f030017;
+        public static final int item_fragmentthree_head=0x7f030018;
+        public static final int item_fragmenttwo=0x7f030019;
+        public static final int item_fragmenttwo_head=0x7f03001a;
+        public static final int item_pop_listview=0x7f03001b;
+>>>>>>> origin/master
         public static final int line_user_center=0x7f03001c;
         public static final int list_item=0x7f03001d;
         public static final int ljlistview=0x7f03001e;
         public static final int ljlistview_footer=0x7f03001f;
         public static final int ljlistview_header=0x7f030020;
         public static final int ljlistview_infohint=0x7f030021;
+<<<<<<< HEAD
         public static final int progressdialog_item=0x7f030022;
         public static final int timepicker=0x7f030023;
+=======
+        public static final int pop_dialog=0x7f030022;
+        public static final int progressdialog_item=0x7f030023;
+        public static final int timepicker=0x7f030024;
+>>>>>>> origin/master
     }
     public static final class string {
         public static final int action_settings=0x7f070002;
