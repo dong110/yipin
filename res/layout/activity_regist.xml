@@ -140,6 +140,36 @@
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="2"
+                        android:text="姓名："
+                        android:textSize="@dimen/text_size_14" />
+
+                    <EditText
+                        android:id="@+id/et_regist_name"
+                        style="@style/regist_right"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="5"
+                        android:background="@null"
+                        android:hint="姓名"
+                        android:textSize="@dimen/text_size_14" />
+                </LinearLayout>
+                
+                  <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginLeft="80dp"
+                    android:background="@color/gray" />
+                  
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:orientation="horizontal" >
+
+                    <TextView
+                        style="@style/regist_left"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="2"
                         android:text="身份证号码："
                         android:textSize="@dimen/text_size_14" />
 
@@ -424,14 +454,10 @@
                     </LinearLayout>
                 </LinearLayout>
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginLeft="80dp"
-                    android:background="@color/gray" />
                 
 
                 <LinearLayout
+                    android:id="@+id/ll_regist_stunum"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
                     android:orientation="horizontal" >

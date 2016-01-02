@@ -37,7 +37,8 @@ public class RegistActivity extends BaseActivity {
 	private TextView tv_regist_type;// 企业名、用户名
 	private EditText et_regist_typename;
 	private EditText et_regist_card_num;
-
+	private EditText et_regist_name;
+	
 	private EditText et_regist_pwd;
 	private EditText et_regist_pwd_confirm;
 	private EditText et_regist_phonenum;
@@ -47,7 +48,8 @@ public class RegistActivity extends BaseActivity {
 
 	private LinearLayout ll_regist_school;
 	private LinearLayout ll_regist_address;
-
+	private LinearLayout ll_regist_stunum;
+	
 	private TextView tv_regist_regist_confirm;
 
 	private TextView tv_regist_sheng;
@@ -60,6 +62,7 @@ public class RegistActivity extends BaseActivity {
 	private boolean isStu = true;
 
 	private String typeName;
+	private String name;
 	private String cardNum;
 	private String pwd;
 	private String pwdComfirm;
@@ -104,7 +107,8 @@ public class RegistActivity extends BaseActivity {
 		tv_regist_type = $(R.id.tv_regist_type);
 		et_regist_typename = $(R.id.et_regist_typename);
 		et_regist_card_num = $(R.id.et_regist_card_num);
-
+		et_regist_name = $(R.id.et_regist_name);
+		
 		et_regist_pwd = $(R.id.et_regist_pwd);
 		et_regist_pwd_confirm = $(R.id.et_regist_pwd_confirm);
 		et_regist_phonenum = $(R.id.et_regist_phonenum);
@@ -114,7 +118,8 @@ public class RegistActivity extends BaseActivity {
 
 		ll_regist_school = $(R.id.ll_regist_school);
 		ll_regist_address = $(R.id.ll_regist_address);
-
+		ll_regist_stunum = $(R.id.ll_regist_stunum);
+		
 		tv_regist_regist_confirm = $(R.id.tv_regist_regist_confirm, true);
 
 		tv_regist_sheng = $(R.id.tv_regist_sheng);
@@ -140,6 +145,7 @@ public class RegistActivity extends BaseActivity {
 				ll_regist_address.setVisibility(View.VISIBLE);
 				ll_regist_school.setVisibility(View.GONE);
 				tv_regist_regist_confirm.setBackgroundResource(R.drawable.index_title_bg);
+				ll_regist_stunum.setVisibility(View.GONE);
 			} else {
 				iv_regist_stu
 						.setImageResource(R.drawable.common_checkbox_seleted);
@@ -150,7 +156,7 @@ public class RegistActivity extends BaseActivity {
 				ll_regist_address.setVisibility(View.GONE);
 				ll_regist_school.setVisibility(View.VISIBLE);
 				tv_regist_regist_confirm.setBackgroundResource(R.drawable.resume_btn);
-				
+				ll_regist_stunum.setVisibility(View.VISIBLE);
 			}
 			break;
 		case R.id.iv_title_left:
@@ -191,6 +197,7 @@ public class RegistActivity extends BaseActivity {
 	// 获取注册信息
 	private void regist_check() {
 		typeName = et_regist_typename.getText().toString().trim();
+		name = et_regist_name.getText().toString().trim();
 		cardNum = et_regist_card_num.getText().toString().trim();
 		pwd = et_regist_pwd.getText().toString().trim();
 		pwdComfirm = et_regist_pwd_confirm.getText().toString().trim();
@@ -200,6 +207,9 @@ public class RegistActivity extends BaseActivity {
 		stuNum = et_regist_stunum.getText().toString().trim();
 		if (isStu && TextUtils.isEmpty(typeName)) {
 			ToastUtil.showToast(this, "用户名不能为空");
+			return;
+		}else if (TextUtils.isEmpty(name)) {
+			ToastUtil.showToast(this, "姓名不能为空");
 			return;
 		} else if (TextUtils.isEmpty(cardNum)) {
 			ToastUtil.showToast(this, "身份证号不能为空");
@@ -254,7 +264,7 @@ public class RegistActivity extends BaseActivity {
 			paramMap.put("company", typeName);
 		}
 		paramMap.put("pwd", pwd);
-		paramMap.put("name", "xx");//
+		paramMap.put("name", name);
 		paramMap.put("cards", cardNum);
 		paramMap.put("tel", phoneNum);
 		paramMap.put("email", email);
