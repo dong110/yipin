@@ -3,11 +3,13 @@ package com.dong.yiping.fragment;
 import roboguice.inject.InjectView;
 
 import com.dong.yiping.R;
+import com.dong.yiping.activity.ComCollectListActivity;
 import com.dong.yiping.activity.CompanyInfoActivity;
 import com.dong.yiping.activity.ModifyPwdActivity;
 import com.dong.yiping.activity.MyResumesActivity;
 import com.dong.yiping.activity.PhoneIdentificationActivity;
 import com.dong.yiping.activity.ResumeActivity;
+import com.dong.yiping.activity.UserCollectListActivity;
 import com.dong.yiping.utils.LogUtil;
 import com.dong.yiping.utils.SPUtil;
 
@@ -27,7 +29,7 @@ public class ForeFragment extends BaseFragment implements OnClickListener{
 	
 	@InjectView(R.id.myResume) TextView myResume;
 	@InjectView(R.id.tv_fragment_jilu) TextView tv_fragment_jilu;
-	
+	@InjectView(R.id.tv_collection) TextView tv_collection;
 	@InjectView(R.id.tv_mine_modifypwd) TextView modify_pwd;
 	@InjectView(R.id.tv_mine_phone) TextView phone;
 	@InjectView(R.id.tv_fragmentfore_username) TextView tv_fragmentfore_username;
@@ -53,18 +55,24 @@ public class ForeFragment extends BaseFragment implements OnClickListener{
 		super.onActivityCreated(savedInstanceState);
 		mContext = getActivity();
 		initView();
+		setListener();
 		initData();
 	}
 	
+	private void setListener() {
+		tv_collection.setOnClickListener(this);
+		myResume.setOnClickListener(this);
+		modify_pwd.setOnClickListener(this);
+		phone.setOnClickListener(this);
+		tv_fragment_jilu.setOnClickListener(this);
+	}
+
 	private void initData() {
 		
 	}
 
 	private void initView() {
-		myResume.setOnClickListener(this);
-		modify_pwd.setOnClickListener(this);
-		phone.setOnClickListener(this);
-		tv_fragment_jilu.setOnClickListener(this);
+		
 		username = SPUtil.getString(mContext,"username","");
 		tv_fragmentfore_username.setText(username);
 		LogUtil.i("username====",username + "");
@@ -105,7 +113,14 @@ public class ForeFragment extends BaseFragment implements OnClickListener{
 			mIntent = new Intent(mContext,PhoneIdentificationActivity.class);
 			mContext.startActivity(mIntent);
 			break;
-		default:
+		case R.id.tv_collection:
+			if(Type == 0){//学生用户
+				mIntent = new Intent(mContext,UserCollectListActivity.class);
+				
+			}else{//公司用户
+				mIntent = new Intent(mContext,ComCollectListActivity.class);
+			}
+			mContext.startActivity(mIntent);
 			break;
 		}
 		

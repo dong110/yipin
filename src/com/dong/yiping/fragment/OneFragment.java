@@ -6,6 +6,7 @@ import java.util.List;
 import roboguice.fragment.RoboFragment;
 import roboguice.inject.InjectView;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
@@ -21,6 +22,9 @@ import android.widget.TextView;
 
 import com.dong.yiping.Constant;
 import com.dong.yiping.R;
+import com.dong.yiping.activity.CompanyInfoActivity;
+import com.dong.yiping.activity.GetJobDetailActivity;
+import com.dong.yiping.activity.JobMessageActivity;
 import com.dong.yiping.adapter.OneFragmentAdapter;
 import com.dong.yiping.banner.BannerBaseView;
 import com.dong.yiping.banner.MainBannerView;
@@ -57,6 +61,7 @@ public class OneFragment extends RoboFragment{
 	private LoadingUtil loadingUtil;
 	private Context mContext;
 	private int netNum =0;
+	private Intent mIntent;
 	
 	private Handler mHandler = new Handler(){
 		public void handleMessage(android.os.Message msg) {
@@ -171,46 +176,36 @@ public class OneFragment extends RoboFragment{
 					long arg3) {
 				if(adapter.isGetJob){
 					if(position == 0){
-						
-						
 					}else if(position<getJobBean.getList().size()+1){
-						
-						
+						mIntent = new Intent(mContext,JobMessageActivity.class);
+						startActivity(mIntent);
 					}else if(position==getJobBean.getList().size()+1){
-						
-						
 					}else if(position==getJobBean.getList().size()+2){
-						
-						
 					}else if(position<getJobBean.getList().size()+starCompanyBean.getList().size()+2){
-						
+						mIntent = new Intent(mContext,CompanyInfoActivity.class);
+						startActivity(mIntent);
 						
 					}else if(position==getJobBean.getList().size()+starCompanyBean.getList().size()+2){
-
 					}else if(position<getJobBean.getList().size()+starCompanyBean.getList().size()+starStudentBean.getList().size()+3){
-						
+						mIntent = new Intent(mContext,GetJobDetailActivity.class);
+						startActivity(mIntent);
 						
 					}
 				}else{
 					if(position == 0){
-						
-						
 					}else if(position<getZhaopin.getList().size()+1){
-						
+						mIntent = new Intent(mContext,GetJobDetailActivity.class);
+						startActivity(mIntent);
 						
 					}else if(position==getZhaopin.getList().size()+1){
-						
-						
 					}else if(position==getZhaopin.getList().size()+2){
-						
-						
 					}else if(position<getZhaopin.getList().size()+starCompanyBean.getList().size()+2){
-						
-						
+						mIntent = new Intent(mContext,CompanyInfoActivity.class);
+						startActivity(mIntent);
 					}else if(position==getZhaopin.getList().size()+starCompanyBean.getList().size()+2){
-
 					}else if(position<getZhaopin.getList().size()+starCompanyBean.getList().size()+starStudentBean.getList().size()+3){
-						
+						mIntent = new Intent(mContext,GetJobDetailActivity.class);
+						startActivity(mIntent);
 					}
 					
 				}

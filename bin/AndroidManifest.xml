@@ -83,6 +83,19 @@
             android:name="com.dong.yiping.activity.JobMessageActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
+        
+        <activity
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:name="com.dong.yiping.activity.ComCollectListActivity"
+            ></activity>
+        
+        <activity 
+            android:name="com.dong.yiping.activity.UserCollectListActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            ></activity>
+        
     </application>
 
 </manifest>
