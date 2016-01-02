@@ -10,13 +10,18 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.dong.yiping.bean.DictListBean;
+import com.dong.yiping.bean.DictListBean.DictBean;
+
 /**
  * Created by huan on 2015/10/27.
  */
 public class MyApplication extends Application {
 	public static MyApplication myApplication;
 	private static final String TAG = MyApplication.class.getName();
-
+	public  DictListBean dictBean;
+	
+	
 	/**
 	 * 全局管理activity，方便退出
 	 */
@@ -25,7 +30,15 @@ public class MyApplication extends Application {
 	public static MyApplication getApplication() {
 		return myApplication;
 	}
-
+	
+	public  void setDictBean(DictListBean dictBean){
+		this.dictBean = dictBean;
+	}
+	
+	public DictListBean getDictBean(){
+		return dictBean;
+	}
+	
 	@Override
 	public void onCreate() {
 		myApplication = this;

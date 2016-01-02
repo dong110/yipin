@@ -2,8 +2,11 @@ package com.dong.yiping.activity;
 
 import java.util.ArrayList;
 
+import javax.inject.Inject;
+
 import roboguice.activity.RoboFragmentActivity;
 import roboguice.inject.InjectView;
+import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
@@ -13,26 +16,43 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.dong.yiping.Constant;
+import com.dong.yiping.MyApplication;
 import com.dong.yiping.R;
 import com.dong.yiping.adapter.MainFragmentPagerAdapter;
+import com.dong.yiping.bean.DictListBean;
+import com.dong.yiping.bean.DictListBean.DictBean;
 import com.dong.yiping.fragment.ForeFragment;
 import com.dong.yiping.fragment.OneFragment;
 import com.dong.yiping.fragment.ThreeFragment;
 import com.dong.yiping.fragment.TwoFragment;
 import com.dong.yiping.ui.ControlScrollViewPager;
+import com.dong.yiping.utils.LogUtil;
+import com.dong.yiping.utils.NetRunnable;
+import com.dong.yiping.utils.SPUtil;
+import com.dong.yiping.utils.ThreadPoolManager;
 
 public class MainActivity extends RoboFragmentActivity {
 
+	private static String TAG = "MainActivity";
+	
 	@InjectView(R.id.main_viewpager) ControlScrollViewPager main_viewpager;
 	@InjectView(R.id.main_tabs_layout) LinearLayout main_tabs_layout;
 	@InjectView(R.id.tv_title_center) TextView tv_title_center;
 	@InjectView(R.id.ll_title_center) LinearLayout ll_title_center;
+	@Inject Context mContext;
 	
 	private boolean exiting = false;
 	
 	private Handler mHandler = new Handler(){
 		public void handleMessage(android.os.Message msg) {
-			
+			switch (msg.what) {
+			case Constant.HANDLER_TYPE_GETDICT:
+				DictListBean dicyBean = (DictListBean) msg.obj;
+				MyApplication.getApplication().setDictBean(dicyBean);
+				LogUtil.i(TAG, MyApplication.getApplication().getDictBean().getStatus()+"---");
+				break;
+			}
 		};
 	};
 	
@@ -40,12 +60,16 @@ public class MainActivity extends RoboFragmentActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		initView();
+		getDictList();
 		setListener();
 	}
 	
+	public void getDictList() {
+		String dictUrl = Constant.HOST + Constant.GET_dictList+SPUtil.getInt(mContext, "id", -1);
+		ThreadPoolManager.getInstance().addTask(new NetRunnable(mHandler,dictUrl,Constant.TOPER_TYPE_GETDICT));
+	}
+	
 	private void initView(){
-		
-		
 		main_viewpager = (ControlScrollViewPager)findViewById(R.id.main_viewpager);
         ArrayList fragmentList = new ArrayList<Fragment>();
         fragmentList.add(new OneFragment());

@@ -4,6 +4,8 @@ import org.json.JSONObject;
 
 import com.dong.yiping.Constant;
 import com.dong.yiping.bean.BannerListBean;
+import com.dong.yiping.bean.DictListBean;
+import com.dong.yiping.bean.DictListBean.DictBean;
 import com.dong.yiping.bean.GetJobBean;
 import com.dong.yiping.bean.GetZhaopinBean;
 import com.dong.yiping.bean.StarCompanyBean;
@@ -57,10 +59,37 @@ public class ToperJson {
 			LogUtil.i("修改密码返回的数据==", result);
 			toperModifyPwd(result);
 			break;
+		case Constant.TOPER_TYPE_GETDICT:
+			toperDictList(result);
+			break;
 		}
 	}
 	
-	
+	/**
+	 * 解析数据字典
+	 * @param result
+	 */
+	private void toperDictList(String result) {
+		try {
+
+			JSONObject jsonObject = new JSONObject(result);
+			int status = jsonObject.optInt("status");
+			
+			if(status == 0){
+				DictListBean bean = gson.fromJson(result, DictListBean.class);
+				Message msg = handler.obtainMessage();
+				msg.obj = bean;
+				msg.what = Constant.HANDLER_TYPE_GETDICT;
+				handler.sendMessage(msg);
+			}else{
+				handler.sendEmptyMessage(Constant.HANDLER_TYPE_GETDICT);
+			}
+		} catch (Exception e) {
+			handler.sendEmptyMessage(Constant.HANDLER_TYPE_GETDICT);
+			e.printStackTrace();
+		}
+		
+	}
 	/**
 	 * 解析修改密码返回的数据
 	 */

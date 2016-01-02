@@ -14,12 +14,14 @@ public class Constant {
 	public static final int TOPER_TYPE_REGIST = 106;
 	public static final int TOPER_TYPE_FINDPWD = 107;
 	public static final int TOPER_TYPE_MODIFYPWD = 108;
+	public static final int TOPER_TYPE_GETDICT = 109;
 	
 	public static final int HANDLER_BANNERLIST = 120;
 	public static final int HANDLER_TYPE_GETJOB = 121;
 	public static final int HANDLER_TYPE_GETZHAOPIN = 122;
 	public static final int HANDLER_TYPE_STARCOM = 123;
 	public static final int HANDLER_TYPE_STARTSTU = 124;
+	public static final int HANDLER_TYPE_GETDICT = 125;
 	
 	public static final int HANDLER_REFESH_FINISH = 130;
 	
@@ -38,7 +40,7 @@ public class Constant {
 	public static final String STAR_STUDENT = "/studentUserList?recommend=1&currentNum=0&pageNum=5";//明星学生
 	public static final String GET_ALL_ZHAOPING = "/recruitList?status=1&currentNum=0&pageNum=5";//所有招聘
 	
-	public static final String GET_dictList = "/api/dictList?type=";//获取字典列表
+	public static final String GET_dictList = "/dictList?type=";//获取字典列表
 	
 	public static final String USER_INFO = "/userInfo?id=";
 	

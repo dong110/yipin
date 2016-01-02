@@ -13,10 +13,14 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
+        android:name="com.dong.yiping.MyApplication"
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@android:style/Theme.Light.NoTitleBar" >
+        android:theme="@android:style/Theme.Light.NoTitleBar" 
+        android:debuggable="true" 
+        
+        >
         <activity
             android:name="com.dong.yiping.activity.LoginActivity"
             android:label="@string/app_name"
