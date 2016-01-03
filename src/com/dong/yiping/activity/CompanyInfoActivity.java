@@ -1,8 +1,19 @@
 package com.dong.yiping.activity;
 
-import com.dong.yiping.R;
+import java.util.HashMap;
+import java.util.Map;
 
+import com.dong.yiping.Constant;
+import com.dong.yiping.R;
+import com.dong.yiping.bean.JobDetailInfo;
+import com.dong.yiping.bean.UserBean;
+import com.dong.yiping.utils.NetRunnable;
+import com.dong.yiping.utils.ThreadPoolManager;
+import com.dong.yiping.utils.ToastUtil;
+
+import android.content.Context;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.view.Window;
 import android.widget.ImageView;
@@ -12,6 +23,26 @@ public class CompanyInfoActivity extends BaseActivity {
 
 	private TextView tv_title_center;
 	private ImageView iv_title_left;
+	private Context mContext;
+
+	private Handler mHandler = new Handler() {
+		public void handleMessage(android.os.Message msg) {
+			switch (msg.what) {
+			case Constant.NET_ERROR:
+				ToastUtil.showToast(mContext, "获取公司详情失败！");
+				break;
+			case Constant.NET_NULL:
+				ToastUtil.showToast(mContext, "职位公司数据为空！");
+				break;
+			case Constant.NET_SUCCESS:
+
+				//填充页面数据
+
+				break;
+			}
+
+		};
+	};
 
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -22,14 +53,23 @@ public class CompanyInfoActivity extends BaseActivity {
 		overridePendingTransition(R.anim.right_to_center, R.anim.center_to_left);
 
 		setContentView(R.layout.activity_companyinfo);
-		initTitleBar();
+
+		mContext = this;
+		initView();
+		initData();
 	}
 
-	private void initTitleBar() {
+	public void initView() {
 		tv_title_center = $(R.id.tv_title_center);
 		iv_title_left = $(R.id.iv_title_left, true);
 
 		tv_title_center.setText("企业信息");
+
+	}
+
+	public void initData() {
+
+
 
 	}
 

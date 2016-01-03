@@ -99,7 +99,11 @@ public final class R {
         public static final int xlistview_arrow=0x7f020031;
     }
     public static final class id {
+<<<<<<< HEAD
+        public static final int banner_cont=0x7f09000a;
+=======
         public static final int banner_cont=0x7f09000e;
+>>>>>>> origin/master
         public static final int bt_getJob=0x7f090043;
         public static final int btn_timepicker_cancel=0x7f090068;
         public static final int btn_timepicker_ok=0x7f090069;
@@ -152,7 +156,10 @@ public final class R {
         public static final int rl_regist_sheng=0x7f09002c;
         public static final int rl_regist_shi=0x7f09002e;
         public static final int rl_regist_stu=0x7f090020;
+<<<<<<< HEAD
+=======
         public static final int subdate=0x7f09000b;
+>>>>>>> origin/master
         public static final int textview=0x7f09005e;
         public static final int timePicker1=0x7f090062;
         public static final int tv_arrer=0x7f09004a;
@@ -162,11 +169,22 @@ public final class R {
         public static final int tv_fragmentfore_username=0x7f090038;
         public static final int tv_fragmenttwo_time=0x7f09004c;
         public static final int tv_group_name=0x7f090048;
+<<<<<<< HEAD
+        public static final int tv_jobmessage_applyjob=0x7f090011;
+        public static final int tv_jobmessage_collect=0x7f090012;
+        public static final int tv_jobmessage_content=0x7f090010;
+        public static final int tv_jobmessage_jobname=0x7f09000b;
+        public static final int tv_jobmessage_salary=0x7f09000c;
+        public static final int tv_jobmessage_subdate=0x7f09000d;
+        public static final int tv_jobmessage_welfare=0x7f09000f;
+        public static final int tv_jobmessage_workdate=0x7f09000e;
+=======
         public static final int tv_intention=0x7f090009;
         public static final int tv_jobmessage_applyjob=0x7f090011;
         public static final int tv_jobmessage_collect=0x7f090012;
         public static final int tv_jobmessage_jobname=0x7f09000f;
         public static final int tv_jobmessage_salary=0x7f090010;
+>>>>>>> origin/master
         public static final int tv_login_findpwd=0x7f090015;
         public static final int tv_login_login=0x7f090017;
         public static final int tv_login_regist=0x7f090016;
@@ -182,16 +200,24 @@ public final class R {
         public static final int tv_regist_shi=0x7f09002f;
         public static final int tv_regist_type=0x7f090002;
         public static final int tv_resume_birthday=0x7f090034;
+<<<<<<< HEAD
+        public static final int tv_resume_collect=0x7f090009;
+        public static final int tv_resume_invite=0x7f090008;
+=======
         public static final int tv_resume_collect=0x7f09000d;
         public static final int tv_resume_invite=0x7f09000c;
+>>>>>>> origin/master
         public static final int tv_resume_publish=0x7f090035;
         public static final int tv_salary=0x7f090049;
         public static final int tv_serach=0x7f09004f;
         public static final int tv_textview=0x7f090045;
         public static final int tv_title=0x7f090037;
         public static final int tv_title_center=0x7f09003f;
+<<<<<<< HEAD
+=======
         public static final int user_name=0x7f090008;
         public static final int working=0x7f09000a;
+>>>>>>> origin/master
         public static final int xListView=0x7f090052;
         public static final int xlistview_footer_content=0x7f090053;
         public static final int xlistview_footer_hint_textview=0x7f090055;
