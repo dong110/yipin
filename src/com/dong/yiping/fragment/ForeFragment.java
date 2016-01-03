@@ -10,6 +10,7 @@ import com.dong.yiping.activity.MyResumesActivity;
 import com.dong.yiping.activity.PhoneIdentificationActivity;
 import com.dong.yiping.activity.ResumeActivity;
 import com.dong.yiping.activity.UserCollectListActivity;
+import com.dong.yiping.activity.UserShenQingActivity;
 import com.dong.yiping.utils.LogUtil;
 import com.dong.yiping.utils.SPUtil;
 
@@ -81,7 +82,7 @@ public class ForeFragment extends BaseFragment implements OnClickListener{
 		if(Type == 0){//学生用户
 			myResume.setText("我的简历");
 			tv_fragment_jilu.setText("职位申请记录");
-			
+			 
 		}else{//公司用户
 			myResume.setText("公司信息");
 			tv_fragment_jilu.setText("面试邀请记录");
@@ -119,6 +120,14 @@ public class ForeFragment extends BaseFragment implements OnClickListener{
 				
 			}else{//公司用户
 				mIntent = new Intent(mContext,ComCollectListActivity.class);
+			}
+			mContext.startActivity(mIntent);
+			break;
+		case R.id.tv_fragment_jilu:
+			if(Type == 0){//学生用户
+				mIntent = new Intent(mContext,UserShenQingActivity.class);
+				
+			}else{//公司用户
 			}
 			mContext.startActivity(mIntent);
 			break;

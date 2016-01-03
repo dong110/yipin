@@ -16,6 +16,7 @@ import com.dong.yiping.utils.NetRunnable;
 import com.dong.yiping.utils.ThreadPoolManager;
 import com.dong.yiping.utils.ToastUtil;
 import com.dong.yiping.view.LJListView;
+import com.dong.yiping.view.LJListView.IXListViewListener;
 
 import roboguice.inject.InjectView;
 import android.content.Context;
@@ -24,17 +25,21 @@ import android.os.Handler;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 
-public class ZhiWeiShenQingActivity extends BaseActivity{
+public class UserShenQingActivity extends BaseActivity implements IXListViewListener{
 	
 	@InjectView(R.id.bt_shenqing) Button bt_shenqing;
 	@InjectView(R.id.bt_yaoqing) Button bt_yaoqing;
 	@InjectView(R.id.listview) LJListView listview;
+	@InjectView(R.id.tv_title_center) TextView tv_title_center;
+	@InjectView(R.id.iv_title_left) ImageView iv_title_left;
 	@Inject Context mContext;
 	
+	private boolean isShenQing= true;
 	
-	private ZhiWeiShenQingAdapter zhiweiAdapter;
 	private YaoQingAdapter adapter;
 	
 	private List<GetJob> listGetJob;
@@ -77,29 +82,44 @@ public class ZhiWeiShenQingActivity extends BaseActivity{
 	}
 
 	private void initView() {
+		tv_title_center.setText("职位申请记录");
+		iv_title_left.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				onBackPressed();
+			}
+		});
 		
 		listGetJob = new ArrayList<GetJobBean.GetJob>();
-		zhiweiAdapter = new ZhiWeiShenQingAdapter(mContext, listGetJob);
-		
+		adapter = new YaoQingAdapter(mContext, listGetJob);
+		listview.setAdapter(adapter);
 		
 		listview.setPullLoadEnable(false,""); //如果不想让脚标显示数据可以mListView.setPullLoadEnable(false,null)或者mListView.setPullLoadEnable(false,"")
 		listview.setPullRefreshEnable(true);
-		//lv_listview.setPullLoadEnable(false, "加载完成");
+		listview.setPullLoadEnable(false, "加载完成");
 		listview.setIsAnimation(true); 
-		
+		listview.setXListViewListener(this);
+		bt_shenqing.setSelected(true);
 		
 		bt_shenqing.setOnClickListener(new OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
-				
+				bt_shenqing.setSelected(true);
+				bt_yaoqing.setSelected(false);
+				isShenQing = true;
+				initData();
 			}
 		});
 		
 		bt_yaoqing.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				
+				bt_shenqing.setSelected(false);
+				bt_yaoqing.setSelected(true);
+				isShenQing = false;
+				initData();
 			}
 		});
 		
@@ -179,11 +199,35 @@ public class ZhiWeiShenQingActivity extends BaseActivity{
 	private void initData() {
 		//http://123.57.75.34:8080/users/api/inviteList?userId=2&currentNum=0&pageNum=5
 		//http://123.57.75.34:8080/users/api/inviteList?userId=2&currentNum=0&pageNum=5&isrecruit=1
-		String url = Constant.HOST+"/inviteList?userId=2&currentNum="+currentNum+"&pageNum="+pagerNum;
-		url = Constant.HOST+"/inviteList?userId=2&currentNum="+currentNum+"&pageNum="+pagerNum+"&isrecruit=1";
+		String url = getLoadUrl(currentNum,pagerNum);
 		ThreadPoolManager.getInstance().addTask(new NetRunnable(mHandler, url, Constant.TOPER_TYPE_GETJOB));
-	
+		
 	}
-	
+	private String getLoadUrl(int currentNum,int pageNum){
+		String url = Constant.HOST+"/inviteList?userId=2&currentNum="+currentNum+"&pageNum="+pagerNum;
+		if(!isShenQing){
+			url = Constant.HOST+"/inviteList?userId=2&currentNum="+currentNum+"&pageNum="+pagerNum+"&isrecruit=1";
+		}
+		return url;
+	}
+
+	@Override
+	public void onRefresh() {
+		initData();
+	}
+
+	@Override
+	public void onLoadMore() {
+		getLoadData();
+		
+	}
+
+	private void getLoadData() {
+			isRefush = false;
+			currentPage++;
+			currentNum = (currentPage-1)*pagerNum;
+			String url = getLoadUrl(currentNum, pagerNum);
+			ThreadPoolManager.getInstance().addTask(new NetRunnable(mHandler,url,Constant.TOPER_TYPE_GETJOB));
+	}
 	
 }
