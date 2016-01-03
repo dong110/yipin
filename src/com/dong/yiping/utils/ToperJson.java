@@ -3,11 +3,13 @@ package com.dong.yiping.utils;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.os.Handler;
+import android.os.Message;
+
 import com.dong.yiping.Constant;
 import com.dong.yiping.bean.BannerListBean;
 import com.dong.yiping.bean.JobDetailInfo;
 import com.dong.yiping.bean.DictListBean;
-import com.dong.yiping.bean.DictListBean.DictBean;
 import com.dong.yiping.bean.GetJobBean;
 import com.dong.yiping.bean.GetZhaopinBean;
 import com.dong.yiping.bean.HangYeBean;
@@ -75,6 +77,20 @@ public class ToperJson {
 			break;
 		case Constant.TOPER_TYPE_APPLYJOB:// 申请职位
 			toperApplyJob(result);
+<<<<<<< HEAD
+=======
+			break;
+
+		case Constant.TOPER_TYPE_COMPANYINFO:// 公司信息
+			toperCompanyInfo(result);
+			break;
+
+		case Constant.TOPER_TYPE_GETJOB_DETAIL:
+			toperGetJobDetail(result);
+			break;
+		case Constant.TOPER_TYPE_GET_USERINFO:
+			toperGetUserInfo(result);
+>>>>>>> origin/master
 			break;
 		case Constant.TOPER_TYPE_GETJOB_DETAIL:
 			toperGetJobDetail(result);
@@ -87,6 +103,9 @@ public class ToperJson {
 			break;
 		}
 	}
+
+
+		
 
 	// 申请职位
 	private void toperApplyJob(String result) {
