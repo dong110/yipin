@@ -107,6 +107,7 @@ public class TwoFragment extends RoboFragment implements IXListViewListener, OnC
 				}
 				loadingUtil.hideDialog();
 				popUtil.createPop(mContext,listStr);
+				
 				popUtil.setOnItemClickListener(new OnItemClickListener() {
 
 					@Override
@@ -159,9 +160,17 @@ public class TwoFragment extends RoboFragment implements IXListViewListener, OnC
 		lv_listview.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
-			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
+			public void onItemClick(AdapterView<?> arg0, View arg1, int position,
 					long arg3) {
-				mContext.startActivity(new Intent(mContext,JobMessageActivity.class));
+				if(position>0){
+					position--;
+				}
+				
+				Intent intent = new Intent(mContext,JobMessageActivity.class);
+				intent.putExtra("bannerListBean", MyApplication.getApplication().getBannerListBean());
+				intent.putExtra("getJob",listGetJob.get(position));
+				
+				mContext.startActivity(intent);
 			}
 		});
 		

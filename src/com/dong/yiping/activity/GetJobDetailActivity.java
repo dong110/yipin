@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.dong.yiping.Constant;
 import com.dong.yiping.R;
+import com.dong.yiping.bean.GetZhaopinBean.ZhaoPin;
 import com.dong.yiping.bean.JobDetailBean;
 import com.dong.yiping.bean.UserBean;
 import com.dong.yiping.utils.NetRunnable;
@@ -53,6 +54,7 @@ public class GetJobDetailActivity extends BaseActivity{
 		}
 
 	};
+	private ZhaoPin zhaoPin;
 	
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -62,8 +64,15 @@ public class GetJobDetailActivity extends BaseActivity{
 		overridePendingTransition(R.anim.right_to_center, R.anim.center_to_left);
 		setContentView(R.layout.activity_getjobdetail);
 		mContext = this;
+		getIntentData();
 		initView();
 		initData();
+	}
+
+	private void getIntentData() {
+		zhaoPin = (ZhaoPin) getIntent().getSerializableExtra("ZhaoPin");
+		
+		
 	}
 
 	private void initData() {
@@ -72,7 +81,11 @@ public class GetJobDetailActivity extends BaseActivity{
 		String user_info = Constant.HOST + Constant.USER_INFO;
 		Map<String, String> mapUser = new HashMap<String, String>();
 		mapUser.put("id", ""+SPUtil.getInt(mContext, "id", 1));
-		String get_job = Constant.HOST + Constant.GET_JOB_DETAIL+"8";
+		int zhaoPinId = -1;
+		if(zhaoPin!=null){
+			zhaoPinId = zhaoPin.getId();
+		}
+		String get_job = Constant.HOST + Constant.GET_JOB_DETAIL+zhaoPinId;
 		ThreadPoolManager.getInstance().addTask(new NetRunnable(mHandler, get_job, Constant.TOPER_TYPE_GETJOB_DETAIL));
 		ThreadPoolManager.getInstance().addTask(new NetRunnable(mHandler, user_info, mapUser, Constant.TOPER_TYPE_GET_USERINFO));
 	}

@@ -1,17 +1,23 @@
 package com.dong.yiping.activity;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import com.dong.yiping.Constant;
 import com.dong.yiping.R;
+import com.dong.yiping.adapter.PopListViewAdapter;
+import com.dong.yiping.adapter.ResumeListAdapter;
 import com.dong.yiping.banner.BannerBaseView;
 import com.dong.yiping.banner.MainBannerView;
 import com.dong.yiping.banner.utils.GetBannerData;
 import com.dong.yiping.bean.BannerListBean;
 import com.dong.yiping.bean.GetJobBean;
+import com.dong.yiping.bean.GetZhaopinBean;
 import com.dong.yiping.bean.GetJobBean.GetJob;
+import com.dong.yiping.bean.GetZhaopinBean.ZhaoPin;
 import com.dong.yiping.bean.JobDetailInfo;
+import com.dong.yiping.utils.LoadingUtil;
 import com.dong.yiping.utils.NetRunnable;
 import com.dong.yiping.utils.SPUtil;
 import com.dong.yiping.utils.ThreadPoolManager;
@@ -19,11 +25,19 @@ import com.dong.yiping.utils.ToastUtil;
 
 import roboguice.inject.InjectView;
 import android.content.Context;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
+import android.view.ViewGroup.LayoutParams;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ImageView;
+import android.widget.ListView;
+import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -48,10 +62,12 @@ public class JobMessageActivity extends BaseActivity {
 	private TextView tv_jobmessage_collect;
 
 	private BannerListBean bannerListBean;
-	
+	private List<ZhaoPin> resumeList;
 	private Context mContext;
 	private String jobId;
-
+	private LoadingUtil loadingUtil;
+	private ResumeListAdapter adapter;
+	
 	private Handler mHandler = new Handler() {
 		public void handleMessage(android.os.Message msg) {
 			switch (msg.what) {
@@ -88,7 +104,20 @@ public class JobMessageActivity extends BaseActivity {
 					ToastUtil.showToast(mContext, "收藏职位失败");
 				}
 				break;
-			}
+			case Constant.HANDLER_RESUME_LIST:
+				GetZhaopinBean jianli = (GetZhaopinBean) msg.obj;//简历列表和招聘列表一样
+				loadingUtil.hideDialog();
+				if(jianli!=null){
+					resumeList = jianli.getList();
+					
+					adapter = new ResumeListAdapter(mContext, resumeList);
+					createPop(mContext);
+				}else{
+					ToastUtil.showToast(mContext, "您的简历列表为空");
+				}
+				
+				break;
+				}
 
 		};
 	};
@@ -120,7 +149,7 @@ public class JobMessageActivity extends BaseActivity {
 		tv_title_center.setText("招聘信息");
 		iv_title_left = $(R.id.iv_title_left, true);
 		iv_title_right = $(R.id.iv_title_right, true);
-
+		loadingUtil = new LoadingUtil(mContext);
 		// 轮播图
 		bannerContent = $(R.id.banner_cont);
 		banner = new MainBannerView(this);
@@ -162,15 +191,51 @@ public class JobMessageActivity extends BaseActivity {
 			break;
 			
 		case R.id.tv_jobmessage_applyjob:// 申请职位
-			applyJob();
+			loadingUtil.showDialog();
+			getResumeList();
 			break;
 
 		case R.id.tv_jobmessage_collect:// 收藏职位
 			collectJob();
 			break;
+			
 		}
 	}
-
+	//获取简历列表
+	private void getResumeList(){
+		String url = Constant.HOST + Constant.GET_Resume_List + "7";
+		//String url = Constant.HOST + Constant.GET_Resume_List + SPUtil.getInt(mContext, "id", -1);
+		ThreadPoolManager.getInstance().addTask(new NetRunnable(mHandler, url, Constant.TOPER_TYPE_GET_RESUME_LIST));
+	}
+	
+	public void createPop(Context mContext){
+		
+		LayoutInflater mLayoutInflater = (LayoutInflater) mContext
+				.getSystemService(mContext.LAYOUT_INFLATER_SERVICE);
+		View view = mLayoutInflater.inflate(R.layout.pop_dialog, null);
+		//自适配长、框设置
+		final PopupWindow dg = new PopupWindow(view, LayoutParams.WRAP_CONTENT,
+				LayoutParams.WRAP_CONTENT);
+		ListView listView = (ListView) view.findViewById(R.id.pop_listview);
+		listView.setAdapter(adapter);
+		listView.setOnItemClickListener(new OnItemClickListener() {
+			@Override
+			public void onItemClick(AdapterView<?> arg0, View arg1, int position,
+					long arg3) {
+				applyJob(resumeList.get(position).getId());
+				dg.dismiss();
+			}
+		});
+		
+		dg.setBackgroundDrawable(new BitmapDrawable());
+		dg.setOutsideTouchable(true);
+		dg.setAnimationStyle(android.R.style.Animation_Dialog);
+		dg.update();
+		dg.setTouchable(true);
+		dg.setFocusable(true);
+		dg.showAtLocation(view, Gravity.CENTER, 0,0);
+	}
+	
 	private void collectJob() {
 		///api/collectionUpdate?id=1&userid=1&type=0  type 0 简历收藏 1招聘抽藏
 		String url = Constant.HOST + Constant.COLLECT;
@@ -183,15 +248,13 @@ public class JobMessageActivity extends BaseActivity {
 		ThreadPoolManager.getInstance().addTask(new NetRunnable(mHandler, url,paramMap,Constant.TOPER_TYPE_COLLECTJOB));
 	}
 
-
-
-	public void applyJob() {
+	public void applyJob(int i) {
 		//简历ID
 		//TODO
 		String resumeId="1";
 		String url = Constant.HOST + Constant.APPLYJOB;
 		Map<String, String> paramMap = new HashMap<String, String>();
-		paramMap.put("resumeId", resumeId);
+		paramMap.put("resumeId", i+"");
 		paramMap.put("type", "0");//0 投简历 1邀面试
 		if(getJob!=null){
 			paramMap.put("recruitId", getJob.getId()+"");

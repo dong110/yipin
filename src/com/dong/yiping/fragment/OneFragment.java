@@ -21,6 +21,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.dong.yiping.Constant;
+import com.dong.yiping.MyApplication;
 import com.dong.yiping.R;
 import com.dong.yiping.activity.CompanyInfoActivity;
 import com.dong.yiping.activity.GetJobDetailActivity;
@@ -71,6 +72,7 @@ public class OneFragment extends RoboFragment{
 				if(bannerListBean == null){
 					bannerListBean = new BannerListBean();
 				}
+				MyApplication.getApplication().setbannerListBean(bannerListBean);
 				LogUtil.i(TAG, bannerListBean.getList().size()+"轮播图");
 				banner.update(GetBannerData.getBannerData(bannerListBean),bannerListBean);
 				setAdapter(++netNum);
@@ -202,6 +204,7 @@ public class OneFragment extends RoboFragment{
 					if(position == 0){
 					}else if(position > 0 && position<getZhaopin.getList().size()+1){
 						mIntent = new Intent(mContext,GetJobDetailActivity.class);
+						mIntent.putExtra("ZhaoPin", getZhaopin.getList().get(position-1));
 						startActivity(mIntent);
 						
 					}else if(position==getZhaopin.getList().size()+1){

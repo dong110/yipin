@@ -102,6 +102,12 @@
            android:launchMode="singleTask"
             android:screenOrientation="portrait" ></activity>
         
+        <activity 
+            android:name="com.dong.yiping.activity.UserHistoryActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            ></activity>
+        
     </application>
 
 </manifest>

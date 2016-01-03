@@ -86,11 +86,15 @@ public class ThreeFragment extends BaseFragment implements IXListViewListener{
 	}
 	private void setListener() {
 		lv_listview.setOnItemClickListener(new OnItemClickListener() {
-
 			@Override
-			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
+			public void onItemClick(AdapterView<?> arg0, View arg1, int position,
 					long arg3) {
-				mContext.startActivity(new Intent(mContext,GetJobDetailActivity.class));
+				if(position>0){
+					position--;
+				}
+				Intent mIntent = new Intent(mContext,GetJobDetailActivity.class);
+				mIntent.putExtra("ZhaoPin", listZhaopin.get(position));
+				startActivity(mIntent);
 				
 			}
 		});

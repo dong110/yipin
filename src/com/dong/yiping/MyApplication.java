@@ -10,6 +10,7 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.dong.yiping.bean.BannerListBean;
 import com.dong.yiping.bean.DictListBean;
 import com.dong.yiping.bean.DictListBean.DictBean;
 
@@ -20,7 +21,7 @@ public class MyApplication extends Application {
 	public static MyApplication myApplication;
 	private static final String TAG = MyApplication.class.getName();
 	public  DictListBean dictBean;
-	
+	public BannerListBean bannerListBean;
 	
 	/**
 	 * 全局管理activity，方便退出
@@ -31,6 +32,12 @@ public class MyApplication extends Application {
 		return myApplication;
 	}
 	
+	public void setbannerListBean(BannerListBean bannerListBean){
+		this.bannerListBean = bannerListBean;
+	}
+	public BannerListBean getBannerListBean( ){
+		return bannerListBean;
+	}
 	public  void setDictBean(DictListBean dictBean){
 		this.dictBean = dictBean;
 	}

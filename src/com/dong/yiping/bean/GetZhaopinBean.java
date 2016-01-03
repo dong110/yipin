@@ -1,11 +1,20 @@
 package com.dong.yiping.bean;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class GetZhaopinBean {
+public class GetZhaopinBean implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7376945295440302852L;
 	private ArrayList<ZhaoPin> list;
 	
-	public class ZhaoPin{
+	public class ZhaoPin implements Serializable{
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = -8370182981046066367L;
 		private String anble;
 		private String cards;
 		private String createtime;

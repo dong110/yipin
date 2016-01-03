@@ -6,6 +6,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import roboguice.inject.InjectView;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,9 +14,9 @@ import android.os.Handler;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.AdapterView.OnItemClickListener;
 
 import com.dong.yiping.Constant;
 import com.dong.yiping.MyApplication;
@@ -30,9 +31,12 @@ import com.dong.yiping.utils.ThreadPoolManager;
 import com.dong.yiping.utils.ToastUtil;
 import com.dong.yiping.view.LJListView;
 import com.dong.yiping.view.LJListView.IXListViewListener;
-
-public class UserCollectListActivity extends BaseActivity implements IXListViewListener{
-
+/**
+ * 浏览历史和收藏夹数据结构一样
+ * @author dong
+ *
+ */
+public class UserHistoryActivity extends BaseActivity implements IXListViewListener{
 	@InjectView(R.id.listview) LJListView listview;
 	@Inject Context mContext;
 	@InjectView(R.id.tv_title_center) TextView tv_title_center;
@@ -73,14 +77,16 @@ public class UserCollectListActivity extends BaseActivity implements IXListViewL
 		};
 	};
 	
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_usercollectionlist);
+		setContentView(R.layout.activity_userhistory);
 		initView();
 		setLitener();
 		initData();
 	}
+
 	private void setLitener() {
 		iv_title_left.setOnClickListener(new OnClickListener() {
 			
@@ -108,7 +114,7 @@ public class UserCollectListActivity extends BaseActivity implements IXListViewL
 	private void initView() {
 		
 		loadingUtil = new LoadingUtil(mContext);
-		tv_title_center.setText("收藏夹");
+		tv_title_center.setText("浏览历史");
 		listGetJob = new ArrayList<GetJobBean.GetJob>();
 		adapter = new UserCollectListAdapter(mContext,listGetJob);
 		listview.setAdapter(adapter);
@@ -126,14 +132,16 @@ public class UserCollectListActivity extends BaseActivity implements IXListViewL
 					position--;
 				}
 				
-				Intent intent = new Intent(UserCollectListActivity.this,JobMessageActivity.class);
+				
+				Intent intent = new Intent(UserHistoryActivity.this,JobMessageActivity.class);
 				intent.putExtra("bannerListBean", MyApplication.getApplication().getBannerListBean());
 				intent.putExtra("getJob",listGetJob.get(position));
-				
 				startActivity(intent);
 			}
 		});
 	}
+	//01-03 21:55:27.451: E/AndroidRuntime(23923): java.lang.RuntimeException: Unable to start activity ComponentInfo{com.dong.yiping/com.dong.yiping.activity.MainActivity}: android.view.WindowManager$BadTokenException: Unable to add window -- token null is not valid; is your activity running?
+
 	/**
 	 * 刷新Listview数据
 	 * @param listGetJob
@@ -191,8 +199,8 @@ public class UserCollectListActivity extends BaseActivity implements IXListViewL
 	}
 	
 	private String getLoadUrl(int currentNum,int pageNum){
-		//recruitCollectionList?userid=3&currentNum=0&pageNum=10
-		String str = "/recruitCollectionList?userid="+SPUtil.getInt(mContext, "id", -1)+"&currentNum="+currentNum+"&pageNum="+pageNum;
+		//http://123.57.75.34:8080/users/api/recruitHistroyList?userid=1&currentNum=0&pageNum=5
+		String str = "/recruitHistroyList?userid="+SPUtil.getInt(mContext, "id", -1)+"&currentNum="+currentNum+"&pageNum="+pageNum;
 		return str;
 	}
 	
@@ -236,5 +244,4 @@ public class UserCollectListActivity extends BaseActivity implements IXListViewL
 		String url = Constant.HOST + getLoadUrl(currentNum, pagerNum);
 		ThreadPoolManager.getInstance().addTask(new NetRunnable(mHandler,url,Constant.TOPER_TYPE_GETJOB));
 	}
-
 }

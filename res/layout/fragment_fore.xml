@@ -83,6 +83,7 @@
          <include layout="@layout/line_user_center"/>
          
          <TextView 
+             android:id="@+id/tv_history"
             style="@style/user_center_text"
             android:text="浏览历史"
             />

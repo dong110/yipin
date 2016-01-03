@@ -10,6 +10,7 @@ import com.dong.yiping.activity.MyResumesActivity;
 import com.dong.yiping.activity.PhoneIdentificationActivity;
 import com.dong.yiping.activity.ResumeActivity;
 import com.dong.yiping.activity.UserCollectListActivity;
+import com.dong.yiping.activity.UserHistoryActivity;
 import com.dong.yiping.activity.UserShenQingActivity;
 import com.dong.yiping.utils.LogUtil;
 import com.dong.yiping.utils.SPUtil;
@@ -34,7 +35,7 @@ public class ForeFragment extends BaseFragment implements OnClickListener{
 	@InjectView(R.id.tv_mine_modifypwd) TextView modify_pwd;
 	@InjectView(R.id.tv_mine_phone) TextView phone;
 	@InjectView(R.id.tv_fragmentfore_username) TextView tv_fragmentfore_username;
-	
+	@InjectView(R.id.tv_history) TextView tv_history;
 	
 	private TextView tv_title_center;
 	private LinearLayout ll_title_center;
@@ -66,6 +67,7 @@ public class ForeFragment extends BaseFragment implements OnClickListener{
 		modify_pwd.setOnClickListener(this);
 		phone.setOnClickListener(this);
 		tv_fragment_jilu.setOnClickListener(this);
+		tv_history.setOnClickListener(this);
 	}
 
 	private void initData() {
@@ -126,6 +128,14 @@ public class ForeFragment extends BaseFragment implements OnClickListener{
 		case R.id.tv_fragment_jilu:
 			if(Type == 0){//学生用户
 				mIntent = new Intent(mContext,UserShenQingActivity.class);
+				
+			}else{//公司用户
+			}
+			mContext.startActivity(mIntent);
+			break;
+		case R.id.tv_history:
+			if(Type == 0){//学生用户
+				mIntent = new Intent(mContext,UserHistoryActivity.class);
 				
 			}else{//公司用户
 			}
