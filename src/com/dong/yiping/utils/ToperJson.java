@@ -77,20 +77,6 @@ public class ToperJson {
 			break;
 		case Constant.TOPER_TYPE_APPLYJOB:// 申请职位
 			toperApplyJob(result);
-<<<<<<< HEAD
-=======
-			break;
-
-		case Constant.TOPER_TYPE_COMPANYINFO:// 公司信息
-			toperCompanyInfo(result);
-			break;
-
-		case Constant.TOPER_TYPE_GETJOB_DETAIL:
-			toperGetJobDetail(result);
-			break;
-		case Constant.TOPER_TYPE_GET_USERINFO:
-			toperGetUserInfo(result);
->>>>>>> origin/master
 			break;
 		case Constant.TOPER_TYPE_GETJOB_DETAIL:
 			toperGetJobDetail(result);
