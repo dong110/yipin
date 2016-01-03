@@ -9,10 +9,12 @@ import android.view.Gravity;
 import android.view.KeyEvent.DispatcherState;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.SimpleAdapter;
+import android.widget.AdapterView.OnItemClickListener;
 
 import com.dong.yiping.R;
 import com.dong.yiping.activity.MainActivity;
@@ -20,26 +22,21 @@ import com.dong.yiping.adapter.PopListViewAdapter;
 
 public class PopUtil {
 	
-	private Context mContext;
 	private PopupWindow dg;
+	private ListView listView;
 	
-	public  PopUtil(Context mContext){
-		this.mContext = mContext;
-	}
 	
-	public void createPop(List<String> listStr){
-		System.out.println(listStr.size()+"====");
+	public void createPop(Context mContext,List<String> listStr){
 		LayoutInflater mLayoutInflater = (LayoutInflater) mContext
 				.getSystemService(mContext.LAYOUT_INFLATER_SERVICE);
 		View view = mLayoutInflater.inflate(R.layout.pop_dialog, null);
 		PopListViewAdapter adapter = new PopListViewAdapter(mContext, listStr);
-		ListView listView = (ListView) view.findViewById(R.id.pop_listview);
+		listView = (ListView) view.findViewById(R.id.pop_listview);
 		listView.setAdapter(adapter);
-		
 		//自适配长、框设置
-		dg = new PopupWindow(view, LayoutParams.MATCH_PARENT,
+		dg = new PopupWindow(view, LayoutParams.WRAP_CONTENT,
 				LayoutParams.WRAP_CONTENT);
-		dg.setBackgroundDrawable(mContext.getResources().getDrawable(R.drawable.bg));
+		dg.setBackgroundDrawable(new BitmapDrawable());
 		dg.setOutsideTouchable(true);
 		dg.setAnimationStyle(android.R.style.Animation_Dialog);
 		dg.update();
@@ -47,7 +44,13 @@ public class PopUtil {
 		dg.setFocusable(true);
 		dg.showAtLocation(view, Gravity.CENTER, 0,0);
 	}
-	public void createDialogTwo(List<String> listStr){
+	
+	public void setOnItemClickListener(OnItemClickListener listener){
+		listView.setOnItemClickListener(listener);
+	}
+	
+	
+	public void createDialogTwo(Context mContext,List<String> listStr){
 		LayoutInflater mLayoutInflater = (LayoutInflater) mContext
 				.getSystemService(mContext.LAYOUT_INFLATER_SERVICE);
 		View view = mLayoutInflater.inflate(R.layout.dialog, null);

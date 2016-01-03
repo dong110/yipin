@@ -1,9 +1,20 @@
 package com.dong.yiping.activity;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import com.dong.yiping.Constant;
 import com.dong.yiping.R;
+import com.dong.yiping.adapter.ResumeListAdapter;
+import com.dong.yiping.bean.GetZhaopinBean;
+import com.dong.yiping.bean.GetZhaopinBean.ZhaoPin;
+import com.dong.yiping.utils.NetRunnable;
+import com.dong.yiping.utils.ThreadPoolManager;
 import com.dong.yiping.view.LJListView;
 
+import android.content.Context;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.view.Window;
 import android.widget.ImageView;
@@ -16,8 +27,23 @@ public class MyResumesActivity extends BaseActivity {
 
 	private TextView tv_myresumes_addresume;
 	private LJListView lv_myresumes_listview;
-
-	@Override
+	private Context mContext;
+	private ResumeListAdapter adapter;
+	private List<ZhaoPin> resumeList;
+	
+	private Handler mHandler = new Handler(){
+		public void handleMessage(android.os.Message msg) {
+			switch (msg.what) {
+			case Constant.HANDLER_RESUME_LIST:
+				GetZhaopinBean bean = (GetZhaopinBean) msg.obj;//简历列表和招聘列表一样
+				resumeList = bean.getList();
+				adapter.notyfyList(resumeList);
+				break;
+			default:
+				break;
+			}
+		};
+	};
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		// 设置没有标题
@@ -25,14 +51,16 @@ public class MyResumesActivity extends BaseActivity {
 		// 当前页面从右往左进入
 		overridePendingTransition(R.anim.right_to_center, R.anim.center_to_left);
 		setContentView(R.layout.activity_myresumes);
+		mContext = this;
 		initTitleBar();
 		initView();
 		initData();
 	}
 
 	private void initData() {
-		// TODO Auto-generated method stub
-		
+		//http://123.57.75.34:8080/users/api/resumeList?userId=7
+		String url = Constant.HOST + Constant.GET_Resume_List + "7";
+		ThreadPoolManager.getInstance().addTask(new NetRunnable(mHandler, url, Constant.TOPER_TYPE_GET_RESUME_LIST));
 	}
 
 	public void initTitleBar() {
@@ -45,8 +73,13 @@ public class MyResumesActivity extends BaseActivity {
 
 	public void initView() {
 		tv_myresumes_addresume = $(R.id.tv_myresumes_addresume, true);
-
 		lv_myresumes_listview = $(R.id.lv_myresumes_listview);
+		lv_myresumes_listview.setPullLoadEnable(false,""); //如果不想让脚标显示数据可以mListView.setPullLoadEnable(false,null)或者mListView.setPullLoadEnable(false,"")
+		lv_myresumes_listview.setPullRefreshEnable(false);
+		
+		resumeList = new ArrayList<GetZhaopinBean.ZhaoPin>();
+		adapter = new ResumeListAdapter(mContext, resumeList);
+		lv_myresumes_listview.setAdapter(adapter);
 	}
 
 	@Override

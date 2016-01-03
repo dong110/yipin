@@ -5,6 +5,7 @@ import java.util.List;
 
 import roboguice.inject.InjectView;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
@@ -18,6 +19,7 @@ import android.widget.TextView;
 
 import com.dong.yiping.Constant;
 import com.dong.yiping.R;
+import com.dong.yiping.activity.GetJobDetailActivity;
 import com.dong.yiping.adapter.ThreeFragmentAdapter;
 import com.dong.yiping.bean.GetZhaopinBean;
 import com.dong.yiping.bean.GetJobBean.GetJob;
@@ -79,8 +81,21 @@ public class ThreeFragment extends BaseFragment implements IXListViewListener{
 		super.onActivityCreated(savedInstanceState);
 		mContext = getActivity();
 		initView();
+		setListener();
 		initData();
 	}
+	private void setListener() {
+		lv_listview.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
+					long arg3) {
+				mContext.startActivity(new Intent(mContext,GetJobDetailActivity.class));
+				
+			}
+		});
+	}
+
 	private void initView() {
 		listZhaopin = new ArrayList<ZhaoPin>();
 		adapter = new ThreeFragmentAdapter(mContext,listZhaopin);

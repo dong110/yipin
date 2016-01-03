@@ -1,5 +1,6 @@
 package com.dong.yiping.bean;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 
@@ -11,10 +12,12 @@ import java.util.ArrayList;
  * @author dong
  *
  */
-public class GetJobBean {
+public class GetJobBean implements Serializable{
+	private static final long serialVersionUID = -3364866778054258930L;
 	private ArrayList<GetJob> list;
 
-	public class GetJob{
+	public class GetJob implements Serializable{
+		private static final long serialVersionUID = -7030417689829983902L;
 		private String conpany;
 		private String content;
 		private String createtime;

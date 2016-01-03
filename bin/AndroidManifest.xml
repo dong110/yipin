@@ -96,6 +96,11 @@
             android:screenOrientation="portrait"
             ></activity>
         
+        <activity 
+            android:name="com.dong.yiping.activity.UserShenQingActivity"
+           android:launchMode="singleTask"
+            android:screenOrientation="portrait" ></activity>
+        
     </application>
 
 </manifest>

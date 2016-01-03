@@ -17,6 +17,7 @@ public class PopListViewAdapter extends BaseAdapter{
 	private Context mContext;
 	public PopListViewAdapter(Context mContext, List<String> listStr) {
 		this.listStr = listStr;
+		this.mContext = mContext;
 	}
 
 	@Override

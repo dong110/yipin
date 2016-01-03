@@ -7,9 +7,12 @@ import com.dong.yiping.Constant;
 import com.dong.yiping.R;
 import com.dong.yiping.banner.BannerBaseView;
 import com.dong.yiping.banner.MainBannerView;
+import com.dong.yiping.banner.utils.GetBannerData;
+import com.dong.yiping.bean.BannerListBean;
 import com.dong.yiping.bean.GetJobBean;
 import com.dong.yiping.bean.JobDetailInfo;
 import com.dong.yiping.utils.NetRunnable;
+import com.dong.yiping.utils.SPUtil;
 import com.dong.yiping.utils.ThreadPoolManager;
 import com.dong.yiping.utils.ToastUtil;
 
@@ -43,6 +46,8 @@ public class JobMessageActivity extends BaseActivity {
 	private TextView tv_jobmessage_applyjob;
 	private TextView tv_jobmessage_collect;
 
+	private BannerListBean bannerListBean;
+	
 	private Context mContext;
 	private String jobId;
 
@@ -80,17 +85,22 @@ public class JobMessageActivity extends BaseActivity {
 	
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-
 		// 设置没有标题
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
-
 		// 当前页面从右往左进入
 		overridePendingTransition(R.anim.right_to_center, R.anim.center_to_left);
-
 		setContentView(R.layout.activity_job_message);
 		mContext = this;
+		getIntentData();
 		initView();
 		initData();
+	}
+
+
+
+	private void getIntentData() {
+		bannerListBean = (BannerListBean) getIntent().getSerializableExtra("bannerListBean");
+		
 	}
 
 
@@ -105,7 +115,9 @@ public class JobMessageActivity extends BaseActivity {
 		bannerContent = $(R.id.banner_cont);
 		banner = new MainBannerView(this);
 		bannerContent.addView(banner);
-
+		if(bannerListBean!=null){
+			banner.update(GetBannerData.getBannerData(bannerListBean),bannerListBean);
+		}
 		//
 		tv_jobmessage_jobname = $(R.id.tv_jobmessage_jobname);
 		tv_jobmessage_salary = $(R.id.tv_jobmessage_salary);
@@ -126,11 +138,7 @@ public class JobMessageActivity extends BaseActivity {
 		// http://123.57.75.34:8080/users/api/recruitSimple?id=5
 
 		String url = Constant.HOST + Constant.COMPANY_INFO + jobId;
-
-		ThreadPoolManager.getInstance()
-				.addTask(
-						new NetRunnable(mHandler, url,
-								Constant.TOPER_TYPE_COMPANYINFO));
+		ThreadPoolManager.getInstance().addTask(new NetRunnable(mHandler, url,Constant.TOPER_TYPE_COMPANYINFO));
 
 	}
 	
@@ -141,34 +149,32 @@ public class JobMessageActivity extends BaseActivity {
 		case R.id.iv_title_left:
 			this.finish();
 			// 当前页面向右退出
-			overridePendingTransition(R.anim.left_to_center,
-					R.anim.center_to_right);
+			overridePendingTransition(R.anim.left_to_center,R.anim.center_to_right);
 			break;
-
-
+			
 		case R.id.tv_jobmessage_applyjob:// 申请职位
-
 			applyJob();
 			break;
 
 		case R.id.tv_jobmessage_collect:// 收藏职位
-
 			collectJob();
 			break;
 		}
 	}
 
-
-
 	private void collectJob() {
-		// TODO Auto-generated method stub
+		///api/collectionUpdate?id=1&userid=1&type=0  type 0 简历收藏 1招聘抽藏
+		String url = Constant.HOST + Constant.COLLECT;
+		Map<String, String> paramMap = new HashMap<String, String>();
+		paramMap.put("id", resumeId);//招聘ID
+		paramMap.put("type", "1");//0 投简历 1邀面试
+		paramMap.put("userid", SPUtil.getInt(mContext, "id", -1)+"");
 		
 	}
 
 
 
 	public void applyJob() {
-
 		//简历ID
 		//TODO
 		String resumeId="1";
@@ -177,10 +183,6 @@ public class JobMessageActivity extends BaseActivity {
 		paramMap.put("resumeId", resumeId);
 		paramMap.put("type", "0");//0 投简历 1邀面试
 		paramMap.put("recruitId", jobId);
-		ThreadPoolManager.getInstance()
-				.addTask(
-						new NetRunnable(mHandler, url,
-								Constant.TOPER_TYPE_APPLYJOB));
-
+		ThreadPoolManager.getInstance().addTask(new NetRunnable(mHandler, url,Constant.TOPER_TYPE_APPLYJOB));
 	}
 }
