@@ -11,6 +11,7 @@ import com.dong.yiping.bean.DictListBean.DictBean;
 import com.dong.yiping.bean.GetJobBean;
 import com.dong.yiping.bean.GetZhaopinBean;
 import com.dong.yiping.bean.HangYeBean;
+import com.dong.yiping.bean.JobDetailBean;
 import com.dong.yiping.bean.StarCompanyBean;
 import com.dong.yiping.bean.StarStudentBean;
 import com.dong.yiping.bean.UserBean;
@@ -72,6 +73,7 @@ public class ToperJson {
 		case Constant.TOPER_TYPE_GETHANGYE:
 			toperGetHangYe(result);
 			break;
+<<<<<<< HEAD
 
 		case Constant.TOPER_TYPE_COMPANYINFO:// 公司信息
 			toperCompanyInfo(result);
@@ -126,6 +128,61 @@ public class ToperJson {
 
 	}
 
+=======
+			
+		case Constant.TOPER_TYPE_GETJOB_DETAIL:
+			toperGetJobDetail(result);
+			break;
+		case Constant.TOPER_TYPE_GET_USERINFO:
+			toperGetUserInfo(result);
+			break;
+		}
+	}
+	/**
+	 * jiexi用户详情
+	 * @param result
+	 */
+	private void toperGetUserInfo(String result) {
+		try {
+			JSONObject jsonObject = new JSONObject(result);
+			int status = jsonObject.getInt("status");
+			
+			if(status==0){
+				UserBean bean = gson.fromJson(result, UserBean.class);
+				Message msg = handler.obtainMessage();
+				msg.what = Constant.HANDLER_TYPE_GET_USERINFO;
+				msg.obj = bean;
+				handler.sendMessage(msg);
+			}else{
+				handler.sendEmptyMessage(Constant.HANDLER_TYPE_GET_USERINFO);
+			}
+		} catch (Exception e) {
+			handler.sendEmptyMessage(Constant.HANDLER_TYPE_GET_USERINFO);
+			e.printStackTrace();
+		}
+		
+		
+	}
+	/**
+	 * 解析工作详情，求职详情
+	 * @param result
+	 */
+	private void toperGetJobDetail(String result) {
+		try {
+				JSONObject jsonObject = new JSONObject(result);
+			
+				JobDetailBean bean = gson.fromJson(result, JobDetailBean.class);
+				Message msg = handler.obtainMessage();
+				msg.obj = bean;
+				msg.what = Constant.HANDLER_TYPE_GETJOB_DETAIL;
+				handler.sendMessage(msg);
+		} catch (Exception e) {
+			handler.sendEmptyMessage(Constant.HANDLER_TYPE_GETJOB_DETAIL);
+			e.printStackTrace();
+		}
+		
+	}
+>>>>>>> origin/master
 	private void toperGetHangYe(String result) {
 		try {
 			JSONObject jsonObject = new JSONObject(result);

@@ -45,6 +45,7 @@
                     android:orientation="vertical" >
 
                     <TextView
+                        android:id="@+id/user_name"
                         android:layout_width="wrap_content"
                         android:layout_height="0dp"
                         android:layout_weight="2"
@@ -67,6 +68,7 @@
             </LinearLayout>
             
             <TextView 
+                android:id="@+id/tv_intention"
                 android:background="@color/writer"
                 android:textSize="@dimen/text_size_17"
                 android:padding="10dp"
@@ -76,11 +78,12 @@
                 android:text="求职意向"
                 />
             <TextView 
+                android:id="@+id/working"
                 android:background="@color/writer"
                 android:paddingLeft="10dp"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:text="文本信息"
+                android:text="工作经历："
                 />
             <LinearLayout 
                 android:padding="10dp"
@@ -90,19 +93,14 @@
                 android:background="@color/writer"
                 >
                 <TextView 
+                    android:id="@+id/subdate"
                 android:background="@color/writer"
                 android:layout_width="0dp"
                 android:layout_weight="3"
                 android:layout_height="wrap_content"
-                android:text="文本信息"
+                android:text="修改时间："
                 />
-                <TextView 
-                android:background="@color/writer"
-                android:layout_width="0dp"
-                android:layout_weight="7"
-                android:layout_height="wrap_content"
-                android:text="文本信息"
-                />
+                
             </LinearLayout>
         </LinearLayout>
     </com.dong.yiping.ui.BounceScrollView>

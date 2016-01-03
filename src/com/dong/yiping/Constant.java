@@ -17,6 +17,8 @@ public class Constant {
 	public static final int TOPER_TYPE_MODIFYPWD = 108;
 	public static final int TOPER_TYPE_GETDICT = 109;
 	public static final int TOPER_TYPE_GETHANGYE = 110;
+	public static final int TOPER_TYPE_GETJOB_DETAIL = 111;
+	public static final int TOPER_TYPE_GET_USERINFO = 112;
 	
 	public static final int TOPER_TYPE_COMPANYINFO = 111;
 	public static final int TOPER_TYPE_APPLYJOB = 112;
@@ -29,9 +31,14 @@ public class Constant {
 	public static final int HANDLER_TYPE_STARTSTU = 124;
 	public static final int HANDLER_TYPE_GETDICT = 125;
 	public static final int HANDLER_TYPE_GETHANGYE = 126;
+<<<<<<< HEAD
 	
 	public static final int APPLYJOB_SUCCESS = 127;
 	public static final int APPLYJOB_FAIL = 128;
+=======
+	public static final int HANDLER_TYPE_GETJOB_DETAIL = 127;
+	public static final int HANDLER_TYPE_GET_USERINFO = 128;
+>>>>>>> origin/master
 	
 	public static final int HANDLER_REFESH_FINISH = 130;
 	
@@ -54,7 +61,8 @@ public class Constant {
 	public static final String GET_DICT_INFO = "/dictList?type=1&code=";
 	
 	
-	public static final String USER_INFO = "/userInfo?id=";
+	public static final String USER_INFO = "/userInfo";//个人详细信息
+	public static final String GET_JOB_DETAIL = "/resumeSimple?id=";//求职详情
 	
 	
 	public static final String COMPANY_INFO = "/recruitSimple?id=";

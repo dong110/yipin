@@ -45,7 +45,7 @@ public class PopUtil {
 		dg.update();
 		dg.setTouchable(true);
 		dg.setFocusable(true);
-		dg.showAtLocation(view.getRootView(), Gravity.CENTER, 0,0);
+		dg.showAtLocation(view, Gravity.CENTER, 0,0);
 	}
 	public void createDialogTwo(List<String> listStr){
 		LayoutInflater mLayoutInflater = (LayoutInflater) mContext
