@@ -4,6 +4,7 @@ public class Constant {
 
 	public static final int NET_ERROR = 0;
 	public static final int NET_SUCCESS = 1;
+	public static final int NET_NULL = 2;
 	
 	public static final int TOPER_TYPE_LOGIN = 100;
 	public static final int TOPER_TYPE_BANNERLIST = 101;
@@ -17,6 +18,10 @@ public class Constant {
 	public static final int TOPER_TYPE_GETDICT = 109;
 	public static final int TOPER_TYPE_GETHANGYE = 110;
 	
+	public static final int TOPER_TYPE_COMPANYINFO = 111;
+	public static final int TOPER_TYPE_APPLYJOB = 112;
+	
+	
 	public static final int HANDLER_BANNERLIST = 120;
 	public static final int HANDLER_TYPE_GETJOB = 121;
 	public static final int HANDLER_TYPE_GETZHAOPIN = 122;
@@ -25,6 +30,8 @@ public class Constant {
 	public static final int HANDLER_TYPE_GETDICT = 125;
 	public static final int HANDLER_TYPE_GETHANGYE = 126;
 	
+	public static final int APPLYJOB_SUCCESS = 127;
+	public static final int APPLYJOB_FAIL = 128;
 	
 	public static final int HANDLER_REFESH_FINISH = 130;
 	
@@ -48,5 +55,9 @@ public class Constant {
 	
 	
 	public static final String USER_INFO = "/userInfo?id=";
+	
+	
+	public static final String COMPANY_INFO = "/recruitSimple?id=";
+	public static final String APPLYJOB = "/noticeUpdate";
 	
 }
