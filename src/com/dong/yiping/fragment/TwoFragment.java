@@ -3,6 +3,8 @@ package com.dong.yiping.fragment;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.inject.Inject;
+
 import roboguice.fragment.RoboFragment;
 import roboguice.inject.InjectView;
 import android.content.Context;
@@ -45,11 +47,12 @@ public class TwoFragment extends RoboFragment implements IXListViewListener, OnC
 	@InjectView(R.id.ll_area) LinearLayout ll_area;
 	@InjectView(R.id.ll_hangye) LinearLayout ll_hangye;
 	@InjectView(R.id.tv_serach) TextView tv_serach;
+	Context mContext;
 	
 	private TextView tv_title_center;
 	private LinearLayout ll_title_center;
 	private TwoFragmentAdapter adapter;
-	private Context mContext;
+	
 	private List<GetJob> listGetJob;
 	private boolean isRefush = true;
 	private int total;//总的条数
@@ -108,10 +111,7 @@ public class TwoFragment extends RoboFragment implements IXListViewListener, OnC
 				
 				break;
 			}
-			
 		}
-
-		
 	};
 	@Override
 	public View onCreateView(LayoutInflater inflater,

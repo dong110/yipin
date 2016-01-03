@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.ListView;
 import android.widget.PopupWindow;
+import android.widget.SimpleAdapter;
 
 import com.dong.yiping.R;
 import com.dong.yiping.activity.MainActivity;
@@ -27,25 +28,24 @@ public class PopUtil {
 	}
 	
 	public void createPop(List<String> listStr){
-		
+		System.out.println(listStr.size()+"====");
 		LayoutInflater mLayoutInflater = (LayoutInflater) mContext
 				.getSystemService(mContext.LAYOUT_INFLATER_SERVICE);
 		View view = mLayoutInflater.inflate(R.layout.pop_dialog, null);
-		view.setBackgroundColor(Color.parseColor("#60000000"));
-		dg = new PopupWindow(view, LayoutParams.WRAP_CONTENT,LayoutParams.WRAP_CONTENT,true);
+		PopListViewAdapter adapter = new PopListViewAdapter(mContext, listStr);
+		ListView listView = (ListView) view.findViewById(R.id.pop_listview);
+		listView.setAdapter(adapter);
 		
-		/*int popWinWidth = MainActivity.this.getWindowManager()
-				.getDefaultDisplay().getWidth();
-		int popWinHeight = MainActivity.this.getWindowManager()
-				.getDefaultDisplay().getHeight();*/
-		dg.setWidth(DisplayUtils.getScreenW(mContext));
-		dg.setHeight(DisplayUtils.getScreenH(mContext));
-		dg.setBackgroundDrawable(new BitmapDrawable());
+		//自适配长、框设置
+		dg = new PopupWindow(view, LayoutParams.MATCH_PARENT,
+				LayoutParams.WRAP_CONTENT);
+		dg.setBackgroundDrawable(mContext.getResources().getDrawable(R.drawable.bg));
+		dg.setOutsideTouchable(true);
+		dg.setAnimationStyle(android.R.style.Animation_Dialog);
+		dg.update();
+		dg.setTouchable(true);
 		dg.setFocusable(true);
 		dg.showAtLocation(view.getRootView(), Gravity.CENTER, 0,0);
-		ListView listview = (ListView) view.findViewById(R.id.pop_listview);
-		PopListViewAdapter adapter = new PopListViewAdapter(mContext,listStr);
-		listview.setAdapter(adapter);
 	}
 	public void createDialogTwo(List<String> listStr){
 		LayoutInflater mLayoutInflater = (LayoutInflater) mContext

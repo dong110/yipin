@@ -174,36 +174,40 @@ public class OneFragment extends RoboFragment{
 		lv_listview.setOnItemClickListener(new OnItemClickListener() {
 			public void onItemClick(AdapterView<?> arg0, View arg1, int position,
 					long arg3) {
+				if(position>0){
+					position--;
+				}
 				if(adapter.isGetJob){
 					if(position == 0){
-					}else if(position<getJobBean.getList().size()+1){
+					}else if(position > 0 && position<getJobBean.getList().size()+1){
 						mIntent = new Intent(mContext,JobMessageActivity.class);
 						startActivity(mIntent);
 					}else if(position==getJobBean.getList().size()+1){
 					}else if(position==getJobBean.getList().size()+2){
-					}else if(position<getJobBean.getList().size()+starCompanyBean.getList().size()+2){
+					}else if(position>getJobBean.getList().size()+2 && position<getJobBean.getList().size()+starCompanyBean.getList().size()+2){
+						
 						mIntent = new Intent(mContext,CompanyInfoActivity.class);
 						startActivity(mIntent);
 						
 					}else if(position==getJobBean.getList().size()+starCompanyBean.getList().size()+2){
-					}else if(position<getJobBean.getList().size()+starCompanyBean.getList().size()+starStudentBean.getList().size()+3){
+					}else if(position>getJobBean.getList().size()+starCompanyBean.getList().size()+2 && position<getJobBean.getList().size()+starCompanyBean.getList().size()+starStudentBean.getList().size()+3){
 						mIntent = new Intent(mContext,GetJobDetailActivity.class);
 						startActivity(mIntent);
 						
 					}
 				}else{
 					if(position == 0){
-					}else if(position<getZhaopin.getList().size()+1){
+					}else if(position > 0 && position<getZhaopin.getList().size()+1){
 						mIntent = new Intent(mContext,GetJobDetailActivity.class);
 						startActivity(mIntent);
 						
 					}else if(position==getZhaopin.getList().size()+1){
 					}else if(position==getZhaopin.getList().size()+2){
-					}else if(position<getZhaopin.getList().size()+starCompanyBean.getList().size()+2){
+					}else if(position>getZhaopin.getList().size()+2 && position<getZhaopin.getList().size()+starCompanyBean.getList().size()+2){
 						mIntent = new Intent(mContext,CompanyInfoActivity.class);
 						startActivity(mIntent);
 					}else if(position==getZhaopin.getList().size()+starCompanyBean.getList().size()+2){
-					}else if(position<getZhaopin.getList().size()+starCompanyBean.getList().size()+starStudentBean.getList().size()+3){
+					}else if(position>getZhaopin.getList().size()+starCompanyBean.getList().size()+2 && position<getZhaopin.getList().size()+starCompanyBean.getList().size()+starStudentBean.getList().size()+3){
 						mIntent = new Intent(mContext,GetJobDetailActivity.class);
 						startActivity(mIntent);
 					}

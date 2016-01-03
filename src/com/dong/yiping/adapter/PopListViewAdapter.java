@@ -21,10 +21,7 @@ public class PopListViewAdapter extends BaseAdapter{
 
 	@Override
 	public int getCount() {
-		if(listStr != null){
-			listStr.size();
-		}
-		return 0;
+			return listStr.size();
 	}
 	
 	@Override

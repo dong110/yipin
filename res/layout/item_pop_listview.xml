@@ -5,6 +5,7 @@
     android:orientation="vertical" >
 
     <TextView
+        android:textColor="#ff0000"
         android:id="@+id/tv_pop_item"
         android:gravity="center"
         android:layout_width="fill_parent"
