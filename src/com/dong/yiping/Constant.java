@@ -20,13 +20,8 @@ public class Constant {
 	public static final int TOPER_TYPE_GETJOB_DETAIL = 111;
 	public static final int TOPER_TYPE_GET_USERINFO = 112;
 	
-<<<<<<< HEAD
 	public static final int TOPER_TYPE_COMPANYINFO = 113;
 	public static final int TOPER_TYPE_APPLYJOB = 114;
-=======
-	public static final int TOPER_TYPE_COMPANYINFO = 111;
-	public static final int TOPER_TYPE_APPLYJOB = 112;
->>>>>>> origin/master
 	
 	
 	public static final int HANDLER_BANNERLIST = 120;
@@ -36,22 +31,11 @@ public class Constant {
 	public static final int HANDLER_TYPE_STARTSTU = 124;
 	public static final int HANDLER_TYPE_GETDICT = 125;
 	public static final int HANDLER_TYPE_GETHANGYE = 126;
-<<<<<<< HEAD
 	
 	public static final int APPLYJOB_SUCCESS = 127;
 	public static final int APPLYJOB_FAIL = 128;
 	public static final int HANDLER_TYPE_GETJOB_DETAIL = 129;
 	public static final int HANDLER_TYPE_GET_USERINFO = 131;
-=======
-<<<<<<< HEAD
-	
-	public static final int APPLYJOB_SUCCESS = 127;
-	public static final int APPLYJOB_FAIL = 128;
-=======
-	public static final int HANDLER_TYPE_GETJOB_DETAIL = 127;
-	public static final int HANDLER_TYPE_GET_USERINFO = 128;
->>>>>>> origin/master
->>>>>>> origin/master
 	
 	public static final int HANDLER_REFESH_FINISH = 130;
 	

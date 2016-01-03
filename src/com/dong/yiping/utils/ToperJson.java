@@ -19,12 +19,9 @@ import com.dong.yiping.bean.StarStudentBean;
 import com.dong.yiping.bean.UserBean;
 import com.google.gson.Gson;
 
-<<<<<<< HEAD
-=======
 import android.os.Handler;
 import android.os.Message;
 
->>>>>>> origin/master
 /**
  * 解析Json工具类
  * 
@@ -78,80 +75,25 @@ public class ToperJson {
 		case Constant.TOPER_TYPE_GETHANGYE:
 			toperGetHangYe(result);
 			break;
-<<<<<<< HEAD
 		case Constant.TOPER_TYPE_APPLYJOB:// 申请职位
 			toperApplyJob(result);
 			break;
-=======
-<<<<<<< HEAD
 
 		case Constant.TOPER_TYPE_COMPANYINFO:// 公司信息
 			toperCompanyInfo(result);
 			break;
 
-		case Constant.TOPER_TYPE_APPLYJOB:// 申请职位
-			toperApplyJob(result);
-			break;
-		}
-	}
-
-	// 申请职位
-	private void toperApplyJob(String result) {
-		LogUtil.i("APPLY====RESULT=====", result);
-		try {
-			JSONObject jsonObject = new JSONObject(result);
-			int status = jsonObject.optInt("status");
-
-			if (status == 0) {
-				handler.sendEmptyMessage(Constant.APPLYJOB_SUCCESS);
-			} else {
-				handler.sendEmptyMessage(Constant.APPLYJOB_FAIL);
-			}
-		} catch (Exception e) {
-			handler.sendEmptyMessage(Constant.NET_ERROR);
-			e.printStackTrace();
-		}
-
-	}
-
-	// 公司信息
-	private void toperCompanyInfo(String result) {
-
-		try {
-			if (result == null) {
-				handler.sendEmptyMessage(Constant.NET_NULL);
-			} else {
-				JSONObject jsonObject = new JSONObject(result);
-
-				JobDetailInfo companyInfo = gson.fromJson(result,
-						JobDetailInfo.class);
-				Message msg = handler.obtainMessage();
-				msg.obj = companyInfo;
-				msg.what = Constant.NET_SUCCESS;
-				handler.sendMessage(msg);
-			}
-
-		} catch (JSONException e) {
-			handler.sendEmptyMessage(Constant.NET_ERROR);
-			e.printStackTrace();
-		}
-
-	}
-
-=======
-			
->>>>>>> origin/master
 		case Constant.TOPER_TYPE_GETJOB_DETAIL:
 			toperGetJobDetail(result);
 			break;
 		case Constant.TOPER_TYPE_GET_USERINFO:
 			toperGetUserInfo(result);
 			break;
-		case Constant.TOPER_TYPE_COMPANYINFO:// 公司信息
-			toperCompanyInfo(result);
-			break;
 		}
 	}
+
+
+		
 
 	// 申请职位
 	private void toperApplyJob(String result) {
@@ -241,7 +183,6 @@ public class ToperJson {
 		}
 		
 	}
->>>>>>> origin/master
 	private void toperGetHangYe(String result) {
 		try {
 			JSONObject jsonObject = new JSONObject(result);
