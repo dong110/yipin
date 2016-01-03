@@ -1,11 +1,17 @@
 package com.dong.yiping.activity;
 
+import com.dong.yiping.Constant;
 import com.dong.yiping.R;
+import com.dong.yiping.bean.JobDetailInfo;
+import com.dong.yiping.utils.NetRunnable;
+import com.dong.yiping.utils.ThreadPoolManager;
 import com.dong.yiping.utils.ToastUtil;
 import com.dong.yiping.view.datepicker.TimeDialog;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.test.TouchUtils;
 import android.view.View;
 import android.view.Window;
@@ -23,6 +29,8 @@ public class ResumeActivity extends BaseActivity {
 	private Context mContext;
 	
 	private TimeDialog timeDialog;
+	private Intent intent;
+	private String resumeId;
 
 	private TimeDialog.CustomTimeListener customTimeListener = new TimeDialog.CustomTimeListener() {
 		@Override
@@ -32,6 +40,35 @@ public class ResumeActivity extends BaseActivity {
 		}
 	};
 
+	
+
+	private Handler mHandler = new Handler() {
+		public void handleMessage(android.os.Message msg) {
+			switch (msg.what) {
+			case Constant.NET_ERROR:
+				ToastUtil.showToast(mContext, "获取数据失败！");
+				break;
+			case Constant.NET_NULL:
+				ToastUtil.showToast(mContext, "职位详情数据为空！");
+				break;
+			case Constant.NET_SUCCESS:
+				JobDetailInfo bean = (JobDetailInfo) msg.obj;
+
+				//填充页面数据
+				break;
+				
+			case Constant.APPLYJOB_FAIL:
+				ToastUtil.showToast(mContext, "职位申请失败");
+				break;
+			case Constant.APPLYJOB_SUCCESS:
+				ToastUtil.showToast(mContext, "职位申请成功");
+				break;
+			}
+
+		};
+	};
+	
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -45,7 +82,11 @@ public class ResumeActivity extends BaseActivity {
 		setContentView(R.layout.activity_resume);
 		mContext = this;
 		initView();
+		
+		initData();
 	}
+
+
 
 	private void initView() {
 		timeDialog = new TimeDialog(this, customTimeListener);
@@ -59,6 +100,18 @@ public class ResumeActivity extends BaseActivity {
 		tv_resume_publish = $(R.id.tv_resume_publish, true);
 	}
 
+	
+	private void initData() {
+		intent = getIntent();
+		resumeId = intent.getStringExtra("ID");
+		if(resumeId!=null){
+
+			String url = Constant.HOST + Constant.COMPANY_INFO + resumeId;
+			ThreadPoolManager.getInstance().addTask(new NetRunnable(mHandler, url,Constant.TOPER_TYPE_COMPANYINFO));
+
+		}
+	}
+	
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
