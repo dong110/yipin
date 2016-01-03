@@ -1,13 +1,17 @@
 package com.dong.yiping.bean;
 
+import java.io.Serializable;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
-public class BannerListBean {
+public class BannerListBean implements Serializable{
+	
+	private static final long serialVersionUID = 2125923916220553986L;
 	
 	private ArrayList<BannerList> list;
 	
-	public class BannerList{
+	public class BannerList implements Serializable{
+		private static final long serialVersionUID = -8430926184130665344L;
 		private int id;
 		private String pic;
 		private String url;

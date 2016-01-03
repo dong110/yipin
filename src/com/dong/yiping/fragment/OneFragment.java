@@ -181,18 +181,21 @@ public class OneFragment extends RoboFragment{
 					if(position == 0){
 					}else if(position > 0 && position<getJobBean.getList().size()+1){
 						mIntent = new Intent(mContext,JobMessageActivity.class);
+						mIntent.putExtra("bannerListBean", bannerListBean);
+						
+						
 						startActivity(mIntent);
 					}else if(position==getJobBean.getList().size()+1){
 					}else if(position==getJobBean.getList().size()+2){
 					}else if(position>getJobBean.getList().size()+2 && position<getJobBean.getList().size()+starCompanyBean.getList().size()+2){
 						
-						mIntent = new Intent(mContext,CompanyInfoActivity.class);
-						startActivity(mIntent);
+						/*mIntent = new Intent(mContext,CompanyInfoActivity.class);
+						startActivity(mIntent);*/
 						
 					}else if(position==getJobBean.getList().size()+starCompanyBean.getList().size()+2){
 					}else if(position>getJobBean.getList().size()+starCompanyBean.getList().size()+2 && position<getJobBean.getList().size()+starCompanyBean.getList().size()+starStudentBean.getList().size()+3){
-						mIntent = new Intent(mContext,GetJobDetailActivity.class);
-						startActivity(mIntent);
+						/*mIntent = new Intent(mContext,GetJobDetailActivity.class);
+						startActivity(mIntent);*/
 						
 					}
 				}else{
@@ -204,12 +207,12 @@ public class OneFragment extends RoboFragment{
 					}else if(position==getZhaopin.getList().size()+1){
 					}else if(position==getZhaopin.getList().size()+2){
 					}else if(position>getZhaopin.getList().size()+2 && position<getZhaopin.getList().size()+starCompanyBean.getList().size()+2){
-						mIntent = new Intent(mContext,CompanyInfoActivity.class);
-						startActivity(mIntent);
+						/*mIntent = new Intent(mContext,CompanyInfoActivity.class);
+						startActivity(mIntent);*/
 					}else if(position==getZhaopin.getList().size()+starCompanyBean.getList().size()+2){
 					}else if(position>getZhaopin.getList().size()+starCompanyBean.getList().size()+2 && position<getZhaopin.getList().size()+starCompanyBean.getList().size()+starStudentBean.getList().size()+3){
-						mIntent = new Intent(mContext,GetJobDetailActivity.class);
-						startActivity(mIntent);
+						/*mIntent = new Intent(mContext,GetJobDetailActivity.class);
+						startActivity(mIntent);*/
 					}
 					
 				}

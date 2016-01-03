@@ -66,6 +66,6 @@ public class Constant {
 	
 	
 	public static final String COMPANY_INFO = "/recruitSimple?id=";
-	public static final String APPLYJOB = "/noticeUpdate";
-	
+	public static final String APPLYJOB = "/noticeUpdate";//申请接口
+	public static final String COLLECT = "/collectionUpdate";//收藏接口
 }
