@@ -91,10 +91,36 @@ public class ToperJson {
 			//获取省份
 			toperSheng(result);
 			break;
-		case Constant.TOPER_TYPE_GET_RESUME_LIST:
+		case Constant.TOPER_TYPE_GET_RESUME_LIST://获取简历列表
 			toperResumeList(result);
 			break;
+		case Constant.TOPER_TYPE_COLLECTJOB://收藏职位
+			toperCollectJob(result);
+			break;
 		}
+	}
+
+	/**
+	 * 收藏职位
+	 * @param result
+	 */
+	private void toperCollectJob(String result) {
+		Message msg = handler.obtainMessage();
+		msg.what = Constant.HANDLER_COLLECTJOB;
+		try {
+			JSONObject jsonObject = new JSONObject(result);
+			int status = jsonObject.getInt("status");
+			msg.obj = status;
+			handler.sendMessage(msg);
+			
+		} catch (Exception e) {
+			msg.obj = 1;
+			msg.what = Constant.HANDLER_COLLECTJOB;
+			handler.sendMessage(msg);
+			e.printStackTrace();
+
+		}
+		
 	}
 
 	/**

@@ -79,6 +79,15 @@ public class JobMessageActivity extends BaseActivity {
 			case Constant.APPLYJOB_SUCCESS:
 				ToastUtil.showToast(mContext, "职位申请成功");
 				break;
+			case Constant.HANDLER_COLLECTJOB:
+				int status = (Integer) msg.obj;
+				if(status==0){
+					ToastUtil.showToast(mContext, "收藏职位成功");
+				}
+				if(status==1){
+					ToastUtil.showToast(mContext, "收藏职位失败");
+				}
+				break;
 			}
 
 		};
@@ -101,7 +110,7 @@ public class JobMessageActivity extends BaseActivity {
 
 	private void getIntentData() {
 		bannerListBean = (BannerListBean) getIntent().getSerializableExtra("bannerListBean");
-		getJob = (GetJob) getIntent().getSerializableExtra("getJobBean");
+		getJob = (GetJob) getIntent().getSerializableExtra("getJob");
 	}
 
 
@@ -137,8 +146,7 @@ public class JobMessageActivity extends BaseActivity {
 
 		jobId = "5";
 		// http://123.57.75.34:8080/users/api/recruitSimple?id=5
-
-		String url = Constant.HOST + Constant.COMPANY_INFO + jobId;
+		String url = Constant.HOST + Constant.COMPANY_INFO +getJob.getId() ;
 		ThreadPoolManager.getInstance().addTask(new NetRunnable(mHandler, url,Constant.TOPER_TYPE_COMPANYINFO));
 
 	}
@@ -167,7 +175,9 @@ public class JobMessageActivity extends BaseActivity {
 		///api/collectionUpdate?id=1&userid=1&type=0  type 0 简历收藏 1招聘抽藏
 		String url = Constant.HOST + Constant.COLLECT;
 		Map<String, String> paramMap = new HashMap<String, String>();
-		paramMap.put("id", getJob.getId()+"");//招聘ID
+		if(getJob!=null){
+			paramMap.put("id", getJob.getId()+"");//招聘ID
+		}
 		paramMap.put("type", "1");//0 投简历 1邀面试
 		paramMap.put("userid", SPUtil.getInt(mContext, "id", -1)+"");//用户id
 		ThreadPoolManager.getInstance().addTask(new NetRunnable(mHandler, url,paramMap,Constant.TOPER_TYPE_COLLECTJOB));
@@ -183,7 +193,10 @@ public class JobMessageActivity extends BaseActivity {
 		Map<String, String> paramMap = new HashMap<String, String>();
 		paramMap.put("resumeId", resumeId);
 		paramMap.put("type", "0");//0 投简历 1邀面试
-		paramMap.put("recruitId", jobId);
+		if(getJob!=null){
+			paramMap.put("recruitId", getJob.getId()+"");
+		}
+		
 		ThreadPoolManager.getInstance().addTask(new NetRunnable(mHandler, url,Constant.TOPER_TYPE_APPLYJOB));
 	}
 }
