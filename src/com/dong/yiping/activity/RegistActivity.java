@@ -168,10 +168,7 @@ public class RegistActivity extends BaseActivity {
 					R.anim.center_to_right);
 			break;
 
-		case R.id.iv_title_right:
-			// 设置
-			// TODO
-			break;
+		
 
 		case R.id.tv_regist_regist_confirm:
 			// 确认注册
