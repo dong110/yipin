@@ -13,10 +13,13 @@ import com.dong.yiping.utils.ThreadPoolManager;
 import com.dong.yiping.view.LJListView;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
 import android.view.Window;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -78,6 +81,20 @@ public class MyResumesActivity extends BaseActivity {
 		lv_myresumes_listview.setPullRefreshEnable(false);
 		
 		resumeList = new ArrayList<GetZhaopinBean.ZhaoPin>();
+		
+		lv_myresumes_listview.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> arg0, View arg1, int i,
+					long arg3) {
+				
+				Intent intent = new Intent(MyResumesActivity.this,ResumeActivity.class);
+				intent.putExtra("ID", resumeList.get(i).getId());
+				startActivity(intent);
+			}
+		});
+		
+		
 		adapter = new ResumeListAdapter(mContext, resumeList);
 		lv_myresumes_listview.setAdapter(adapter);
 	}
