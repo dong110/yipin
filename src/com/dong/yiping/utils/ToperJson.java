@@ -73,14 +73,17 @@ public class ToperJson {
 		case Constant.TOPER_TYPE_GETHANGYE:
 			toperGetHangYe(result);
 			break;
-<<<<<<< HEAD
-
-		case Constant.TOPER_TYPE_COMPANYINFO:// 公司信息
-			toperCompanyInfo(result);
-			break;
-
 		case Constant.TOPER_TYPE_APPLYJOB:// 申请职位
 			toperApplyJob(result);
+			break;
+		case Constant.TOPER_TYPE_GETJOB_DETAIL:
+			toperGetJobDetail(result);
+			break;
+		case Constant.TOPER_TYPE_GET_USERINFO:
+			toperGetUserInfo(result);
+			break;
+		case Constant.TOPER_TYPE_COMPANYINFO:// 公司信息
+			toperCompanyInfo(result);
 			break;
 		}
 	}
@@ -128,16 +131,7 @@ public class ToperJson {
 
 	}
 
-=======
-			
-		case Constant.TOPER_TYPE_GETJOB_DETAIL:
-			toperGetJobDetail(result);
-			break;
-		case Constant.TOPER_TYPE_GET_USERINFO:
-			toperGetUserInfo(result);
-			break;
-		}
-	}
+		
 	/**
 	 * jiexi用户详情
 	 * @param result
@@ -182,7 +176,6 @@ public class ToperJson {
 		}
 		
 	}
->>>>>>> origin/master
 	private void toperGetHangYe(String result) {
 		try {
 			JSONObject jsonObject = new JSONObject(result);
