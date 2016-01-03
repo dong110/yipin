@@ -3,29 +3,22 @@ package com.dong.yiping.activity;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.w3c.dom.Text;
-
-import com.dong.yiping.Constant;
-import com.dong.yiping.R;
-import com.dong.yiping.banner.BannerBaseView;
-import com.dong.yiping.banner.MainBannerView;
-import com.dong.yiping.bean.GetJobBean;
-import com.dong.yiping.bean.JobDetailBean;
-import com.dong.yiping.bean.UserBean;
-import com.dong.yiping.utils.NetRunnable;
-import com.dong.yiping.utils.SPUtil;
-import com.dong.yiping.utils.ThreadPoolManager;
-import com.dong.yiping.utils.ToastUtil;
-
-import roboguice.inject.InjectView;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
 import android.view.Window;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import com.dong.yiping.Constant;
+import com.dong.yiping.R;
+import com.dong.yiping.bean.JobDetailBean;
+import com.dong.yiping.bean.UserBean;
+import com.dong.yiping.utils.NetRunnable;
+import com.dong.yiping.utils.SPUtil;
+import com.dong.yiping.utils.ThreadPoolManager;
+import com.dong.yiping.utils.ToastUtil;
 
 public class GetJobDetailActivity extends BaseActivity{
 
@@ -148,7 +141,7 @@ public class GetJobDetailActivity extends BaseActivity{
 				}
 				if(type==1){
 					//企业用户
-					
+					InvateMeet();
 					
 				}
 			}else{
@@ -157,8 +150,35 @@ public class GetJobDetailActivity extends BaseActivity{
 			break;
 
 		case R.id.tv_resume_collect:// 收藏简历
-
+			if(type!=-1){
+				if(type ==0){
+					//个人用户
+					ToastUtil.showToast(mContext, "个人用户没有权限");
+				}
+				if(type==1){
+					//企业用户
+					collectResume();
+					
+				}
+			}else{
+				ToastUtil.showToast(mContext, "参数错误");
+			}
 			break;
 		}
+	}
+	/**
+	 * 收藏简历
+	 */
+	private void collectResume() {
+		
+		
+	}
+
+	/**
+	 * 邀请面试
+	 */
+	private void InvateMeet() {
+		//String url = Constant.HOST + "/noticeUpdate?resumeId="++"&type=1&recruitId=1";
+		
 	}
 }
