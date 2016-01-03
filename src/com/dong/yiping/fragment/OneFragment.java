@@ -182,7 +182,7 @@ public class OneFragment extends RoboFragment{
 					}else if(position > 0 && position<getJobBean.getList().size()+1){
 						mIntent = new Intent(mContext,JobMessageActivity.class);
 						mIntent.putExtra("bannerListBean", bannerListBean);
-						
+						mIntent.putExtra("getJob",getJobBean.getList().get(position-1));
 						
 						startActivity(mIntent);
 					}else if(position==getJobBean.getList().size()+1){

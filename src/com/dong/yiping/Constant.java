@@ -23,7 +23,7 @@ public class Constant {
 	public static final int TOPER_TYPE_APPLYJOB = 114;
 	public static final int TOPER_TYPE_GET_SHENG = 115;
 	public static final int TOPER_TYPE_GET_RESUME_LIST = 116;
-	
+	public static final int TOPER_TYPE_COLLECTJOB = 117;
 	
 	public static final int HANDLER_BANNERLIST = 120;
 	public static final int HANDLER_TYPE_GETJOB = 121;
@@ -39,6 +39,7 @@ public class Constant {
 	public static final int HANDLER_TYPE_GET_SHENG = 132;
 	public static final int HANDLER_REFESH_FINISH = 130;
 	public static final int HANDLER_RESUME_LIST = 133;
+	public static final int HANDLER_COLLECTJOB = 134;
 	
 	
 	public static final String HOST = "http://123.57.75.34:8080/users/api";

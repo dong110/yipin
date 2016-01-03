@@ -10,6 +10,7 @@ import com.dong.yiping.banner.MainBannerView;
 import com.dong.yiping.banner.utils.GetBannerData;
 import com.dong.yiping.bean.BannerListBean;
 import com.dong.yiping.bean.GetJobBean;
+import com.dong.yiping.bean.GetJobBean.GetJob;
 import com.dong.yiping.bean.JobDetailInfo;
 import com.dong.yiping.utils.NetRunnable;
 import com.dong.yiping.utils.SPUtil;
@@ -30,7 +31,7 @@ public class JobMessageActivity extends BaseActivity {
 
 	private RelativeLayout bannerContent;
 	private BannerBaseView banner;
-	private GetJobBean getJobBean;
+	private GetJob getJob;
 
 	private TextView tv_title_center;
 	private ImageView iv_title_left;
@@ -100,7 +101,7 @@ public class JobMessageActivity extends BaseActivity {
 
 	private void getIntentData() {
 		bannerListBean = (BannerListBean) getIntent().getSerializableExtra("bannerListBean");
-		
+		getJob = (GetJob) getIntent().getSerializableExtra("getJobBean");
 	}
 
 
@@ -166,10 +167,10 @@ public class JobMessageActivity extends BaseActivity {
 		///api/collectionUpdate?id=1&userid=1&type=0  type 0 简历收藏 1招聘抽藏
 		String url = Constant.HOST + Constant.COLLECT;
 		Map<String, String> paramMap = new HashMap<String, String>();
-		paramMap.put("id", resumeId);//招聘ID
+		paramMap.put("id", getJob.getId()+"");//招聘ID
 		paramMap.put("type", "1");//0 投简历 1邀面试
-		paramMap.put("userid", SPUtil.getInt(mContext, "id", -1)+"");
-		
+		paramMap.put("userid", SPUtil.getInt(mContext, "id", -1)+"");//用户id
+		ThreadPoolManager.getInstance().addTask(new NetRunnable(mHandler, url,paramMap,Constant.TOPER_TYPE_COLLECTJOB));
 	}
 
 
