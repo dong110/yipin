@@ -19,9 +19,10 @@ public class Constant {
 	public static final int TOPER_TYPE_GETHANGYE = 110;
 	public static final int TOPER_TYPE_GETJOB_DETAIL = 111;
 	public static final int TOPER_TYPE_GET_USERINFO = 112;
-	
 	public static final int TOPER_TYPE_COMPANYINFO = 113;
 	public static final int TOPER_TYPE_APPLYJOB = 114;
+	public static final int TOPER_TYPE_GET_SHENG = 115;
+	public static final int TOPER_TYPE_GET_RESUME_LIST = 116;
 	
 	
 	public static final int HANDLER_BANNERLIST = 120;
@@ -31,13 +32,14 @@ public class Constant {
 	public static final int HANDLER_TYPE_STARTSTU = 124;
 	public static final int HANDLER_TYPE_GETDICT = 125;
 	public static final int HANDLER_TYPE_GETHANGYE = 126;
-	
 	public static final int APPLYJOB_SUCCESS = 127;
 	public static final int APPLYJOB_FAIL = 128;
 	public static final int HANDLER_TYPE_GETJOB_DETAIL = 129;
 	public static final int HANDLER_TYPE_GET_USERINFO = 131;
-	
+	public static final int HANDLER_TYPE_GET_SHENG = 132;
 	public static final int HANDLER_REFESH_FINISH = 130;
+	public static final int HANDLER_RESUME_LIST = 133;
+	
 	
 	public static final String HOST = "http://123.57.75.34:8080/users/api";
 	
@@ -57,6 +59,7 @@ public class Constant {
 	public static final String GET_dictList = "/dictList?type=";//获取字典列表
 	public static final String GET_DICT_INFO = "/dictList?type=1&code=";
 	
+	public static final String GET_Resume_List = "/resumeList?userId=";//简历列表
 	
 	public static final String USER_INFO = "/userInfo";//个人详细信息
 	public static final String GET_JOB_DETAIL = "/resumeSimple?id=";//求职详情

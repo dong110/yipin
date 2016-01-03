@@ -87,11 +87,48 @@ public class ToperJson {
 		case Constant.TOPER_TYPE_COMPANYINFO:// 公司信息
 			toperCompanyInfo(result);
 			break;
+		case Constant.TOPER_TYPE_GET_SHENG:
+			//获取省份
+			toperSheng(result);
+			break;
+		case Constant.TOPER_TYPE_GET_RESUME_LIST:
+			toperResumeList(result);
+			break;
 		}
 	}
 
+	/**
+	 * 解析简历列表
+	 */
+	private void toperResumeList(String result) {
+		try {
+			JSONObject jsonObject = new JSONObject(result);
+			int status = jsonObject.getInt("status");
+			if (status == 0) {
+				GetZhaopinBean bean = gson.fromJson(result,
+						GetZhaopinBean.class);
+				Message msg = handler.obtainMessage();
+				msg.obj = bean;
+				msg.what = Constant.HANDLER_RESUME_LIST;
+				handler.sendMessage(msg);
+			}
+			if (status == 1) {
+				handler.sendEmptyMessage(Constant.HANDLER_RESUME_LIST);
+			}
+			
+		} catch (Exception e) {
+			handler.sendEmptyMessage(Constant.HANDLER_RESUME_LIST);
 
+			e.printStackTrace();
+
+		}
 		
+	}
+
+	private void toperSheng(String result) {
+		
+		
+	}
 
 	// 申请职位
 	private void toperApplyJob(String result) {
