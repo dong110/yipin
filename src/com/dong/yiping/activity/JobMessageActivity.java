@@ -24,6 +24,7 @@ import com.dong.yiping.utils.ThreadPoolManager;
 import com.dong.yiping.utils.ToastUtil;
 
 import roboguice.inject.InjectView;
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
@@ -32,12 +33,14 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
+import android.view.WindowManager;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.PopupWindow;
+import android.widget.PopupWindow.OnDismissListener;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -246,8 +249,27 @@ public class JobMessageActivity extends BaseActivity {
 		dg.setTouchable(true);
 		dg.setFocusable(true);
 		dg.showAtLocation(view, Gravity.CENTER, 0,0);
+		backgroundAlpha(0.5f);
+		dg.setOnDismissListener(new OnDismissListener() {
+			
+			@Override
+			public void onDismiss() {
+				backgroundAlpha(1f);
+				
+			}
+		});
 	}
-	
+	/**
+	 * 设置添加屏幕的背景透明度
+	 * 
+	 * @param bgAlpha
+	 */
+	public void backgroundAlpha(float bgAlpha) {
+		WindowManager.LayoutParams lp = ((Activity) mContext).getWindow()
+				.getAttributes();
+		lp.alpha = bgAlpha; // 0.0-1.0
+		((Activity) mContext).getWindow().setAttributes(lp);
+	}
 	private void collectJob() {
 		///api/collectionUpdate?id=1&userid=1&type=0  type 0 简历收藏 1招聘抽藏
 		String url = Constant.HOST + Constant.COLLECT;

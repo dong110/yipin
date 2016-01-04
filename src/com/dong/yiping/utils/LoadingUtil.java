@@ -42,7 +42,7 @@ public class LoadingUtil {
 			dg = new PopupWindow(view, LayoutParams.WRAP_CONTENT,
 					LayoutParams.WRAP_CONTENT);
 		}
-		dg.setFocusable(true);
+		dg.setFocusable(false);
 		
 		dg.showAtLocation(view.getRootView(), Gravity.CENTER, 0,0);
 	}
