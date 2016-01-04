@@ -112,6 +112,8 @@ public class LJListView extends RelativeLayout implements OnScrollListener{
 		// XListView need the scroll event, and it will dispatch the event to
 		// user's listener (as a proxy).
 		mListView = (ListView) LayoutInflater.from(context).inflate(R.layout.ljlistview, null);
+		mListView.setDivider(null);
+		mListView.setDividerHeight(0);
 		OnTouchListener touch = new OnTouchListener() {
 			
 			@Override

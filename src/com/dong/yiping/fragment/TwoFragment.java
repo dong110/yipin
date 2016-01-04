@@ -108,6 +108,9 @@ public class TwoFragment extends RoboFragment implements IXListViewListener, OnC
 			switch (msg.what) {
 			case Constant.HANDLER_TYPE_GETJOB:
 				GetJobBean getJobBean = (GetJobBean) msg.obj;
+				if(getJobBean==null){
+					ToastUtil.showToast(mContext, "没有更多数据");
+				}
 				if(isRefush){
 					resolveRefushData(getJobBean);
 				}else{
@@ -211,6 +214,8 @@ public class TwoFragment extends RoboFragment implements IXListViewListener, OnC
 		ll_area.setOnClickListener(this);
 		tv_serach.setOnClickListener(this);
 		tv_fabuQiuZhi.setOnClickListener(this);
+		
+		
 		
 		lv_listview.setOnItemClickListener(new OnItemClickListener() {
 
@@ -326,6 +331,11 @@ public class TwoFragment extends RoboFragment implements IXListViewListener, OnC
 			}
 			notifyAdapter(listGetJob);
 			setListView(total);
+		}else{
+			total = 0;
+			listGetJob.clear();
+			notifyAdapter(listGetJob);
+			setListView(total);
 		}
 		
 	}
@@ -351,11 +361,10 @@ public class TwoFragment extends RoboFragment implements IXListViewListener, OnC
 			
 			
 		}else{
-			
 			lv_listview.stopRefresh();
 			lv_listview.stopLoadMore();
 			lv_listview.setRefreshTime("刚刚");
-			lv_listview.setPullLoadEnable(false, null);
+			lv_listview.setPullLoadEnable(false, "没有更多数据");
 		}
 		
 		

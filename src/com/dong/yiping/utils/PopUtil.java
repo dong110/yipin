@@ -15,6 +15,7 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.ListView;
 import android.widget.PopupWindow;
+import android.widget.PopupWindow.OnDismissListener;
 import android.widget.SimpleAdapter;
 import android.widget.AdapterView.OnItemClickListener;
 
@@ -51,7 +52,16 @@ public class PopUtil {
 		dg.setFocusable(true);
 		dg.showAtLocation(view.getRootView(), Gravity.CENTER, 0,0);
 		backgroundAlpha(0.5f);
+		dg.setOnDismissListener(new OnDismissListener() {
+			
+			@Override
+			public void onDismiss() {
+				backgroundAlpha(1f);
+				
+			}
+		});
 	}
+	
 	/**
 	 * 设置添加屏幕的背景透明度
 	 * 
@@ -66,6 +76,7 @@ public class PopUtil {
 	public void setOnItemClickListener(OnItemClickListener listener){
 		listView.setOnItemClickListener(listener);
 	}
+	
 	
 	
 	public void createDialogTwo(Context mContext,List<String> listStr){
@@ -90,6 +101,8 @@ public class PopUtil {
 		ListView list_diglo = (ListView) view.findViewById(R.id.pop_listview);
 		PopListViewAdapter adapter = new PopListViewAdapter(mContext,listStr);
 		list_diglo.setAdapter(adapter);
+	
+			
 		
 	}
 	public void hidePop(){

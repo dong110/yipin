@@ -101,6 +101,9 @@ public class ThreeFragment extends BaseFragment implements IXListViewListener, O
 			switch (msg.what) {
 			case Constant.HANDLER_TYPE_GETZHAOPIN:
 				GetZhaopinBean getZhaopin = (GetZhaopinBean) msg.obj;
+				if(getZhaopin==null){
+					ToastUtil.showToast(mContext, "没有更多数据");
+				}
 				if(isRefush){
 					resolveRefushData(getZhaopin);
 				}else{
@@ -347,7 +350,7 @@ public class ThreeFragment extends BaseFragment implements IXListViewListener, O
 			lv_listview.stopRefresh();
 			lv_listview.stopLoadMore();
 			lv_listview.setRefreshTime("刚刚");
-			lv_listview.setPullLoadEnable(false, null);
+			lv_listview.setPullLoadEnable(false, "没有更多数据");
 		}
 		
 	}
@@ -363,6 +366,11 @@ public class ThreeFragment extends BaseFragment implements IXListViewListener, O
 			for(ZhaoPin zhaoPin : getZhaopin.getList()){
 				listZhaopin.add(zhaoPin);
 			}
+			notifyAdapter(listZhaopin);
+			setListView(total);
+		}else{
+			total = 0;
+			listZhaopin.clear();
 			notifyAdapter(listZhaopin);
 			setListView(total);
 		}
