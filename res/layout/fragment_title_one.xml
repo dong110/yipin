@@ -41,6 +41,7 @@
 	            android:src="@drawable/apply_search_btn"
 	            />
 	        <EditText 
+	            android:id="@+id/et_search"
 	            android:layout_marginRight="10dp"
 	            android:hint="请输入关键字"
 	            android:background="@color/writer"

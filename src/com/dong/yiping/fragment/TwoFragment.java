@@ -12,12 +12,16 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
+import android.text.Editable;
+import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -35,6 +39,7 @@ import com.dong.yiping.bean.HangYeBean.HangYe;
 import com.dong.yiping.utils.LoadingUtil;
 import com.dong.yiping.utils.NetRunnable;
 import com.dong.yiping.utils.PopUtil;
+import com.dong.yiping.utils.SPUtil;
 import com.dong.yiping.utils.ThreadPoolManager;
 import com.dong.yiping.utils.ToastUtil;
 import com.dong.yiping.view.LJListView;
@@ -42,7 +47,7 @@ import com.dong.yiping.view.LJListView.IXListViewListener;
 import com.dong.yiping.view.datepicker.TimeDialog;
 
 public class TwoFragment extends RoboFragment implements IXListViewListener, OnClickListener{
-	
+	@InjectView(R.id.tv_fabuQiuZhi) TextView tv_fabuQiuZhi;
 	@InjectView(R.id.lv_listview) LJListView lv_listview; 
 	@InjectView(R.id.ll_time) LinearLayout ll_time; 
 	@InjectView(R.id.tv_fragmenttwo_time) TextView publishTime;
@@ -52,12 +57,26 @@ public class TwoFragment extends RoboFragment implements IXListViewListener, OnC
 	@InjectView(R.id.tv_hangye) TextView tv_hangye;
 	@InjectView(R.id.tv_area) TextView tv_area;
 	
+	private EditText et_search;
 	Context mContext;
 	
 	private TextView tv_title_center;
 	private LinearLayout ll_title_center;
 	private TwoFragmentAdapter adapter;
 	
+	private HangYeBean shengBean;
+	private HangYeBean shiBean;
+	private HangYeBean quBean;
+	private String sheng = null;
+	private String shi = null;
+	private String shengCode = null;
+	private String shiCode = null;
+	private String quCode = null;
+	private String qu = null;
+	private String hangYeCode=null;
+	private String hangYe=null;
+	private int changeType = 1;//1选择省份，2选择市，3选择区县，4获取行业
+	private HangYeBean hangYeBean;
 	private List<GetJob> listGetJob;
 	private boolean isRefush = true;
 	private int total;//总的条数
@@ -65,14 +84,17 @@ public class TwoFragment extends RoboFragment implements IXListViewListener, OnC
 	private int currentPage = 1;;//当前是第几页
 	private int currentNum=0;//当前第几条
 	private int pagerNum=10;//每页的条数
-	
+	private String sreach;//搜索关键词
 	private TimeDialog timeDialog;
 	private PopUtil popUtil;
 	private LoadingUtil loadingUtil;
+	private List<String> listStr;
+	private String date;;
 	
     private TimeDialog.CustomTimeListener customTimeListener = new TimeDialog.CustomTimeListener() {
-        @Override
+		@Override
         public void setTime(String time) {
+        	date = time;
         	publishTime.setText(time);
             timeDialog.dismiss();
         }
@@ -80,7 +102,9 @@ public class TwoFragment extends RoboFragment implements IXListViewListener, OnC
     
 	private Handler mHandler = new Handler(){
 		
+
 		public void handleMessage(android.os.Message msg) {
+			loadingUtil.hideDialog();
 			switch (msg.what) {
 			case Constant.HANDLER_TYPE_GETJOB:
 				GetJobBean getJobBean = (GetJobBean) msg.obj;
@@ -100,22 +124,53 @@ public class TwoFragment extends RoboFragment implements IXListViewListener, OnC
 				
 				break;
 			case Constant.HANDLER_TYPE_GETHANGYE:
-				HangYeBean hangYeBean = (HangYeBean) msg.obj;
-				List<String> listStr = new ArrayList<String>();
+				hangYeBean = (HangYeBean) msg.obj;
+				listStr = new ArrayList<String>();
 				for(HangYe hangYe:hangYeBean.getList()){
 					listStr.add(hangYe.getName());
 				}
 				loadingUtil.hideDialog();
-				popUtil.createPop(mContext,listStr);
+				popUtil.createPop(listStr);
 				
-				popUtil.setOnItemClickListener(new OnItemClickListener() {
-
-					@Override
-					public void onItemClick(AdapterView<?> arg0, View arg1, int position,
-							long arg3) {
-						
+				
+				break;
+			case Constant.HANDLER_TYPE_GET_SHENG:
+				if(changeType == 1){
+					shengBean = (HangYeBean) msg.obj;
+					if(shengBean==null){
+						ToastUtil.showToast(mContext, "获取省份数据失败");
+					}else{
+						listStr = new ArrayList<String>();
+						for(HangYe str:shengBean.getList()){
+							listStr.add(str.getName());
+						}
+						popUtil.createPop(listStr);
 					}
-				});
+				}else if(changeType == 2){
+					shiBean = (HangYeBean) msg.obj;
+					if(shiBean==null){
+						ToastUtil.showToast(mContext, "获取省份数据失败");
+					}else{
+						listStr = new ArrayList<String>();
+						for(HangYe str:shiBean.getList()){
+							listStr.add(str.getName());
+						}
+						popUtil.createPop(listStr);
+					}
+				}else if(changeType == 3){
+					quBean = (HangYeBean) msg.obj;
+					if(quBean==null){
+						ToastUtil.showToast(mContext, "获取省份数据失败");
+					}else{
+						listStr = new ArrayList<String>();
+						for(HangYe str:quBean.getList()){
+							listStr.add(str.getName());
+						}
+						popUtil.createPop(listStr);
+					}
+				}
+				
+				
 				break;
 			}
 		}
@@ -155,7 +210,7 @@ public class TwoFragment extends RoboFragment implements IXListViewListener, OnC
 		ll_hangye.setOnClickListener(this);
 		ll_area.setOnClickListener(this);
 		tv_serach.setOnClickListener(this);
-		
+		tv_fabuQiuZhi.setOnClickListener(this);
 		
 		lv_listview.setOnItemClickListener(new OnItemClickListener() {
 
@@ -173,13 +228,72 @@ public class TwoFragment extends RoboFragment implements IXListViewListener, OnC
 				mContext.startActivity(intent);
 			}
 		});
-		
+		popUtil.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> arg0, View arg1, int position,
+					long arg3) {
+				if(changeType == 1){
+					//省
+					sheng = shengBean.getList().get(position).getName();
+					shengCode = shengBean.getList().get(position).getCode();
+					tv_area.setText(sheng);
+					changeType =2;
+					getArea(2);
+				}else if(changeType == 2){
+					//市
+					shi = shiBean.getList().get(position).getName();
+					shiCode = shiBean.getList().get(position).getCode();
+					changeType =3;
+					tv_area.setText(shi);
+					getArea(3);
+				}else if(changeType == 3){
+					//区县
+					qu = quBean.getList().get(position).getName();
+					quCode = quBean.getList().get(position).getCode();
+					tv_area.setText(qu);
+					
+				}else if(changeType == 4){
+					//行业
+					hangYe = hangYeBean.getList().get(position).getName();
+					hangYeCode = hangYeBean.getList().get(position).getCode();
+					tv_hangye.setText(hangYe);
+					
+					
+				}
+				
+				popUtil.hidePop();
+			}
+		});
+		et_search.addTextChangedListener(new TextWatcher() {
+			
+			@Override
+			public void onTextChanged(CharSequence s, int start, int before, int count) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void beforeTextChanged(CharSequence s, int start, int count,
+					int after) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void afterTextChanged(Editable s) {
+				sreach = et_search.getText().toString().trim();
+				initData();
+			}
+		});
 		
 	}
 	private void initView() {
 		
+		et_search = (EditText) getActivity().findViewById(R.id.et_search);
+		
 		timeDialog = new TimeDialog(mContext,customTimeListener);
-		popUtil = new PopUtil();
+		popUtil = new PopUtil(mContext);
 		loadingUtil = new LoadingUtil(mContext);
 		listGetJob = new ArrayList<GetJobBean.GetJob>();
 		adapter = new TwoFragmentAdapter(mContext,listGetJob);
@@ -190,13 +304,7 @@ public class TwoFragment extends RoboFragment implements IXListViewListener, OnC
 		//lv_listview.setPullLoadEnable(false, "加载完成");
 		lv_listview.setIsAnimation(true); 
 		lv_listview.setXListViewListener(this);
-		lv_listview.setOnItemClickListener(new OnItemClickListener() {
-			@Override
-			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
-					long arg3) {
-				System.out.println(arg0 + "------" + arg2);
-			}
-		});
+		
 	}
 	/**
 	 * 刷新Listview数据
@@ -255,7 +363,28 @@ public class TwoFragment extends RoboFragment implements IXListViewListener, OnC
 	}
 	
 	private String getLoadUrl(int currentNum,int pageNum){
+		
+		
 		String str = "/recruitList?status=1&currentNum="+currentNum+"&pageNum="+pageNum;
+		if(sreach != null && !TextUtils.isEmpty(sreach)){
+			str += "&company="+sreach;
+		}
+		
+		if(sheng != null && !TextUtils.isEmpty(sheng)){
+			str += "&sheng="+sheng;
+		}
+		if(shi != null && !TextUtils.isEmpty(shi)){
+			str += "&shi="+shi;
+		}
+		if(qu != null && !TextUtils.isEmpty(qu)){
+			str += "&quxian="+qu;
+		}
+		if(hangYe!= null && !TextUtils.isEmpty(hangYe)){
+			str += "&industry="+hangYe;
+		}
+		if(date!= null && !TextUtils.isEmpty(date)){
+			str += "&subdate="+date;
+		}
 		return str;
 	}
 	
@@ -303,45 +432,72 @@ public class TwoFragment extends RoboFragment implements IXListViewListener, OnC
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
+		case R.id.tv_fabuQiuZhi:
+			int type = SPUtil.getInt(mContext, "type", -1);
+			if(type == 0){
+				
+			}
+			if(type == 1){
+				ToastUtil.showToast(mContext, "非企业用户权限");
+			}
+			break;
 		case R.id.ll_time:
 			timeDialog.show();
 			break;
 		case R.id.ll_hangye:
 			loadingUtil.showDialog();
+			changeType =4;
 			getHangyeData();
 			
 			break;
 		case R.id.ll_area:
-			getArea();
+			loadingUtil.showDialog();
+			changeType = 1;
+			getArea(1);
+			
 			break;
 		case R.id.tv_serach:
+			loadingUtil.showDialog();
+			initData();
 			
 			break;
 		}
 	}
-
-	private void getArea() {
+	
+	
+	private void getArea(int i) {
 		List<DictBean> listDictBean = MyApplication.getApplication().getDictBean().getList();
-		String code = "";
+		/*String code = "";
 		for(DictBean dictBean : listDictBean){
 			if(dictBean.getCode().equals("SHENG")){
 				code = dictBean.getCode();
 			}
+		}*/
+		String url = Constant.HOST + Constant.GET_DICT_INFO;
+		if(i == 1){
+			url += "SHENG";
+		}else if(i == 2){
+			//选择市
+			url += "SHI"+shengCode.substring(shengCode.length()-2, shengCode.length());
+			
+		}else if(i==3){
+			//选择区县
+			url += "QUXIAN"+shengCode.substring(shengCode.length()-2, shengCode.length()) + shiCode.substring(shiCode.length()-2, shiCode.length());
 		}
-		String url = Constant.HOST + Constant.GET_DICT_INFO+code;
+		
 		ThreadPoolManager.getInstance().addTask(new NetRunnable(mHandler,url,Constant.TOPER_TYPE_GET_SHENG));
 		
 	}
 
 	private void getHangyeData() {
 		List<DictBean> listDictBean = MyApplication.getApplication().getDictBean().getList();
-		String code = "";
+		/*String code = "";
 		for(DictBean dictBean : listDictBean){
 			if(dictBean.getCode().equals("HANGYE")){
 				code = dictBean.getCode();
 			}
-		}
-		String url = Constant.HOST + Constant.GET_DICT_INFO+code;
+		}*/
+		String url = Constant.HOST + Constant.GET_DICT_INFO+"HANGYE";
 		ThreadPoolManager.getInstance().addTask(new NetRunnable(mHandler,url,Constant.TOPER_TYPE_GETHANGYE));
 	}
 }

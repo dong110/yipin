@@ -5,22 +5,20 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.mime.HttpMultipartMode;
+import org.apache.http.entity.mime.content.FileBody;
+import org.apache.http.entity.mime.content.StringBody;
+import org.apache.http.impl.client.DefaultHttpClient;
 
 import roboguice.inject.InjectView;
-
-import com.dong.yiping.R;
-import com.dong.yiping.activity.ComCollectListActivity;
-import com.dong.yiping.activity.CompanyInfoActivity;
-import com.dong.yiping.activity.ModifyPwdActivity;
-import com.dong.yiping.activity.MyResumesActivity;
-import com.dong.yiping.activity.PhoneIdentificationActivity;
-import com.dong.yiping.activity.ResumeActivity;
-import com.dong.yiping.activity.UserCollectListActivity;
-import com.dong.yiping.activity.UserHistoryActivity;
-import com.dong.yiping.activity.UserShenQingActivity;
-import com.dong.yiping.utils.LogUtil;
-import com.dong.yiping.utils.SPUtil;
-
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -30,7 +28,6 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.util.Base64;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -42,6 +39,21 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
+
+import com.dong.yiping.Constant;
+import com.dong.yiping.R;
+import com.dong.yiping.activity.ComCollectListActivity;
+import com.dong.yiping.activity.CompanyInfoActivity;
+import com.dong.yiping.activity.ModifyPwdActivity;
+import com.dong.yiping.activity.MyResumesActivity;
+import com.dong.yiping.activity.PhoneIdentificationActivity;
+import com.dong.yiping.activity.UserCollectListActivity;
+import com.dong.yiping.activity.UserHistoryActivity;
+import com.dong.yiping.activity.UserShenQingActivity;
+import com.dong.yiping.utils.LogUtil;
+import com.dong.yiping.utils.MultipartEntityExt;
+import com.dong.yiping.utils.SPUtil;
+import com.dong.yiping.utils.UpdateNickAndPortrait;
 
 public class ForeFragment extends BaseFragment implements OnClickListener {
 
@@ -127,43 +139,56 @@ public class ForeFragment extends BaseFragment implements OnClickListener {
 			} else {// 公司用户
 				mIntent = new Intent(mContext, CompanyInfoActivity.class);
 			}
-
-			mContext.startActivity(mIntent);
+			if(mIntent !=null){
+				mContext.startActivity(mIntent);
+			}
+			
 			break;
 
 		case R.id.tv_mine_modifypwd:
 			mIntent = new Intent(mContext, ModifyPwdActivity.class);
-			mContext.startActivity(mIntent);
+			if(mIntent !=null){
+				mContext.startActivity(mIntent);
+			}
 			break;
 
 		case R.id.tv_mine_phone:
 			mIntent = new Intent(mContext, PhoneIdentificationActivity.class);
-			mContext.startActivity(mIntent);
+			if(mIntent !=null){
+				mContext.startActivity(mIntent);
+			}
 			break;
 		case R.id.tv_collection:
+			mIntent = new Intent(mContext, UserCollectListActivity.class);
 			if (Type == 0) {// 学生用户
-				mIntent = new Intent(mContext, UserCollectListActivity.class);
+				
 
 			} else {// 公司用户
-				mIntent = new Intent(mContext, ComCollectListActivity.class);
+				//mIntent = new Intent(mContext, ComCollectListActivity.class);
 			}
-			mContext.startActivity(mIntent);
+			if(mIntent !=null){
+				mContext.startActivity(mIntent);
+			}
 			break;
 		case R.id.tv_fragment_jilu:
 			if (Type == 0) {// 学生用户
-				mIntent = new Intent(mContext, UserShenQingActivity.class);
-
 			} else {// 公司用户
 			}
-			mContext.startActivity(mIntent);
+			mIntent = new Intent(mContext, UserShenQingActivity.class);
+			mIntent.putExtra("type", Type);
+			if(mIntent !=null){
+				mContext.startActivity(mIntent);
+			}
 			break;
 		case R.id.tv_history:
+			mIntent = new Intent(mContext, UserHistoryActivity.class);
 			if (Type == 0) {// 学生用户
-				mIntent = new Intent(mContext, UserHistoryActivity.class);
 
 			} else {// 公司用户
 			}
-			mContext.startActivity(mIntent);
+			if(mIntent !=null){
+				mContext.startActivity(mIntent);
+			}
 			break;
 
 		// 以下是修改头像中的点击事件
@@ -194,6 +219,7 @@ public class ForeFragment extends BaseFragment implements OnClickListener {
 			camera_pop_window.dismiss();
 			break;
 		}
+		mIntent =null;
 
 	}
 
@@ -312,7 +338,7 @@ public class ForeFragment extends BaseFragment implements OnClickListener {
 		// 拍照
 
 		if (requestCode == PHOTOHRAPH) {
-
+			
 			// 设置文件保存路径这里放在跟目录下
 
 			File picture = new File(Environment.getExternalStorageDirectory()
@@ -352,10 +378,10 @@ public class ForeFragment extends BaseFragment implements OnClickListener {
 				byte[] byteArray = stream.toByteArray();// 字节数组输出流转换成字节数组
 
 				File file = new File(Environment.getExternalStorageDirectory()
-						+ "/eggkerImage.JPEG");
+						+ "/yipin.jpg");
 				String filePath = Environment.getExternalStorageDirectory()
-						+ "/eggkerImage.JPEG";
-
+						+ "/yipin.jpg";
+				
 				// 将字节数组写入到刚创建的图片文件
 				try {
 					fos = new FileOutputStream(file);
@@ -374,11 +400,11 @@ public class ForeFragment extends BaseFragment implements OnClickListener {
 				}
 
 				// 用户头像图片显示==================================================
-				// circleiv_mine_icon.setImageBitmap(lastPhoto);
-
-				String ImageString = getPstr(filePath);
+				iv_fragmentfore_icon.setImageBitmap(lastPhoto);
+				
+				//String ImageString = getPstr(filePath);
 				// 上传用户图片
-				upLoadImage(ImageString);
+				upLoadImage(file);
 
 			}
 
@@ -389,10 +415,70 @@ public class ForeFragment extends BaseFragment implements OnClickListener {
 
 	// 上传头像
 	// TODO
-	private void upLoadImage(String ImageString) {
-
+	private void upLoadImage(final File file) {
+		new Thread(){
+			public void run() {
+				try {
+					String actionUrl = Constant.HOST + Constant.UPLOAD_USER_IMG;
+					Map<String, String> params = new HashMap<String, String>();
+					//params.put("userId", SPUtil.getInt(mContext, "id", -1)+"");
+					params.put("userid", "4");
+					params.put("isdefault", "1");
+					params.put("thumbnail", "1");
+					List<File> fileList = new ArrayList<File>();
+					fileList.add(file);
+					
+					Map<String, File> files = new HashMap<String, File>();
+					files.put("original", file);
+					updateFilesTwo(actionUrl, params, fileList);				
+					//UpdateNickAndPortrait.post(actionUrl, params, files);
+					//UploadFileUtil.post(actionUrl, params, fileList);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				
+			};
+		}.start();
 	}
+	public int updateFilesTwo(String url,Map<String, String> map_parm,List<File> files){
+		int code = 1;
+		try {
+			HttpClient httpclient = new DefaultHttpClient();
+			 HttpPost httpPost = new HttpPost(url);
+			 MultipartEntityExt mulentity = new MultipartEntityExt(HttpMultipartMode.BROWSER_COMPATIBLE,
+					 new MultipartEntityExt.ProgressListener() {
+						
+						@Override
+						public void transferred(long totalUploaded) {
+							 /*int per = (int) (((float) totalUploaded / (float) mAvatarLength) * 100);
+			                    if (per > 100){
+			                        per = 100;
+			                    }*/
+			                    //onProgressUpdate(per);
+			                    
+							
+						}
+					});
+			 for(String str:map_parm.keySet()){
+				 mulentity.addPart(str, new StringBody(map_parm.get(str)));
+			 }
+			 
+			 for(File file:files){
+				 mulentity.addPart("original", new FileBody(new File(file.getAbsolutePath())));
+			 }
+			 httpPost.setEntity(mulentity);
+			 HttpResponse response = httpclient.execute(httpPost);
+			 int state = response.getStatusLine().getStatusCode();
+			 if(state == 200){
+				 code=0;
+			 }
 
+		} catch (Exception e) {
+			code=1;
+			e.printStackTrace();
+		}
+		return code;
+	}
 	// 将头像转换成Base64编码
 	public String getPstr(String pathname) {
 

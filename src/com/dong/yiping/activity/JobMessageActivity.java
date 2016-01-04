@@ -183,6 +183,7 @@ public class JobMessageActivity extends BaseActivity {
 
 	@Override
 	public void onClick(View v) {
+		int type = SPUtil.getInt(mContext, "type", -1);
 		switch (v.getId()) {
 		case R.id.iv_title_left:
 			this.finish();
@@ -191,12 +192,23 @@ public class JobMessageActivity extends BaseActivity {
 			break;
 			
 		case R.id.tv_jobmessage_applyjob:// 申请职位
-			loadingUtil.showDialog();
-			getResumeList();
+			if(type==0){
+				loadingUtil.showDialog();
+				getResumeList();
+			}
+			if(type==1){
+				ToastUtil.showToast(mContext, "非企业用户权限");
+			}
 			break;
 
 		case R.id.tv_jobmessage_collect:// 收藏职位
-			collectJob();
+			if(type==0){
+				collectJob();
+			}
+			if(type==1){
+				ToastUtil.showToast(mContext, "非企业用户权限");
+			}
+			
 			break;
 			
 		}

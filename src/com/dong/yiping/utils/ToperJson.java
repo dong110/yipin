@@ -64,7 +64,9 @@ public class ToperJson {
 			LogUtil.i("注册成功返回的数据==", result);
 			toperRegist(result);
 			break;
-
+		case Constant.TOPER_TYPE_ISUSERNAME:
+			toperUserName(result);//判断用户名是否重复
+			break;
 		case Constant.TOPER_TYPE_MODIFYPWD:
 			LogUtil.i("修改密码返回的数据==", result);
 			toperModifyPwd(result);
@@ -98,6 +100,28 @@ public class ToperJson {
 			toperCollectJob(result);
 			break;
 		}
+	}
+	/**
+	 * 判断用户明是否重复
+	 * @param result
+	 */
+	private void toperUserName(String result) {
+		Message msg = handler.obtainMessage();
+		msg.what = Constant.HANDLER_TYPE_ISUSERNAME;
+		try {
+			JSONObject jsonObject = new JSONObject(result);
+			int status = jsonObject.getInt("status");
+			msg.obj = status;
+			handler.sendMessage(msg);
+			
+		} catch (Exception e) {
+			msg.obj = 1;
+			msg.what = Constant.HANDLER_COLLECTJOB;
+			handler.sendMessage(msg);
+			e.printStackTrace();
+
+		}
+		
 	}
 
 	/**
@@ -150,9 +174,28 @@ public class ToperJson {
 		}
 		
 	}
-
+	/**
+	 * 解析省份  和行业数据类型一样
+	 * @param result
+	 */
 	private void toperSheng(String result) {
-		
+		try {
+			JSONObject jsonObject = new JSONObject(result);
+			int status = jsonObject.optInt("status");
+			
+			if (status == 0) {
+				HangYeBean sheng = gson.fromJson(result, HangYeBean.class);
+				Message msg = handler.obtainMessage();
+				msg.obj = sheng;
+				msg.what = Constant.HANDLER_TYPE_GET_SHENG;
+				handler.sendMessage(msg);
+			} else {
+				handler.sendEmptyMessage(Constant.HANDLER_TYPE_GET_SHENG);
+			}
+		} catch (Exception e) {
+			handler.sendEmptyMessage(Constant.HANDLER_TYPE_GET_SHENG);
+			e.printStackTrace();
+		}
 		
 	}
 
@@ -324,6 +367,7 @@ public class ToperJson {
 			int status = jsonObject.optInt("status");
 
 			if (status == 0) {// 注册成功
+				
 				Message msg = handler.obtainMessage();
 				msg.what = Constant.NET_SUCCESS;
 				handler.sendMessage(msg);

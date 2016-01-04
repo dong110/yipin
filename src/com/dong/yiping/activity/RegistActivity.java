@@ -1,13 +1,19 @@
 package com.dong.yiping.activity;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import com.dong.yiping.Constant;
+import com.dong.yiping.MyApplication;
 import com.dong.yiping.R;
+import com.dong.yiping.bean.HangYeBean;
+import com.dong.yiping.bean.HangYeBean.HangYe;
 import com.dong.yiping.bean.UserBean;
 import com.dong.yiping.utils.FormatUtils;
 import com.dong.yiping.utils.NetRunnable;
+import com.dong.yiping.utils.PopUtil;
 import com.dong.yiping.utils.ThreadPoolManager;
 import com.dong.yiping.utils.ToastUtil;
 
@@ -18,6 +24,8 @@ import android.os.Handler;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.Window;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -52,7 +60,8 @@ public class RegistActivity extends BaseActivity {
 	private LinearLayout ll_regist_stunum;
 	
 	private TextView tv_regist_regist_confirm;
-
+	private TextView tv_left_address;
+	
 	private TextView tv_regist_sheng;
 	private TextView tv_regist_shi;
 	private TextView tv_regist_qu;
@@ -71,10 +80,88 @@ public class RegistActivity extends BaseActivity {
 	private String email;
 	private String address;
 	private String stuNum;
-	private String sheng = "北京";
-	private String shi = "北京";
-	private String qu = "北京";
+	private String sheng = null;
+	private String shi = null;
+	private String shengCode = null;
+	private String shiCode = null;
+	private String quCode = null;
+	private String qu = null;
+	private PopUtil popUtil;
+	private HangYeBean shengBean;
+	private HangYeBean shiBean;
+	private HangYeBean quBean;
+	private int changeType = 1;//1选择省份，2选择市，3选择区县
+	
+	private Handler mHandler = new Handler(){
 
+		public void handleMessage(android.os.Message msg) {
+			switch (msg.what) {
+			case Constant.HANDLER_TYPE_ISUSERNAME:
+				int status = (Integer) msg.obj;
+				if(status==0){
+					registMethod();
+				}else{
+					ToastUtil.showToast(mContext, "用户名重复");
+				}
+				break;
+			case Constant.NET_ERROR:
+				ToastUtil.showToast(mContext, "注册失败！");
+				break;
+			case Constant.NET_SUCCESS:
+				UserBean bean = (UserBean) msg.obj;
+				ToastUtil.showToast(mContext, "注册成功！");
+				
+				startToActivity(LoginActivity.class);
+				
+				finish();
+				
+				  // 当前页面向右退出
+                overridePendingTransition(R.anim.left_to_center,
+                        R.anim.center_to_right);
+				break;
+			case Constant.HANDLER_TYPE_GET_SHENG:
+				if(changeType == 1){
+					shengBean = (HangYeBean) msg.obj;
+					if(shengBean==null){
+						ToastUtil.showToast(mContext, "获取省份数据失败");
+					}else{
+						List<String> listStr = new ArrayList<String>();
+						for(HangYe str:shengBean.getList()){
+							listStr.add(str.getName());
+						}
+						popUtil.createPop(listStr);
+					}
+				}else if(changeType == 2){
+					shiBean = (HangYeBean) msg.obj;
+					if(shiBean==null){
+						ToastUtil.showToast(mContext, "获取省份数据失败");
+					}else{
+						List<String> listStr = new ArrayList<String>();
+						for(HangYe str:shiBean.getList()){
+							listStr.add(str.getName());
+						}
+						popUtil.createPop(listStr);
+					}
+				}else if(changeType == 3){
+					quBean = (HangYeBean) msg.obj;
+					if(quBean==null){
+						ToastUtil.showToast(mContext, "获取省份数据失败");
+					}else{
+						List<String> listStr = new ArrayList<String>();
+						for(HangYe str:quBean.getList()){
+							listStr.add(str.getName());
+						}
+						popUtil.createPop(listStr);
+					}
+				}
+				
+				
+				break;
+			}
+			
+		};
+	};
+	
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		// 设置没有标题
@@ -100,11 +187,16 @@ public class RegistActivity extends BaseActivity {
 	}
 
 	private void initView() {
+		
+		popUtil = new PopUtil(mContext);
+		
+		
 		rl_regist_stu = $(R.id.rl_regist_stu, true);
 		rl_regist_qiye = $(R.id.rl_regist_qiye, true);
 		iv_regist_stu = $(R.id.iv_regist_stu);
 		iv_regist_qiye = $(R.id.iv_regist_qiye);
-
+		tv_left_address = $(R.id.tv_left_addre);
+		
 		tv_regist_type = $(R.id.tv_regist_type);
 		et_regist_typename = $(R.id.et_regist_typename);
 		et_regist_card_num = $(R.id.et_regist_card_num);
@@ -129,6 +221,27 @@ public class RegistActivity extends BaseActivity {
 		rl_regist_sheng = $(R.id.rl_regist_sheng, true);
 		rl_regist_shi = $(R.id.rl_regist_shi, true);
 		rl_regist_qu = $(R.id.rl_regist_qu, true);
+		popUtil.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
+					long arg3) {
+				if(changeType == 1){
+					sheng = shengBean.getList().get(arg2).getName();
+					shengCode = shengBean.getList().get(arg2).getCode();
+					tv_regist_sheng.setText(sheng);
+				}else if(changeType == 2){
+					shi = shiBean.getList().get(arg2).getName();
+					shiCode = shiBean.getList().get(arg2).getCode();
+					tv_regist_shi.setText(shi);
+				}else if(changeType == 3){
+					qu = quBean.getList().get(arg2).getName();
+					quCode = quBean.getList().get(arg2).getCode();
+					tv_regist_qu.setText(qu);
+				}
+				popUtil.hidePop();
+			}
+		});
 	}
 
 	@Override
@@ -144,10 +257,12 @@ public class RegistActivity extends BaseActivity {
 				isStu = false;
 				tv_regist_type.setText("企业名称");
 				ll_regist_address.setVisibility(View.VISIBLE);
-				ll_regist_school.setVisibility(View.GONE);
+				tv_left_address.setText("企业地区：");
+				
 				tv_regist_regist_confirm.setBackgroundResource(R.drawable.index_title_bg);
 				ll_regist_stunum.setVisibility(View.GONE);
 			} else {
+				tv_left_address.setText("所在院校：");
 				iv_regist_stu
 						.setImageResource(R.drawable.common_checkbox_seleted);
 				iv_regist_qiye
@@ -178,18 +293,54 @@ public class RegistActivity extends BaseActivity {
 			
 		case R.id.rl_regist_sheng:
 			//选择省
-			// TODO
+			changeType = 1;
+			changeSheng();
 			break;
 			
 		case R.id.rl_regist_shi:
 			//选择市
-			// TODO
+			changeType = 2;
+			if(sheng == null || TextUtils.isEmpty(sheng)){
+				ToastUtil.showToast(mContext, "请先选择省份");
+			}else{
+				changeShi();
+			}
 			break;
 		case R.id.rl_regist_qu:
 			//选择区
-			// TODO
+			changeType = 3;
+			if(shi == null || TextUtils.isEmpty(shi)){
+				ToastUtil.showToast(mContext, "请先选择市");
+			}else{
+				changeQu();
+			}
 			break;
 		}
+	}
+	/**
+	 * 选择区
+	 */
+	private void changeQu() {
+		String shengUrl = Constant.HOST + Constant.GET_DICT_INFO+"QUXIAN"+shengCode.substring(shengCode.length()-2, shengCode.length())+shiCode.substring(shiCode.length()-2, shiCode.length());
+		ThreadPoolManager.getInstance().addTask(new NetRunnable(mHandler, shengUrl, Constant.TOPER_TYPE_GET_SHENG));
+	}
+
+	/**
+	 * 选择市
+	 */
+	private void changeShi(){
+		String shengUrl = Constant.HOST + Constant.GET_DICT_INFO+"SHI"+shengCode.substring(shengCode.length()-2, shengCode.length());
+		ThreadPoolManager.getInstance().addTask(new NetRunnable(mHandler, shengUrl, Constant.TOPER_TYPE_GET_SHENG));
+	}
+	
+	/**
+	 * 选择省份
+	 */
+	private void changeSheng() {
+		//http://123.57.75.34:8080/users/api/dictList?type=1&code=SHENG
+		String shengUrl = Constant.HOST + Constant.GET_DICT_INFO+"SHENG";
+		ThreadPoolManager.getInstance().addTask(new NetRunnable(mHandler, shengUrl, Constant.TOPER_TYPE_GET_SHENG));
+		
 	}
 
 	// 获取注册信息
@@ -243,11 +394,15 @@ public class RegistActivity extends BaseActivity {
 			ToastUtil.showToast(this, "院校地址区不能为空");
 			return;
 		}
-
+		isUserName(typeName);
 		//regist
-		registMethod();
 	}
 	
+	//判断用户名是否重复
+	private void isUserName(String name2) {
+		String url = Constant.HOST+Constant.IS_USERNAME+name2;
+		ThreadPoolManager.getInstance().addTask(new NetRunnable(mHandler, url, Constant.TOPER_TYPE_ISUSERNAME));
+	}
 
 	private void registMethod() {
 		String url = Constant.HOST+Constant.REGIST;
@@ -256,11 +411,11 @@ public class RegistActivity extends BaseActivity {
 		if(isStu){
 			paramMap.put("username", typeName);
 			paramMap.put("type","0");//0 学生 1 企业
-		
 		}else{
 			paramMap.put("type","1");
 			paramMap.put("company", typeName);
 		}
+		paramMap.put("username", typeName);
 		paramMap.put("pwd", pwd);
 		paramMap.put("name", name);
 		paramMap.put("cards", cardNum);
@@ -279,26 +434,5 @@ public class RegistActivity extends BaseActivity {
 	}
 	
 	
-	private Handler mHandler = new Handler(){
-		public void handleMessage(android.os.Message msg) {
-			switch (msg.what) {
-			case Constant.NET_ERROR:
-				ToastUtil.showToast(mContext, "注册失败！");
-				break;
-			case Constant.NET_SUCCESS:
-				UserBean bean = (UserBean) msg.obj;
-				ToastUtil.showToast(mContext, "注册成功！");
-				
-				startToActivity(LoginActivity.class);
-				
-				finish();
-				
-				  // 当前页面向右退出
-                overridePendingTransition(R.anim.left_to_center,
-                        R.anim.center_to_right);
-				break;
-			}
-			
-		};
-	};
+	
 }

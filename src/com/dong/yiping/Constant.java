@@ -24,6 +24,7 @@ public class Constant {
 	public static final int TOPER_TYPE_GET_SHENG = 115;
 	public static final int TOPER_TYPE_GET_RESUME_LIST = 116;
 	public static final int TOPER_TYPE_COLLECTJOB = 117;
+	public static final int TOPER_TYPE_ISUSERNAME = 118;
 	
 	public static final int HANDLER_BANNERLIST = 120;
 	public static final int HANDLER_TYPE_GETJOB = 121;
@@ -40,12 +41,13 @@ public class Constant {
 	public static final int HANDLER_REFESH_FINISH = 130;
 	public static final int HANDLER_RESUME_LIST = 133;
 	public static final int HANDLER_COLLECTJOB = 134;
-	
+	public static final int HANDLER_TYPE_ISUSERNAME = 135;
 	
 	public static final String HOST = "http://123.57.75.34:8080/users/api";
 	
 	public static final String LOGIN = "/userLogin";//登录
 	public static final String REGIST = "/register";//注册
+	public static final String IS_USERNAME = "/isUserName?username=";//判断用户名是否有重复
 	public static final String FINDPWD = "/";//找回密码
 	public static final String MODIFYPWD = "/userPwdUpdate";//修改密码
 	public static final String PHONEINDENTIFICATION = "/";//手机号验证
@@ -65,8 +67,9 @@ public class Constant {
 	public static final String USER_INFO = "/userInfo";//个人详细信息
 	public static final String GET_JOB_DETAIL = "/resumeSimple?id=";//求职详情
 	
-	
 	public static final String COMPANY_INFO = "/recruitSimple?id=";
 	public static final String APPLYJOB = "/noticeUpdate";//申请接口
 	public static final String COLLECT = "/collectionUpdate";//收藏接口
+	public static final String UPLOAD_IMG = "/imageUpload";//上传图片
+	public static final String UPLOAD_USER_IMG = "/infoPicUpdate";//上传用户头像
 }

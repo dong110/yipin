@@ -24,14 +24,19 @@ public class PopUtil {
 	
 	private PopupWindow dg;
 	private ListView listView;
-	
-	
-	public void createPop(Context mContext,List<String> listStr){
+	private View view;
+	private Context mContext;
+	public PopUtil(Context mContext){
+		this.mContext = mContext;
 		LayoutInflater mLayoutInflater = (LayoutInflater) mContext
 				.getSystemService(mContext.LAYOUT_INFLATER_SERVICE);
-		View view = mLayoutInflater.inflate(R.layout.pop_dialog, null);
-		PopListViewAdapter adapter = new PopListViewAdapter(mContext, listStr);
+		view= mLayoutInflater.inflate(R.layout.pop_dialog, null);
 		listView = (ListView) view.findViewById(R.id.pop_listview);
+	}
+	
+	public void createPop(List<String> listStr){
+		
+		PopListViewAdapter adapter = new PopListViewAdapter(mContext, listStr);
 		listView.setAdapter(adapter);
 		//自适配长、框设置
 		dg = new PopupWindow(view, LayoutParams.WRAP_CONTENT,
@@ -42,7 +47,7 @@ public class PopUtil {
 		dg.update();
 		dg.setTouchable(true);
 		dg.setFocusable(true);
-		dg.showAtLocation(view, Gravity.CENTER, 0,0);
+		dg.showAtLocation(view.getRootView(), Gravity.CENTER, 0,0);
 	}
 	
 	public void setOnItemClickListener(OnItemClickListener listener){

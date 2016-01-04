@@ -9,33 +9,69 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
+import android.text.Editable;
+import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.dong.yiping.Constant;
+import com.dong.yiping.MyApplication;
 import com.dong.yiping.R;
 import com.dong.yiping.activity.GetJobDetailActivity;
 import com.dong.yiping.adapter.ThreeFragmentAdapter;
 import com.dong.yiping.bean.GetZhaopinBean;
+import com.dong.yiping.bean.HangYeBean;
+import com.dong.yiping.bean.DictListBean.DictBean;
 import com.dong.yiping.bean.GetJobBean.GetJob;
 import com.dong.yiping.bean.GetZhaopinBean.ZhaoPin;
+import com.dong.yiping.bean.HangYeBean.HangYe;
+import com.dong.yiping.utils.LoadingUtil;
 import com.dong.yiping.utils.NetRunnable;
+import com.dong.yiping.utils.PopUtil;
+import com.dong.yiping.utils.SPUtil;
 import com.dong.yiping.utils.ThreadPoolManager;
 import com.dong.yiping.utils.ToastUtil;
 import com.dong.yiping.view.LJListView;
 import com.dong.yiping.view.LJListView.IXListViewListener;
+import com.dong.yiping.view.datepicker.TimeDialog;
 
-public class ThreeFragment extends BaseFragment implements IXListViewListener{
+public class ThreeFragment extends BaseFragment implements IXListViewListener, OnClickListener{
 
 	@InjectView(R.id.listview) LJListView lv_listview;
+	
+	@InjectView(R.id.ll_time) LinearLayout ll_time; 
+	@InjectView(R.id.tv_time) TextView publishTime;
+	@InjectView(R.id.ll_area) LinearLayout ll_area;
+	@InjectView(R.id.ll_hangye) LinearLayout ll_hangye;
+	@InjectView(R.id.tv_serach) TextView tv_serach;
+	@InjectView(R.id.tv_hangye) TextView tv_hangye;
+	@InjectView(R.id.tv_area) TextView tv_area;
+	private EditText et_search;
 	private TextView tv_title_center;
 	private LinearLayout ll_title_center;
 	private ThreeFragmentAdapter adapter;
+	
+	private HangYeBean shengBean;
+	private HangYeBean shiBean;
+	private HangYeBean quBean;
+	private String sheng = null;
+	private String shi = null;
+	private String shengCode = null;
+	private String shiCode = null;
+	private String quCode = null;
+	private String qu = null;
+	private String hangYeCode=null;
+	private String hangYe=null;
+	private int changeType = 1;//1选择省份，2选择市，3选择区县，4获取行业
+	private HangYeBean hangYeBean;
 	private List<ZhaoPin> listZhaopin;
 	private Context mContext;
 	private boolean isRefush = true;
@@ -44,9 +80,24 @@ public class ThreeFragment extends BaseFragment implements IXListViewListener{
 	private int currentPage = 1;;//当前是第几页
 	private int currentNum=0;//当前第几条
 	private int pagerNum=10;//每页的条数
+	private String sreach;//搜索关键词
+	private TimeDialog timeDialog;
+	private PopUtil popUtil;
+	private LoadingUtil loadingUtil;
+	private List<String> listStr;
+	private String date;;
 	
+	 private TimeDialog.CustomTimeListener customTimeListener = new TimeDialog.CustomTimeListener() {
+			@Override
+	        public void setTime(String time) {
+	        	date = time;
+	        	publishTime.setText(time);
+	            timeDialog.dismiss();
+	        }
+	    };
 	private Handler mHandler = new Handler(){
 		public void handleMessage(android.os.Message msg) {
+			loadingUtil.hideDialog();
 			switch (msg.what) {
 			case Constant.HANDLER_TYPE_GETZHAOPIN:
 				GetZhaopinBean getZhaopin = (GetZhaopinBean) msg.obj;
@@ -62,6 +113,55 @@ public class ThreeFragment extends BaseFragment implements IXListViewListener{
 				ToastUtil.showToast(mContext, "网络错误！");
 				lv_listview.stopRefresh();
 				lv_listview.stopLoadMore();
+				
+				break;
+			case Constant.HANDLER_TYPE_GETHANGYE:
+				hangYeBean = (HangYeBean) msg.obj;
+				listStr = new ArrayList<String>();
+				for(HangYe hangYe:hangYeBean.getList()){
+					listStr.add(hangYe.getName());
+				}
+				loadingUtil.hideDialog();
+				popUtil.createPop(listStr);
+				
+				
+				break;
+			case Constant.HANDLER_TYPE_GET_SHENG:
+				if(changeType == 1){
+					shengBean = (HangYeBean) msg.obj;
+					if(shengBean==null){
+						ToastUtil.showToast(mContext, "获取省份数据失败");
+					}else{
+						listStr = new ArrayList<String>();
+						for(HangYe str:shengBean.getList()){
+							listStr.add(str.getName());
+						}
+						popUtil.createPop(listStr);
+					}
+				}else if(changeType == 2){
+					shiBean = (HangYeBean) msg.obj;
+					if(shiBean==null){
+						ToastUtil.showToast(mContext, "获取省份数据失败");
+					}else{
+						listStr = new ArrayList<String>();
+						for(HangYe str:shiBean.getList()){
+							listStr.add(str.getName());
+						}
+						popUtil.createPop(listStr);
+					}
+				}else if(changeType == 3){
+					quBean = (HangYeBean) msg.obj;
+					if(quBean==null){
+						ToastUtil.showToast(mContext, "获取省份数据失败");
+					}else{
+						listStr = new ArrayList<String>();
+						for(HangYe str:quBean.getList()){
+							listStr.add(str.getName());
+						}
+						popUtil.createPop(listStr);
+					}
+				}
+				
 				
 				break;
 			}
@@ -85,6 +185,12 @@ public class ThreeFragment extends BaseFragment implements IXListViewListener{
 		initData();
 	}
 	private void setListener() {
+		ll_time.setOnClickListener(this);
+		ll_hangye.setOnClickListener(this);
+		ll_area.setOnClickListener(this);
+		tv_serach.setOnClickListener(this);
+		
+		
 		lv_listview.setOnItemClickListener(new OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View arg1, int position,
@@ -98,9 +204,73 @@ public class ThreeFragment extends BaseFragment implements IXListViewListener{
 				
 			}
 		});
+		popUtil.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> arg0, View arg1, int position,
+					long arg3) {
+				if(changeType == 1){
+					//省
+					sheng = shengBean.getList().get(position).getName();
+					shengCode = shengBean.getList().get(position).getCode();
+					tv_area.setText(sheng);
+					changeType =2;
+					getArea(2);
+				}else if(changeType == 2){
+					//市
+					shi = shiBean.getList().get(position).getName();
+					shiCode = shiBean.getList().get(position).getCode();
+					changeType =3;
+					tv_area.setText(shi);
+					getArea(3);
+				}else if(changeType == 3){
+					//区县
+					qu = quBean.getList().get(position).getName();
+					quCode = quBean.getList().get(position).getCode();
+					tv_area.setText(qu);
+					
+				}else if(changeType == 4){
+					//行业
+					hangYe = hangYeBean.getList().get(position).getName();
+					hangYeCode = hangYeBean.getList().get(position).getCode();
+					tv_hangye.setText(hangYe);
+					
+					
+				}
+				
+				popUtil.hidePop();
+			}
+		});
+		et_search.addTextChangedListener(new TextWatcher() {
+			
+			@Override
+			public void onTextChanged(CharSequence s, int start, int before, int count) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void beforeTextChanged(CharSequence s, int start, int count,
+					int after) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void afterTextChanged(Editable s) {
+				sreach = et_search.getText().toString().trim();
+				initData();
+			}
+		});
 	}
 
 	private void initView() {
+		et_search = (EditText) getActivity().findViewById(R.id.et_search);
+		
+		timeDialog = new TimeDialog(mContext,customTimeListener);
+		popUtil = new PopUtil(mContext);
+		loadingUtil = new LoadingUtil(mContext);
+		
 		listZhaopin = new ArrayList<ZhaoPin>();
 		adapter = new ThreeFragmentAdapter(mContext,listZhaopin);
 		lv_listview.setAdapter(adapter);
@@ -109,13 +279,6 @@ public class ThreeFragment extends BaseFragment implements IXListViewListener{
 		//lv_listview.setPullLoadEnable(false, "加载完成");
 		lv_listview.setIsAnimation(true); 
 		lv_listview.setXListViewListener(this);
-		lv_listview.setOnItemClickListener(new OnItemClickListener() {
-			@Override
-			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
-					long arg3) {
-				System.out.println(arg0 + "------" + arg2);
-			}
-		});
 	}
 	/**
 	 * 初始化数据
@@ -132,6 +295,25 @@ public class ThreeFragment extends BaseFragment implements IXListViewListener{
 	}
 	private String getLoadUrl(int currentNum,int pageNum){
 		String str = "/resumeList?status=1&currentNum="+currentNum+"&pageNum="+pageNum;
+		if(sreach != null && !TextUtils.isEmpty(sreach)){
+			str += "&company="+sreach;
+		}
+		
+		if(sheng != null && !TextUtils.isEmpty(sheng)){
+			str += "&sheng="+sheng;
+		}
+		if(shi != null && !TextUtils.isEmpty(shi)){
+			str += "&shi="+shi;
+		}
+		if(qu != null && !TextUtils.isEmpty(qu)){
+			str += "&quxian="+qu;
+		}
+		if(hangYe!= null && !TextUtils.isEmpty(hangYe)){
+			str += "&industry="+hangYe;
+		}
+		if(date!= null && !TextUtils.isEmpty(date)){
+			str += "&subdate="+date;
+		}
 		return str;
 	}
 
@@ -221,6 +403,69 @@ public class ThreeFragment extends BaseFragment implements IXListViewListener{
 	@Override
 	public void onLoadMore() {
 		getLoadData();
+		
+	}
+	private void getArea(int i) {
+		List<DictBean> listDictBean = MyApplication.getApplication().getDictBean().getList();
+		/*String code = "";
+		for(DictBean dictBean : listDictBean){
+			if(dictBean.getCode().equals("SHENG")){
+				code = dictBean.getCode();
+			}
+		}*/
+		String url = Constant.HOST + Constant.GET_DICT_INFO;
+		if(i == 1){
+			url += "SHENG";
+		}else if(i == 2){
+			//选择市
+			url += "SHI"+shengCode.substring(shengCode.length()-2, shengCode.length());
+			
+		}else if(i==3){
+			//选择区县
+			url += "QUXIAN"+shengCode.substring(shengCode.length()-2, shengCode.length()) + shiCode.substring(shiCode.length()-2, shiCode.length());
+		}
+		
+		ThreadPoolManager.getInstance().addTask(new NetRunnable(mHandler,url,Constant.TOPER_TYPE_GET_SHENG));
+		
+	}
+	
+	private void getHangyeData() {
+		List<DictBean> listDictBean = MyApplication.getApplication().getDictBean().getList();
+		/*String code = "";
+		for(DictBean dictBean : listDictBean){
+			if(dictBean.getCode().equals("HANGYE")){
+				code = dictBean.getCode();
+			}
+		}*/
+		String url = Constant.HOST + Constant.GET_DICT_INFO+"HANGYE";
+		ThreadPoolManager.getInstance().addTask(new NetRunnable(mHandler,url,Constant.TOPER_TYPE_GETHANGYE));
+	}
+	
+	@Override
+	public void onClick(View v) {
+		switch (v.getId()) {
+		
+		case R.id.ll_time:
+			timeDialog.show();
+			break;
+		case R.id.ll_hangye:
+			loadingUtil.showDialog();
+			changeType =4;
+			getHangyeData();
+			
+			break;
+		case R.id.ll_area:
+			loadingUtil.showDialog();
+			changeType = 1;
+			getArea(1);
+			
+			break;
+		case R.id.tv_serach:
+			loadingUtil.showDialog();
+			initData();
+			
+			break;
+		}
 		
 	}
 

@@ -37,6 +37,7 @@ import com.dong.yiping.bean.GetJobBean;
 import com.dong.yiping.bean.GetZhaopinBean;
 import com.dong.yiping.bean.StarCompanyBean;
 import com.dong.yiping.bean.StarStudentBean;
+import com.dong.yiping.ui.ControlScrollViewPager;
 import com.dong.yiping.utils.LoadingUtil;
 import com.dong.yiping.utils.LogUtil;
 import com.dong.yiping.utils.NetRunnable;
@@ -188,6 +189,8 @@ public class OneFragment extends RoboFragment{
 						
 						startActivity(mIntent);
 					}else if(position==getJobBean.getList().size()+1){
+						ControlScrollViewPager main_viewpager = (ControlScrollViewPager) getActivity().findViewById(R.id.main_viewpager);
+						main_viewpager.setCurrentItem(1, false);
 					}else if(position==getJobBean.getList().size()+2){
 					}else if(position>getJobBean.getList().size()+2 && position<getJobBean.getList().size()+starCompanyBean.getList().size()+2){
 						
@@ -198,7 +201,6 @@ public class OneFragment extends RoboFragment{
 					}else if(position>getJobBean.getList().size()+starCompanyBean.getList().size()+2 && position<getJobBean.getList().size()+starCompanyBean.getList().size()+starStudentBean.getList().size()+3){
 						/*mIntent = new Intent(mContext,GetJobDetailActivity.class);
 						startActivity(mIntent);*/
-						
 					}
 				}else{
 					if(position == 0){
@@ -208,6 +210,8 @@ public class OneFragment extends RoboFragment{
 						startActivity(mIntent);
 						
 					}else if(position==getZhaopin.getList().size()+1){
+						ControlScrollViewPager main_viewpager = (ControlScrollViewPager) getActivity().findViewById(R.id.main_viewpager);
+						main_viewpager.setCurrentItem(2, false);
 					}else if(position==getZhaopin.getList().size()+2){
 					}else if(position>getZhaopin.getList().size()+2 && position<getZhaopin.getList().size()+starCompanyBean.getList().size()+2){
 						/*mIntent = new Intent(mContext,CompanyInfoActivity.class);

@@ -150,7 +150,7 @@ public class GetJobDetailActivity extends BaseActivity{
 			if(type!=-1){
 				if(type ==0){
 					//个人用户
-					ToastUtil.showToast(mContext, "个人用户没有权限");
+					ToastUtil.showToast(mContext, "非个人用户权限");
 				}
 				if(type==1){
 					//企业用户
@@ -166,7 +166,7 @@ public class GetJobDetailActivity extends BaseActivity{
 			if(type!=-1){
 				if(type ==0){
 					//个人用户
-					ToastUtil.showToast(mContext, "个人用户没有权限");
+					ToastUtil.showToast(mContext, "非个人用户权限");
 				}
 				if(type==1){
 					//企业用户
