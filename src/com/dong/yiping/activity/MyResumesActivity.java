@@ -87,18 +87,18 @@ public class MyResumesActivity extends BaseActivity {
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View arg1, int i,
 					long arg3) {
-				
+				if(i>0){
+					i--;
+				}
 				Intent intent = new Intent(MyResumesActivity.this,ResumeActivity.class);
 				intent.putExtra("ID", resumeList.get(i).getId());
 				startActivity(intent);
 			}
 		});
-		
-		
 		adapter = new ResumeListAdapter(mContext, resumeList);
 		lv_myresumes_listview.setAdapter(adapter);
 	}
-
+	
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {

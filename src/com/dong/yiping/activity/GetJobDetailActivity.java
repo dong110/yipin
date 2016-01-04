@@ -50,6 +50,22 @@ public class GetJobDetailActivity extends BaseActivity{
 				changeUserInfo(bean);
 				
 				break;
+			case Constant.HANDLER_COLLECTJOB:
+				//收藏简历和收藏工作数据类型一样
+				int status = (Integer) msg.obj;
+				if(status==0){
+					ToastUtil.showToast(mContext, "收藏简历成功");
+				}
+				if(status==1){
+					ToastUtil.showToast(mContext, "收藏简历失败");
+				}
+				break;
+			case Constant.APPLYJOB_FAIL:
+				ToastUtil.showToast(mContext, "邀请面试失败");
+				break;
+			case Constant.APPLYJOB_SUCCESS:
+				ToastUtil.showToast(mContext, "要前面试成功");
+				break;
 			}
 		}
 
@@ -183,7 +199,14 @@ public class GetJobDetailActivity extends BaseActivity{
 	 * 收藏简历
 	 */
 	private void collectResume() {
-		
+		String url = Constant.HOST + Constant.COLLECT;
+		Map<String, String> paramMap = new HashMap<String, String>();
+		if(zhaoPin!=null){
+			paramMap.put("id", zhaoPin.getId()+"");//招聘ID
+		}
+		paramMap.put("type", "0");//0 投简历 1邀面试
+		paramMap.put("userid", SPUtil.getInt(mContext, "id", -1)+"");//用户id
+		ThreadPoolManager.getInstance().addTask(new NetRunnable(mHandler, url,paramMap,Constant.TOPER_TYPE_COLLECTJOB));
 		
 	}
 
@@ -192,6 +215,15 @@ public class GetJobDetailActivity extends BaseActivity{
 	 */
 	private void InvateMeet() {
 		//String url = Constant.HOST + "/noticeUpdate?resumeId="++"&type=1&recruitId=1";
+		String resumeId="1";
+		String url = Constant.HOST + Constant.APPLYJOB;
+		Map<String, String> paramMap = new HashMap<String, String>();
+		paramMap.put("resumeId", zhaoPin.getId()+"");//简历Id
+		paramMap.put("type", "0");//0 简历 1面试
+		if(zhaoPin!=null){
+			paramMap.put("recruitId", zhaoPin.getId()+"");
+		}
 		
+		ThreadPoolManager.getInstance().addTask(new NetRunnable(mHandler, url,Constant.TOPER_TYPE_APPLYJOB));
 	}
 }

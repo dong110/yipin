@@ -2,6 +2,7 @@ package com.dong.yiping.utils;
 
 import java.util.List;
 
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
@@ -9,6 +10,7 @@ import android.view.Gravity;
 import android.view.KeyEvent.DispatcherState;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.WindowManager;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.ListView;
@@ -48,8 +50,19 @@ public class PopUtil {
 		dg.setTouchable(true);
 		dg.setFocusable(true);
 		dg.showAtLocation(view.getRootView(), Gravity.CENTER, 0,0);
+		backgroundAlpha(0.5f);
 	}
-	
+	/**
+	 * 设置添加屏幕的背景透明度
+	 * 
+	 * @param bgAlpha
+	 */
+	public void backgroundAlpha(float bgAlpha) {
+		WindowManager.LayoutParams lp = ((Activity) mContext).getWindow()
+				.getAttributes();
+		lp.alpha = bgAlpha; // 0.0-1.0
+		((Activity) mContext).getWindow().setAttributes(lp);
+	}
 	public void setOnItemClickListener(OnItemClickListener listener){
 		listView.setOnItemClickListener(listener);
 	}
@@ -84,6 +97,7 @@ public class PopUtil {
 			dg.dismiss();
 			dg = null;
 		}
+		backgroundAlpha(1f);
 	}
 	
 }

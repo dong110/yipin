@@ -255,7 +255,7 @@ public class JobMessageActivity extends BaseActivity {
 		if(getJob!=null){
 			paramMap.put("id", getJob.getId()+"");//招聘ID
 		}
-		paramMap.put("type", "1");//0 投简历 1邀面试
+		paramMap.put("type", "1");//0 简历 1面试
 		paramMap.put("userid", SPUtil.getInt(mContext, "id", -1)+"");//用户id
 		ThreadPoolManager.getInstance().addTask(new NetRunnable(mHandler, url,paramMap,Constant.TOPER_TYPE_COLLECTJOB));
 	}
@@ -267,7 +267,7 @@ public class JobMessageActivity extends BaseActivity {
 		String url = Constant.HOST + Constant.APPLYJOB;
 		Map<String, String> paramMap = new HashMap<String, String>();
 		paramMap.put("resumeId", i+"");
-		paramMap.put("type", "0");//0 投简历 1邀面试
+		paramMap.put("type", "1");//0 简历 1面试
 		if(getJob!=null){
 			paramMap.put("recruitId", getJob.getId()+"");
 		}
