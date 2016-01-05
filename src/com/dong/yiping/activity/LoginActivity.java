@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.dong.yiping.Constant;
+import com.dong.yiping.MyApplication;
 import com.dong.yiping.R;
 import com.dong.yiping.bean.UserBean;
 import com.dong.yiping.utils.LoadingUtil;
@@ -48,6 +49,7 @@ public class LoginActivity extends BaseActivity implements OnClickListener{
 				break;
 			case Constant.NET_SUCCESS:
 				UserBean bean = (UserBean) msg.obj;
+				MyApplication.getApplication().setUserBean(bean);
 				SPUtil.saveUser(mContext, bean);
 				util.hideDialog();
 				ToastUtil.showToast(mContext, "登录成功！");

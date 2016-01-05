@@ -1,6 +1,8 @@
 package com.dong.yiping.banner;
 
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Handler;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -216,7 +218,10 @@ public class BannerBaseView extends RelativeLayout implements BannerViewBehavior
 			imageView.setOnClickListener(new OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					Toast.makeText(context,d.getUrl(),0).show();
+					String url = d.getPath(); // web address
+					Intent intent = new Intent(Intent.ACTION_VIEW);
+					intent.setData(Uri.parse(url));
+					context.startActivity(intent);
 				}
 			});
             return imageView;

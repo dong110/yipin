@@ -12,9 +12,9 @@
             android:width="40dp" /><!--矩形的宽高  -->
 
         <gradient
-            android:endColor="#50000000"
-            android:startColor="#50000000" /><!--&lt;!&ndash; 矩形的内部颜色，这里设置成白色，即空心 &ndash;&gt;-->
-        <solid android:color="#50000000"/>
+            android:endColor="#40000000"
+            android:startColor="#40000000" /><!--&lt;!&ndash; 矩形的内部颜色，这里设置成白色，即空心 &ndash;&gt;-->
+        <solid android:color="#40000000"/>
 
 
 </shape>

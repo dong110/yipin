@@ -44,7 +44,12 @@
 
             </LinearLayout>
         </LinearLayout>
-        
+         <TextView 
+            
+            android:id="@+id/myInfo"
+            style="@style/user_center_text"
+            android:text="我的信息"
+            />
          <include layout="@layout/line_user_center"/>
         
         <TextView 
@@ -90,6 +95,16 @@
             android:text="浏览历史"
             />
          <include layout="@layout/line_user_center"/>
+         
+         <Button 
+             android:id="@+id/login_out"
+             android:layout_marginTop="10dp"
+             android:background="@color/yello"
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:text="退出登录"
+             android:padding="10dp"
+             />
          
     </LinearLayout>
 

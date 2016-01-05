@@ -64,23 +64,16 @@ public class SPUtil {
 		editor.putInt("type", bean.getObj().getType());
 		editor.commit();
 	}
-	public static void clearStusent(Context context) {
+	public static void clearUser(Context context) {
 		if (sp == null){
 			sp = context.getSharedPreferences(SP_NAME, 0);
 		}
 		
-			Editor editor = sp.edit();
-			editor.putString("cxid", "");
-			editor.putString("email", "");
-			editor.putString("phone", "");
-			editor.putString("realname", "");
-			editor.putString("roleid", "");
-			editor.putBoolean("result", false);
-			editor.putString("schoolid", "");
-			editor.putString("status", "");
-			editor.putString("uid", "");
-			editor.putString("uname", "");
-			editor.putString("touxiang", "");
-			editor.commit();
+		Editor editor = sp.edit();
+		editor.putInt("id", -1);
+		editor.putString("username", "");
+		editor.putString("password", "");
+		editor.putInt("type", -1);
+		editor.commit();
 	}
 }

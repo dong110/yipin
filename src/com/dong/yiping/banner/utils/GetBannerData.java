@@ -14,7 +14,7 @@ public class GetBannerData {
     public static List<BaseBannerBean> getBannerData(BannerListBean bannerListBean){
         List<BaseBannerBean> list = new ArrayList<BaseBannerBean>();
         for(BannerList banner:bannerListBean.getList()){
-        	list.add(new BaseBannerBean(banner.getPic()));
+        	list.add(new BaseBannerBean(banner.getPic(),banner.getUrl()));
         }
         
         return list;

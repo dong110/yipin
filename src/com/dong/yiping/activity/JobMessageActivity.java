@@ -121,7 +121,7 @@ public class JobMessageActivity extends BaseActivity {
 				
 				break;
 				}
-
+			loadingUtil.hideDialog();
 		};
 	};
 	
@@ -175,15 +175,13 @@ public class JobMessageActivity extends BaseActivity {
 	
 
 	public void initData() {
-
+		
 		jobId = "5";
 		// http://123.57.75.34:8080/users/api/recruitSimple?id=5
 		String url = Constant.HOST + Constant.COMPANY_INFO +getJob.getId() ;
 		ThreadPoolManager.getInstance().addTask(new NetRunnable(mHandler, url,Constant.TOPER_TYPE_COMPANYINFO));
-		
+		//loadingUtil.showDialog();
 	}
-	
-
 	@Override
 	public void onClick(View v) {
 		int type = SPUtil.getInt(mContext, "type", -1);

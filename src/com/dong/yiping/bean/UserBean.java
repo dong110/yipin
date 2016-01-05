@@ -65,7 +65,7 @@ public class UserBean {
 		private String updatetime;
 		private UserInfo userInfo;
 		
-		private class UserInfo{
+		public class UserInfo{
 			private String birthday;
 			private String cards;
 			private String conpany;

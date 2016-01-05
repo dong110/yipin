@@ -1,19 +1,9 @@
 package com.dong.yiping.activity;
 
-import com.dong.yiping.Constant;
-import com.dong.yiping.R;
-import com.dong.yiping.bean.JobDetailInfo;
-import com.dong.yiping.bean.GetZhaopinBean.ZhaoPin;
-import com.dong.yiping.utils.NetRunnable;
-import com.dong.yiping.utils.ThreadPoolManager;
-import com.dong.yiping.utils.ToastUtil;
-import com.dong.yiping.view.datepicker.TimeDialog;
-
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.test.TouchUtils;
 import android.view.View;
 import android.view.Window;
 import android.widget.EditText;
@@ -21,13 +11,20 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-public class ResumeActivity extends BaseActivity {
+import com.dong.yiping.MyApplication;
+import com.dong.yiping.R;
+import com.dong.yiping.bean.UserBean;
+import com.dong.yiping.utils.ToastUtil;
+import com.dong.yiping.view.datepicker.TimeDialog;
+
+public class UserInfoActivity extends BaseActivity {
 
 	private TextView tv_title_center;
 	private ImageView iv_title_left;
 
 	private TextView tv_resume_birthday;
-	private TextView tv_resume_publish;
+	private TextView tv_resume_xiugai;
+	private TextView tv_resume_baocun;
 	
 	private EditText et_username;
 	private EditText et_pinjia;
@@ -35,13 +32,12 @@ public class ResumeActivity extends BaseActivity {
 	private EditText working;
 	private EditText launager;
 	private LinearLayout ll_upload_img;
-	
 	private Context mContext;
-	
 	private TimeDialog timeDialog;
 	private Intent intent;
-	private String resumeId;
-	private ZhaoPin resumen;//简历和招聘对象一样的
+	private UserBean userBean;//简历和招聘对象一样的
+	private boolean isChange=false;
+	
 	private TimeDialog.CustomTimeListener customTimeListener = new TimeDialog.CustomTimeListener() {
 		@Override
 		public void setTime(String time) {
@@ -55,26 +51,8 @@ public class ResumeActivity extends BaseActivity {
 	private Handler mHandler = new Handler() {
 		public void handleMessage(android.os.Message msg) {
 			switch (msg.what) {
-			case Constant.NET_ERROR:
-				ToastUtil.showToast(mContext, "获取数据失败！");
-				break;
-			case Constant.NET_NULL:
-				ToastUtil.showToast(mContext, "职位详情数据为空！");
-				break;
-			case Constant.NET_SUCCESS:
-				JobDetailInfo bean = (JobDetailInfo) msg.obj;
-
-				//填充页面数据
-				break;
-				
-			case Constant.APPLYJOB_FAIL:
-				ToastUtil.showToast(mContext, "职位申请失败");
-				break;
-			case Constant.APPLYJOB_SUCCESS:
-				ToastUtil.showToast(mContext, "职位申请成功");
-				break;
+			
 			}
-
 		};
 	};
 	
@@ -87,23 +65,17 @@ public class ResumeActivity extends BaseActivity {
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		// 当前页面从右往左进入
 		overridePendingTransition(R.anim.right_to_center, R.anim.center_to_left);
-		setContentView(R.layout.activity_resume);
+		setContentView(R.layout.activity_userinfo);
 		mContext = this;
 		getIntentData();
 		initView();
-		initData();
+		setListener();
 	}
-
-
 
 	private void getIntentData() {
-		resumen = (ZhaoPin) getIntent().getSerializableExtra("resumeBean");
-		
-		
+		userBean = MyApplication.getApplication().getUserBean();
 		
 	}
-
-
 
 	private void initView() {
 		timeDialog = new TimeDialog(this, customTimeListener);
@@ -111,7 +83,8 @@ public class ResumeActivity extends BaseActivity {
 		iv_title_left = $(R.id.iv_title_left, true);
 		
 		tv_resume_birthday = $(R.id.tv_resume_birthday, true);
-		tv_resume_publish = $(R.id.tv_resume_publish, true);
+		tv_resume_xiugai = $(R.id.tv_resume_xiugai, true);
+		tv_resume_baocun = $(R.id.tv_resume_baocun, true);
 		
 		et_username = $(R.id.et_username);
 		et_pinjia = $(R.id.et_pinjia);
@@ -119,33 +92,34 @@ public class ResumeActivity extends BaseActivity {
 		working = $(R.id.working);
 		launager = $(R.id.launager);
 		ll_upload_img = $(R.id.ll_upload_img,true);
+		tv_title_center.setText("个人信息");
+		if(userBean != null){
+			et_username.setText(userBean.getObj().getUsername());
+			tv_resume_birthday.setText(userBean.getObj().getUserInfo().getBirthday());
+			et_pinjia.setText(userBean.getObj().getUserInfo().getContent());
+		}
 		
-		if(resumen != null){
-			et_username.setText(resumen.getName());
-			et_intedsy.setText(resumen.getIntention());
-			launager.setText(resumen.getLange());
-			working.setText(resumen.getWorking());
-			tv_title_center.setText("修改简历");
+	}
+	
+	private void setListener() {
+		if(isChange){
+			et_username.setClickable(true);
+			et_pinjia.setClickable(true);
+			et_intedsy.setClickable(true);
+			working.setClickable(true);
+			launager.setClickable(true);
+			tv_resume_birthday.setClickable(true);
 		}else{
-			tv_title_center.setText("添加简历");
+			et_username.setClickable(false);
+			et_pinjia.setClickable(false);
+			et_intedsy.setClickable(false);
+			working.setClickable(false);
+			launager.setClickable(false);
+			tv_resume_birthday.setClickable(false);
 		}
 		
 	}
 	
-	private void setView(){
-		
-	}
-	
-	private void initData() {
-		intent = getIntent();
-		resumeId = intent.getStringExtra("ID");
-		if(resumeId!=null){
-
-			String url = Constant.HOST + Constant.COMPANY_INFO + resumeId;
-			ThreadPoolManager.getInstance().addTask(new NetRunnable(mHandler, url,Constant.TOPER_TYPE_COMPANYINFO));
-
-		}
-	}
 	
 	@Override
 	public void onClick(View v) {
@@ -156,17 +130,17 @@ public class ResumeActivity extends BaseActivity {
 			overridePendingTransition(R.anim.left_to_center,
 					R.anim.center_to_right);
 			break;
-
 		case R.id.tv_resume_birthday:
 			timeDialog.show();
 
 			break;
 			
-		case R.id.tv_resume_publish://发布简历
-			
-			ToastUtil.showToast(mContext, "发布简历");
+		case R.id.tv_resume_baocun://保存信息
+			ToastUtil.showToast(mContext, "保存信息");
 			break;
-
+		case R.id.tv_resume_xiugai://修改信息
+			ToastUtil.showToast(mContext, "修改信息");
+			break;
 		}
 	}
 }

@@ -5,14 +5,23 @@ package com.dong.yiping.banner.bean;
  */
 public class BaseBannerBean {
     private String url;
-    public  BaseBannerBean(String url){
+    private String path;
+    
+    public  BaseBannerBean(String url,String path){
         this.url =  url;
+        this.path = path;
     }
     public  BaseBannerBean(){
 
     }
 
-    public String getUrl() {
+    public String getPath() {
+		return path;
+	}
+	public void setPath(String path) {
+		this.path = path;
+	}
+	public String getUrl() {
         return url;
     }
 

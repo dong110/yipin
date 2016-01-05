@@ -35,6 +35,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
@@ -44,11 +45,14 @@ import com.dong.yiping.Constant;
 import com.dong.yiping.R;
 import com.dong.yiping.activity.ComCollectListActivity;
 import com.dong.yiping.activity.CompanyInfoActivity;
+import com.dong.yiping.activity.LoginActivity;
+import com.dong.yiping.activity.MainActivity;
 import com.dong.yiping.activity.ModifyPwdActivity;
 import com.dong.yiping.activity.MyResumesActivity;
 import com.dong.yiping.activity.PhoneIdentificationActivity;
 import com.dong.yiping.activity.UserCollectListActivity;
 import com.dong.yiping.activity.UserHistoryActivity;
+import com.dong.yiping.activity.UserInfoActivity;
 import com.dong.yiping.activity.UserShenQingActivity;
 import com.dong.yiping.utils.LogUtil;
 import com.dong.yiping.utils.MultipartEntityExt;
@@ -73,7 +77,13 @@ public class ForeFragment extends BaseFragment implements OnClickListener {
 	TextView tv_history;
 	@InjectView(R.id.iv_fragmentfore_icon)
 	ImageView iv_fragmentfore_icon;
-
+	@InjectView(R.id.login_out)
+	Button login_out;
+	@InjectView(R.id.myInfo)
+	TextView myInfo;
+	
+	
+	
 	private TextView tv_title_center;
 	private LinearLayout ll_title_center;
 	private Intent mIntent;
@@ -103,8 +113,9 @@ public class ForeFragment extends BaseFragment implements OnClickListener {
 		phone.setOnClickListener(this);
 		tv_fragment_jilu.setOnClickListener(this);
 		tv_history.setOnClickListener(this);
-
+		login_out.setOnClickListener(this);
 		iv_fragmentfore_icon.setOnClickListener(this);
+		myInfo.setOnClickListener(this);
 	}
 
 	private void initData() {
@@ -117,25 +128,30 @@ public class ForeFragment extends BaseFragment implements OnClickListener {
 		tv_fragmentfore_username.setText(username);
 		LogUtil.i("username====", username + "");
 		Type = SPUtil.getInt(mContext, "type", 0);
-		LogUtil.i("type====", Type + "");
 		if (Type == 0) {// 学生用户
+			myInfo.setVisibility(View.VISIBLE);
 			myResume.setText("我的简历");
 			tv_fragment_jilu.setText("职位申请记录");
-
+			
 		} else {// 公司用户
 			myResume.setText("公司信息");
 			tv_fragment_jilu.setText("面试邀请记录");
-
+			myInfo.setVisibility(View.GONE);
 		}
 	}
 
 	@Override
 	public void onClick(View view) {
 		switch (view.getId()) {
+		case R.id.myInfo:
+			mIntent = new Intent(mContext,UserInfoActivity.class);
+			startActivity(mIntent);
+			
+			break;
 		case R.id.myResume:
 			if (Type == 0) {// 学生用户
 				mIntent = new Intent(mContext, MyResumesActivity.class);
-
+				
 			} else {// 公司用户
 				mIntent = new Intent(mContext, CompanyInfoActivity.class);
 			}
@@ -218,7 +234,16 @@ public class ForeFragment extends BaseFragment implements OnClickListener {
 		case R.id.tv_cancel:
 			camera_pop_window.dismiss();
 			break;
+		case R.id.login_out:
+			SPUtil.clearUser(mContext);
+			mIntent = new Intent(mContext,LoginActivity.class);
+			startActivity(mIntent);
+			getActivity().finish();
+			
+			break;
+		
 		}
+		
 		mIntent =null;
 
 	}

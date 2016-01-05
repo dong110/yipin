@@ -62,7 +62,7 @@ public class Constant {
 	public static final String GET_dictList = "/dictList?type=";//获取字典列表
 	public static final String GET_DICT_INFO = "/dictList?type=1&code=";
 	
-	public static final String GET_Resume_List = "/resumeList?userId=";//简历列表
+	public static final String GET_Resume_List = "/resumeList?userid=";//简历列表
 	
 	public static final String USER_INFO = "/userInfo";//个人详细信息
 	public static final String GET_JOB_DETAIL = "/resumeSimple?id=";//求职详情

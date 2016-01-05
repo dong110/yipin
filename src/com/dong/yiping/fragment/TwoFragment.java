@@ -30,6 +30,7 @@ import com.dong.yiping.MyApplication;
 import com.dong.yiping.R;
 import com.dong.yiping.activity.JobMessageActivity;
 import com.dong.yiping.activity.MainActivity;
+import com.dong.yiping.activity.ResumeActivity;
 import com.dong.yiping.adapter.TwoFragmentAdapter;
 import com.dong.yiping.bean.DictListBean.DictBean;
 import com.dong.yiping.bean.GetJobBean;
@@ -444,7 +445,8 @@ public class TwoFragment extends RoboFragment implements IXListViewListener, OnC
 		case R.id.tv_fabuQiuZhi:
 			int type = SPUtil.getInt(mContext, "type", -1);
 			if(type == 0){
-				
+				Intent mIntent = new Intent(mContext,ResumeActivity.class);
+				startActivity(mIntent);
 			}
 			if(type == 1){
 				ToastUtil.showToast(mContext, "非企业用户权限");

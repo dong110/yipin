@@ -12,6 +12,7 @@ import java.util.List;
 
 import com.dong.yiping.bean.BannerListBean;
 import com.dong.yiping.bean.DictListBean;
+import com.dong.yiping.bean.UserBean;
 import com.dong.yiping.bean.DictListBean.DictBean;
 
 /**
@@ -22,7 +23,7 @@ public class MyApplication extends Application {
 	private static final String TAG = MyApplication.class.getName();
 	public  DictListBean dictBean;
 	public BannerListBean bannerListBean;
-	
+	public UserBean bean;
 	/**
 	 * 全局管理activity，方便退出
 	 */
@@ -46,6 +47,12 @@ public class MyApplication extends Application {
 		return dictBean;
 	}
 	
+	public UserBean getUserBean(){
+		return bean;
+	}
+	public void setUserBean(UserBean bean){
+		this.bean= bean;
+	}
 	@Override
 	public void onCreate() {
 		myApplication = this;

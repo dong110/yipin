@@ -25,7 +25,9 @@ import android.widget.TextView;
 import com.dong.yiping.Constant;
 import com.dong.yiping.MyApplication;
 import com.dong.yiping.R;
+import com.dong.yiping.activity.CompanyInfoActivity;
 import com.dong.yiping.activity.GetJobDetailActivity;
+import com.dong.yiping.activity.SendZhaoPinActivity;
 import com.dong.yiping.adapter.ThreeFragmentAdapter;
 import com.dong.yiping.bean.GetZhaopinBean;
 import com.dong.yiping.bean.HangYeBean;
@@ -54,6 +56,7 @@ public class ThreeFragment extends BaseFragment implements IXListViewListener, O
 	@InjectView(R.id.tv_serach) TextView tv_serach;
 	@InjectView(R.id.tv_hangye) TextView tv_hangye;
 	@InjectView(R.id.tv_area) TextView tv_area;
+	@InjectView(R.id.tv_fabuZhaopin) TextView tv_fabuZhaopin;
 	private EditText et_search;
 	private TextView tv_title_center;
 	private LinearLayout ll_title_center;
@@ -192,7 +195,7 @@ public class ThreeFragment extends BaseFragment implements IXListViewListener, O
 		ll_hangye.setOnClickListener(this);
 		ll_area.setOnClickListener(this);
 		tv_serach.setOnClickListener(this);
-		
+		tv_fabuZhaopin.setOnClickListener(this);
 		
 		lv_listview.setOnItemClickListener(new OnItemClickListener() {
 			@Override
@@ -451,10 +454,20 @@ public class ThreeFragment extends BaseFragment implements IXListViewListener, O
 	
 	@Override
 	public void onClick(View v) {
+		int type = SPUtil.getInt(mContext, "type", -1);
 		switch (v.getId()) {
-		
 		case R.id.ll_time:
 			timeDialog.show();
+			break;
+		case R.id.tv_fabuZhaopin:
+			if(type == 0){
+				ToastUtil.showToast(mContext, "非个人用户权限");
+			}
+			if(type==1){
+				Intent mIntent = new Intent(mContext,SendZhaoPinActivity.class);
+				startActivity(mIntent);
+			}
+			
 			break;
 		case R.id.ll_hangye:
 			loadingUtil.showDialog();
@@ -471,7 +484,6 @@ public class ThreeFragment extends BaseFragment implements IXListViewListener, O
 		case R.id.tv_serach:
 			loadingUtil.showDialog();
 			initData();
-			
 			break;
 		}
 		
