@@ -25,6 +25,7 @@ public class Constant {
 	public static final int TOPER_TYPE_GET_RESUME_LIST = 116;
 	public static final int TOPER_TYPE_COLLECTJOB = 117;
 	public static final int TOPER_TYPE_ISUSERNAME = 118;
+	public static final int TOPER_TYPE_UPDATE_RESUME = 119;
 	
 	public static final int HANDLER_BANNERLIST = 120;
 	public static final int HANDLER_TYPE_GETJOB = 121;
@@ -42,7 +43,7 @@ public class Constant {
 	public static final int HANDLER_RESUME_LIST = 133;
 	public static final int HANDLER_COLLECTJOB = 134;
 	public static final int HANDLER_TYPE_ISUSERNAME = 135;
-	
+	public static final int HANDLER_TYPE_UPDATE_RESUME = 136;
 	public static final String HOST = "http://123.57.75.34:8080/users/api";
 	
 	public static final String LOGIN = "/userLogin";//登录
@@ -72,4 +73,7 @@ public class Constant {
 	public static final String COLLECT = "/collectionUpdate";//收藏接口
 	public static final String UPLOAD_IMG = "/imageUpload";//上传图片
 	public static final String UPLOAD_USER_IMG = "/infoPicUpdate";//上传用户头像
+	public static final String UPDATE_RESUME = "/resumeUpdate";//修改简历
+	
+	
 }

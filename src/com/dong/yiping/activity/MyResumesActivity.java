@@ -14,6 +14,7 @@ import com.dong.yiping.utils.ThreadPoolManager;
 import com.dong.yiping.utils.ToastUtil;
 import com.dong.yiping.view.LJListView;
 import com.dong.yiping.view.LJListView.IXListViewListener;
+import com.dong.yiping.view.LoadingProgressDialog;
 
 import android.content.Context;
 import android.content.Intent;
@@ -44,7 +45,6 @@ public class MyResumesActivity extends BaseActivity implements IXListViewListene
 	private Context mContext;
 	private ResumeListAdapter adapter;
 	private List<ZhaoPin> resumeList;
-	
 	private Handler mHandler = new Handler(){
 		@SuppressWarnings("unused")
 		public void handleMessage(android.os.Message msg) {
@@ -66,6 +66,7 @@ public class MyResumesActivity extends BaseActivity implements IXListViewListene
 			}
 		};
 	};
+	
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		// 设置没有标题
@@ -76,9 +77,13 @@ public class MyResumesActivity extends BaseActivity implements IXListViewListene
 		mContext = this;
 		initTitleBar();
 		initView();
+		
+	}
+	@Override
+	protected void onResume() {
+		super.onResume();
 		initData();
 	}
-
 	private void initData() {
 		//http://123.57.75.34:8080/users/api/resumeList?userId=7
 		//String url = Constant.HOST + Constant.GET_Resume_List + SPUtil.getInt(mContext, "id", -1);
@@ -213,7 +218,6 @@ public class MyResumesActivity extends BaseActivity implements IXListViewListene
 
 		case R.id.tv_myresumes_addresume:
 			// 添加简历
-			
 			startToActivity(ResumeActivity.class);
 			break;
 

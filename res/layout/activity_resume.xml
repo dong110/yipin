@@ -163,7 +163,7 @@
         android:text="保存简历"
         android:textSize="@dimen/text_size_18" />
     <TextView
-        android:id="@+id/tv_resume_publish"
+        android:id="@+id/tv_resume_fabu"
         android:layout_width="0dp"
         android:layout_weight="1"
         android:layout_height="wrap_content"

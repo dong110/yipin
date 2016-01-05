@@ -212,8 +212,8 @@ public final class R {
         public static final int tv_resume_baocun=0x7f09003f;
         public static final int tv_resume_birthday=0x7f09003a;
         public static final int tv_resume_collect=0x7f09000d;
+        public static final int tv_resume_fabu=0x7f090040;
         public static final int tv_resume_invite=0x7f09000c;
-        public static final int tv_resume_publish=0x7f090040;
         public static final int tv_resume_xiugai=0x7f090041;
         public static final int tv_salary=0x7f090060;
         public static final int tv_serach=0x7f090069;

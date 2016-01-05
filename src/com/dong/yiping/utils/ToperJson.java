@@ -99,8 +99,33 @@ public class ToperJson {
 		case Constant.TOPER_TYPE_COLLECTJOB://收藏职位
 			toperCollectJob(result);
 			break;
+		case Constant.TOPER_TYPE_UPDATE_RESUME://跟新简历
+			toperUpdateResume(result);
+			
+			break;
 		}
 	}
+	/**
+	 * 跟新简历
+	 * @param result
+	 */
+	private void toperUpdateResume(String result) {
+		Message msg = handler.obtainMessage();
+		msg.what = Constant.HANDLER_TYPE_UPDATE_RESUME;
+		try {
+			JSONObject jsonObject = new JSONObject(result);
+			int status = jsonObject.getInt("status");
+			msg.obj = status;
+			handler.sendMessage(msg);
+			
+		} catch (Exception e) {
+			msg.obj = 1;
+			msg.what = Constant.HANDLER_TYPE_UPDATE_RESUME;
+			handler.sendMessage(msg);
+			e.printStackTrace();
+		}
+	}
+
 	/**
 	 * 判断用户明是否重复
 	 * @param result
