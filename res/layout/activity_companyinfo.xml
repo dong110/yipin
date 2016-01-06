@@ -23,7 +23,6 @@
             android:orientation="vertical"
             >
             <LinearLayout
-                android:background="@color/writer"
                 android:padding="10dp"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
@@ -39,7 +38,6 @@
                     android:text="什么什么公司" />
             </LinearLayout>
             <LinearLayout
-                android:background="@color/writer"
                 android:padding="10dp"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
@@ -56,7 +54,6 @@
             </LinearLayout>
             
             <LinearLayout
-                android:background="@color/writer"
                 android:padding="10dp"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
@@ -72,7 +69,6 @@
                     android:text="smsm@163.com" />
             </LinearLayout>
             <LinearLayout
-                android:background="@color/writer"
                 android:padding="10dp"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
@@ -94,7 +90,6 @@
             <LinearLayout 
                 android:padding="10dp"
                  android:layout_marginTop="10dp"
-                android:background="@color/writer"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
@@ -117,11 +112,15 @@
                     android:layout_height="150dp"
                     android:layout_weight="7"
                     />
+                <EditText 
+                    android:visibility="gone"
+                    android:id="@+id/et_jieshao_two"
+                    style="@style/resume_text_two"
+                    />
             </LinearLayout>
             <LinearLayout 
                 android:padding="10dp"
                 android:layout_marginBottom="60dp"
-                android:background="@color/writer"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
@@ -140,15 +139,11 @@
                    android:orientation="horizontal"
                    >
                    <ImageView 
-                       android:layout_width="60dp"
-                       android:layout_height="60dp"
+                       android:layout_width="80dp"
+                       android:layout_height="100dp"
                        android:src="@drawable/resume_upload"
                        />
-                   <ImageView 
-                       android:layout_width="60dp"
-                       android:layout_height="60dp"
-                       android:src="@drawable/resume_upload"
-                       />
+                   
                </LinearLayout>
             </LinearLayout>
         </LinearLayout>
@@ -162,7 +157,7 @@
          android:layout_alignParentBottom="true"
          >
         <TextView 
-        
+        android:visibility="gone"
         android:gravity="center"
         android:background="@color/yello"
         android:textSize="@dimen/text_size_18"

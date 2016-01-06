@@ -73,9 +73,14 @@
                     android:gravity="top"
                     android:hint="输入自我评价（140字以内）"
                     android:padding="5dp" />
+                <EditText
+                    android:visibility="gone"
+                    android:id="@+id/et_pinjia_two"
+                    style="@style/resume_text_two" />
             </LinearLayout>
 
             <LinearLayout
+                android:visibility="gone"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
@@ -93,6 +98,7 @@
             </LinearLayout>
 
             <LinearLayout
+                 android:visibility="gone"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal" >
@@ -108,6 +114,7 @@
             </LinearLayout>
 
             <LinearLayout
+                 android:visibility="gone"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal" >
@@ -140,8 +147,8 @@
                     android:gravity="right" >
 
                     <ImageView
-                        android:layout_width="60dp"
-                        android:layout_height="60dp"
+                        android:layout_width="80dp"
+                        android:layout_height="100dp"
                         android:src="@drawable/resume_upload" />
                 </LinearLayout>
             </LinearLayout>
@@ -155,6 +162,7 @@
         android:orientation="horizontal"
         >
      <TextView
+         android:visibility="gone"
         android:id="@+id/tv_resume_xiugai"
         android:layout_width="0dp"
         android:layout_weight="1"

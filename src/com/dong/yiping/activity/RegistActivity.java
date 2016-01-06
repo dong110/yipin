@@ -68,7 +68,7 @@ public class RegistActivity extends BaseActivity {
 	private RelativeLayout rl_regist_sheng;
 	private RelativeLayout rl_regist_shi;
 	private RelativeLayout rl_regist_qu;
-
+	private TextView tv_IdName;
 	private boolean isStu = true;
 	private Context mContext;
 	private String typeName;
@@ -190,7 +190,7 @@ public class RegistActivity extends BaseActivity {
 		
 		popUtil = new PopUtil(mContext);
 		
-		
+		tv_IdName = $(R.id.tv_IdName);
 		rl_regist_stu = $(R.id.rl_regist_stu, true);
 		rl_regist_qiye = $(R.id.rl_regist_qiye, true);
 		iv_regist_stu = $(R.id.iv_regist_stu);
@@ -250,6 +250,7 @@ public class RegistActivity extends BaseActivity {
 		case R.id.rl_regist_stu:
 		case R.id.rl_regist_qiye:
 			if (isStu) {
+				tv_IdName.setText("营业执照号：");
 				iv_regist_stu
 						.setImageResource(R.drawable.common_checkbox_unselect);
 				iv_regist_qiye
@@ -262,6 +263,8 @@ public class RegistActivity extends BaseActivity {
 				tv_regist_regist_confirm.setBackgroundResource(R.drawable.index_title_bg);
 				ll_regist_stunum.setVisibility(View.GONE);
 			} else {
+				tv_IdName.setText("身份证号：");
+				
 				tv_left_address.setText("所在院校：");
 				iv_regist_stu
 						.setImageResource(R.drawable.common_checkbox_seleted);

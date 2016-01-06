@@ -12,6 +12,7 @@ import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -40,6 +41,7 @@ public class MainActivity extends RoboFragmentActivity {
 	@InjectView(R.id.main_tabs_layout) LinearLayout main_tabs_layout;
 	@InjectView(R.id.tv_title_center) TextView tv_title_center;
 	@InjectView(R.id.ll_title_center) LinearLayout ll_title_center;
+	@InjectView(R.id.et_search) EditText et_search;
 	@Inject Context mContext;
 	
 	private boolean exiting = false;
@@ -73,8 +75,8 @@ public class MainActivity extends RoboFragmentActivity {
 		main_viewpager = (ControlScrollViewPager)findViewById(R.id.main_viewpager);
         ArrayList fragmentList = new ArrayList<Fragment>();
         fragmentList.add(new OneFragment());
-        fragmentList.add(new TwoFragment());
         fragmentList.add(new ThreeFragment());
+        fragmentList.add(new TwoFragment());
         fragmentList.add(new ForeFragment());
         MainFragmentPagerAdapter pagerAdapter = new MainFragmentPagerAdapter(getSupportFragmentManager(),fragmentList);
         main_viewpager.setOffscreenPageLimit(3);
@@ -122,6 +124,12 @@ public class MainActivity extends RoboFragmentActivity {
     		tv_title_center.setVisibility(View.VISIBLE);
     		ll_title_center.setVisibility(View.GONE);
     		tv_title_center.setText("个人中心");
+        }
+        if(index==1){
+        	et_search.setHint("请输入学生名");
+        }
+        if(index==2){
+        	et_search.setHint("请输入公司名");
         }
 	}
 	private class MainOnPageChangeListener implements ViewPager.OnPageChangeListener {

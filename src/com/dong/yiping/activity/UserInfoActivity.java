@@ -31,13 +31,14 @@ public class UserInfoActivity extends BaseActivity {
 	private EditText et_intedsy;
 	private EditText working;
 	private EditText launager;
+	private EditText et_pinjia_two;
 	private LinearLayout ll_buts;
 	private LinearLayout ll_upload_img;
 	private Context mContext;
 	private TimeDialog timeDialog;
 	private Intent intent;
 	private UserBean userBean;//简历和招聘对象一样的
-	private boolean isChange=false;
+	private boolean isChange=true;
 	
 	private TimeDialog.CustomTimeListener customTimeListener = new TimeDialog.CustomTimeListener() {
 		@Override
@@ -92,24 +93,26 @@ public class UserInfoActivity extends BaseActivity {
 		ll_buts = $(R.id.ll_buts);
 		et_username = $(R.id.et_username);
 		et_pinjia = $(R.id.et_pinjia);
+		et_pinjia_two = $(R.id.et_pinjia_two);
 		et_intedsy = $(R.id.et_intedsy);
 		working = $(R.id.working);
 		launager = $(R.id.launager);
 		ll_upload_img = $(R.id.ll_upload_img,true);
 		tv_title_center.setText("个人信息");
 		if(userBean != null){
-			et_username.setText(userBean.getObj().getUsername());
+			et_username.setText(userBean.getObj().getUserInfo().getName());
 			tv_resume_birthday.setText(userBean.getObj().getUserInfo().getBirthday());
 			et_pinjia.setText(userBean.getObj().getUserInfo().getContent());
 		}
 		if("oneFragment".equals(type)){
 			ll_buts.setVisibility(View.GONE);
-			
+			et_pinjia.setVisibility(View.GONE);
+			et_pinjia_two.setVisibility(View.VISIBLE);
 		}
 		if(student!=null){
 			et_username.setText(student.getName());
 			tv_resume_birthday.setText(student.getBirthday());
-			et_pinjia.setText(student.getContent());
+			et_pinjia_two.setText(student.getContent());
 		}
 		
 	}
@@ -146,6 +149,9 @@ public class UserInfoActivity extends BaseActivity {
 			
 			launager.setFocusable(false);
 			launager.setFocusableInTouchMode(false);
+			
+			et_pinjia_two.setFocusable(false);
+			et_pinjia_two.setFocusableInTouchMode(false);
 			tv_resume_birthday.setClickable(false);
 		}
 		

@@ -31,6 +31,7 @@ import com.dong.yiping.R;
 import com.dong.yiping.activity.JobMessageActivity;
 import com.dong.yiping.activity.MainActivity;
 import com.dong.yiping.activity.ResumeActivity;
+import com.dong.yiping.activity.SendZhaoPinActivity;
 import com.dong.yiping.adapter.TwoFragmentAdapter;
 import com.dong.yiping.bean.DictListBean.DictBean;
 import com.dong.yiping.bean.GetJobBean;
@@ -173,8 +174,6 @@ public class TwoFragment extends RoboFragment implements IXListViewListener, OnC
 						popUtil.createPop(listStr);
 					}
 				}
-				
-				
 				break;
 			}
 		}
@@ -297,7 +296,7 @@ public class TwoFragment extends RoboFragment implements IXListViewListener, OnC
 	private void initView() {
 		
 		et_search = (EditText) getActivity().findViewById(R.id.et_search);
-		
+		et_search.setHint("请输入公司名");
 		timeDialog = new TimeDialog(mContext,customTimeListener);
 		popUtil = new PopUtil(mContext);
 		loadingUtil = new LoadingUtil(mContext);
@@ -445,11 +444,12 @@ public class TwoFragment extends RoboFragment implements IXListViewListener, OnC
 		case R.id.tv_fabuQiuZhi:
 			int type = SPUtil.getInt(mContext, "type", -1);
 			if(type == 0){
-				Intent mIntent = new Intent(mContext,ResumeActivity.class);
-				startActivity(mIntent);
+				ToastUtil.showToast(mContext, "非个人用户权限");
 			}
 			if(type == 1){
-				ToastUtil.showToast(mContext, "非企业用户权限");
+				Intent mIntent = new Intent(mContext,SendZhaoPinActivity.class);
+				startActivity(mIntent);
+				
 			}
 			break;
 		case R.id.ll_time:

@@ -33,7 +33,9 @@ public class CompanyInfoActivity extends BaseActivity {
 	private EditText et_jieshao;
 	
 	private LinearLayout ll_buts;
-	
+	private String type;
+	private StarCom starCom;
+	private EditText et_jieshao_two;
 	private Context mContext;
 	
 	private Handler mHandler = new Handler() {
@@ -54,8 +56,7 @@ public class CompanyInfoActivity extends BaseActivity {
 
 		};
 	};
-	private String type;
-	private StarCom starCom;
+	
 
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -88,15 +89,36 @@ public class CompanyInfoActivity extends BaseActivity {
 		et_email = $(R.id.et_email);
 		et_name = $(R.id.et_name);
 		et_jieshao = $(R.id.et_jieshao);
+		et_jieshao_two = $(R.id.et_jieshao_two);
 		if("oneFragment".equals(type)){
 			ll_buts.setVisibility(View.GONE);
+			et_company.setFocusable(false);
+			et_company.setFocusableInTouchMode(false);
+			
+			et_tel.setFocusable(false);
+			et_tel.setFocusableInTouchMode(false);
+			
+			et_email.setFocusable(false);
+			et_email.setFocusableInTouchMode(false);
+			
+			et_name.setFocusable(false);
+			et_name.setFocusableInTouchMode(false);
+			
+			et_jieshao.setFocusable(false);
+			et_jieshao.setFocusableInTouchMode(false);
+			
+			et_jieshao_two.setFocusable(false);
+			et_jieshao_two.setFocusableInTouchMode(false);
+			
+			et_jieshao.setVisibility(View.GONE);
+			et_jieshao_two.setVisibility(View.VISIBLE);
 		}
 		if(starCom != null){
 			et_company.setText(starCom.getConpany());
 			et_tel.setText(starCom.getTel());
 			et_email.setText(starCom.getEmail());
 			et_name.setText(starCom.getName());
-			et_jieshao.setText(starCom.getContent()); 
+			et_jieshao_two.setText(starCom.getContent()); 
 		}
 	}
 

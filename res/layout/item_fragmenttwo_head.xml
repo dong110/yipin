@@ -10,12 +10,12 @@
         android:id="@+id/tv_fabuQiuZhi"
         android:textSize="@dimen/text_size_17"
         android:textColor="@color/writer"
-        android:background="@color/one_blue"
+        android:background="@color/yello"
         android:padding="5dp"
         android:gravity="center"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="点击发布求职消息"
+        android:text="点击发布招聘消息"
         />
     
     <LinearLayout 

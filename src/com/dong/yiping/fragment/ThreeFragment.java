@@ -27,6 +27,8 @@ import com.dong.yiping.MyApplication;
 import com.dong.yiping.R;
 import com.dong.yiping.activity.CompanyInfoActivity;
 import com.dong.yiping.activity.GetJobDetailActivity;
+import com.dong.yiping.activity.MyResumesActivity;
+import com.dong.yiping.activity.ResumeActivity;
 import com.dong.yiping.activity.SendZhaoPinActivity;
 import com.dong.yiping.adapter.ThreeFragmentAdapter;
 import com.dong.yiping.bean.GetZhaopinBean;
@@ -272,7 +274,7 @@ public class ThreeFragment extends BaseFragment implements IXListViewListener, O
 
 	private void initView() {
 		et_search = (EditText) getActivity().findViewById(R.id.et_search);
-		
+		et_search.setHint("请输入学生名");
 		timeDialog = new TimeDialog(mContext,customTimeListener);
 		popUtil = new PopUtil(mContext);
 		loadingUtil = new LoadingUtil(mContext);
@@ -461,11 +463,12 @@ public class ThreeFragment extends BaseFragment implements IXListViewListener, O
 			break;
 		case R.id.tv_fabuZhaopin:
 			if(type == 0){
-				ToastUtil.showToast(mContext, "非个人用户权限");
+				Intent mIntent = new Intent(mContext,ResumeActivity.class);
+				startActivity(mIntent);
 			}
 			if(type==1){
-				Intent mIntent = new Intent(mContext,SendZhaoPinActivity.class);
-				startActivity(mIntent);
+				ToastUtil.showToast(mContext, "非企业用户权限");
+				
 			}
 			
 			break;
