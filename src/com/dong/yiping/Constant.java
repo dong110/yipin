@@ -44,7 +44,7 @@ public class Constant {
 	public static final int HANDLER_COLLECTJOB = 134;
 	public static final int HANDLER_TYPE_ISUSERNAME = 135;
 	public static final int HANDLER_TYPE_UPDATE_RESUME = 136;
-	public static final String HOST = "http://123.57.75.34:8080/users/api";
+	public static final String HOST = "http://123.57.75.34:8082/users/api";
 	
 	public static final String LOGIN = "/userLogin";//登录
 	public static final String REGIST = "/register";//注册

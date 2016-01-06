@@ -60,7 +60,7 @@ public class JobMessageActivity extends BaseActivity {
 	private TextView tv_jobmessage_workdate;
 	private TextView tv_jobmessage_welfare;
 	private TextView tv_jobmessage_content;
-	
+	private TextView tv_company;
 	private TextView tv_jobmessage_applyjob;
 	private TextView tv_jobmessage_collect;
 
@@ -84,12 +84,8 @@ public class JobMessageActivity extends BaseActivity {
 				JobDetailInfo bean = (JobDetailInfo) msg.obj;
 
 				//填充页面数据
-				tv_jobmessage_jobname.setText(bean.job);
-				tv_jobmessage_salary.setText(bean.wage);
-				tv_jobmessage_subdate.setText(bean.subdate);
-				tv_jobmessage_welfare.setText(bean.welfare);
-				tv_jobmessage_workdate.setText(bean.workdate);
-				tv_jobmessage_content.setText(bean.content);
+				
+				
 				break;
 				
 			case Constant.APPLYJOB_FAIL:
@@ -135,7 +131,7 @@ public class JobMessageActivity extends BaseActivity {
 		mContext = this;
 		getIntentData();
 		initView();
-		initData();
+		//initData();
 	}
 
 
@@ -148,6 +144,8 @@ public class JobMessageActivity extends BaseActivity {
 
 
 	private void initView() {
+		
+		
 		tv_title_center = $(R.id.tv_title_center);
 		tv_title_center.setText("招聘信息");
 		iv_title_left = $(R.id.iv_title_left, true);
@@ -167,9 +165,20 @@ public class JobMessageActivity extends BaseActivity {
 		tv_jobmessage_workdate = $(R.id.tv_jobmessage_workdate);
 		tv_jobmessage_welfare = $(R.id.tv_jobmessage_welfare);
 		tv_jobmessage_content = $(R.id.tv_jobmessage_content);
+		tv_company = $(R.id.tv_company);
 		
 		tv_jobmessage_applyjob = $(R.id.tv_jobmessage_applyjob, true);
 		tv_jobmessage_collect = $(R.id.tv_jobmessage_collect, true);
+		if(getJob != null){
+			tv_jobmessage_jobname.setText(getJob.getJob());
+			tv_jobmessage_salary.setText(getJob.getWage());
+			tv_jobmessage_subdate.setText(getJob.getSubdate());
+			tv_jobmessage_welfare.setText(getJob.getWelfare());
+			tv_jobmessage_workdate.setText(getJob.getWorkdate());
+			tv_jobmessage_content.setText(getJob.getContent());
+			tv_company.setText(getJob.getConpany());
+		}
+		
 	}
 	
 	

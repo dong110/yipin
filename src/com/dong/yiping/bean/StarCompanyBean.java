@@ -1,12 +1,21 @@
 package com.dong.yiping.bean;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class StarCompanyBean {
+public class StarCompanyBean implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1927150406572851432L;
 	private ArrayList<StarCom> list;
 	
-	public class StarCom{
+	public class StarCom implements Serializable{
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 8782394476986507125L;
 		private String birthday;
 		private String cards;
 		private String conpany;

@@ -26,6 +26,7 @@ import com.dong.yiping.R;
 import com.dong.yiping.activity.CompanyInfoActivity;
 import com.dong.yiping.activity.GetJobDetailActivity;
 import com.dong.yiping.activity.JobMessageActivity;
+import com.dong.yiping.activity.UserInfoActivity;
 import com.dong.yiping.adapter.OneFragmentAdapter;
 import com.dong.yiping.banner.BannerBaseView;
 import com.dong.yiping.banner.MainBannerView;
@@ -115,6 +116,7 @@ public class OneFragment extends RoboFragment{
 				setAdapter(++netNum);
 				break;
 			}
+			loadingUtil.hideDialog();
 		};
 	};
 
@@ -152,9 +154,6 @@ public class OneFragment extends RoboFragment{
 		ThreadPoolManager.getInstance().addTask(new NetRunnable(mHandler,getZhaopin,Constant.TOPER_TYPE_GETZHAOPIN));
 		ThreadPoolManager.getInstance().addTask(new NetRunnable(mHandler,starCom,Constant.TOPER_TYPE_STARCOM));
 		ThreadPoolManager.getInstance().addTask(new NetRunnable(mHandler,starStu,Constant.TOPER_TYPE_STARTSTU));
-		
-		
-		
 	}
 	
 	private synchronized  void setAdapter(int netNum){
@@ -194,13 +193,17 @@ public class OneFragment extends RoboFragment{
 					}else if(position==getJobBean.getList().size()+2){
 					}else if(position>getJobBean.getList().size()+2 && position<getJobBean.getList().size()+starCompanyBean.getList().size()+2){
 						
-						/*mIntent = new Intent(mContext,CompanyInfoActivity.class);
-						startActivity(mIntent);*/
+						mIntent = new Intent(mContext,CompanyInfoActivity.class);
+						mIntent.putExtra("Company", starCompanyBean.getList().get(position-getJobBean.getList().size()-3));
+						mIntent.putExtra("type", "oneFragment");
+						startActivity(mIntent);
 						
 					}else if(position==getJobBean.getList().size()+starCompanyBean.getList().size()+2){
 					}else if(position>getJobBean.getList().size()+starCompanyBean.getList().size()+2 && position<getJobBean.getList().size()+starCompanyBean.getList().size()+starStudentBean.getList().size()+3){
-						/*mIntent = new Intent(mContext,GetJobDetailActivity.class);
-						startActivity(mIntent);*/
+						mIntent = new Intent(mContext,UserInfoActivity.class);
+						mIntent.putExtra("student", starStudentBean.getList().get(position-getJobBean.getList().size()-starCompanyBean.getList().size()-3));
+						mIntent.putExtra("type", "oneFragment");
+						startActivity(mIntent);
 					}
 				}else{
 					if(position == 0){
@@ -214,14 +217,17 @@ public class OneFragment extends RoboFragment{
 						main_viewpager.setCurrentItem(2, false);
 					}else if(position==getZhaopin.getList().size()+2){
 					}else if(position>getZhaopin.getList().size()+2 && position<getZhaopin.getList().size()+starCompanyBean.getList().size()+2){
-						/*mIntent = new Intent(mContext,CompanyInfoActivity.class);
-						startActivity(mIntent);*/
+						mIntent = new Intent(mContext,CompanyInfoActivity.class);
+						mIntent.putExtra("Company", starCompanyBean.getList().get(position-getZhaopin.getList().size()-3));
+						mIntent.putExtra("type", "oneFragment");
+						startActivity(mIntent);
 					}else if(position==getZhaopin.getList().size()+starCompanyBean.getList().size()+2){
 					}else if(position>getZhaopin.getList().size()+starCompanyBean.getList().size()+2 && position<getZhaopin.getList().size()+starCompanyBean.getList().size()+starStudentBean.getList().size()+3){
-						/*mIntent = new Intent(mContext,GetJobDetailActivity.class);
-						startActivity(mIntent);*/
+						mIntent = new Intent(mContext,UserInfoActivity.class);
+						mIntent.putExtra("student", starStudentBean.getList().get(position-getZhaopin.getList().size()-starCompanyBean.getList().size()-3));
+						mIntent.putExtra("type", "oneFragment");
+						startActivity(mIntent);
 					}
-					
 				}
 			}
 		});

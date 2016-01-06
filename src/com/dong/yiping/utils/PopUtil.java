@@ -44,12 +44,12 @@ public class PopUtil {
 		//自适配长、框设置
 		dg = new PopupWindow(view, LayoutParams.WRAP_CONTENT,
 				LayoutParams.WRAP_CONTENT);
+		dg.setFocusable(true);
 		dg.setBackgroundDrawable(new BitmapDrawable());
-		dg.setOutsideTouchable(true);
+		
 		dg.setAnimationStyle(android.R.style.Animation_Dialog);
 		dg.update();
-		dg.setTouchable(true);
-		dg.setFocusable(true);
+		
 		dg.showAtLocation(view.getRootView(), Gravity.CENTER, 0,0);
 		backgroundAlpha(0.5f);
 		dg.setOnDismissListener(new OnDismissListener() {

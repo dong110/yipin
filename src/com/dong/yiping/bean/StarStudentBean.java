@@ -1,12 +1,21 @@
 package com.dong.yiping.bean;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class StarStudentBean {
+public class StarStudentBean implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1214006122708006520L;
 	private ArrayList<Student> list;
 	
-	public class Student{
+	public class Student implements Serializable{
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 2978741784749671398L;
 		private String birthday;
 		private String cards;
 		private String conpany;
