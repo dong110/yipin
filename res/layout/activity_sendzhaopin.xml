@@ -19,7 +19,6 @@
             
             <LinearLayout
                 android:layout_marginTop="10dp"
-                android:background="@color/writer"
                 android:padding="10dp"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
@@ -35,7 +34,6 @@
             </LinearLayout>
             
             <LinearLayout
-                android:background="@color/writer"
                 android:padding="10dp"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
@@ -50,7 +48,6 @@
                      />
             </LinearLayout>
             <LinearLayout
-                android:background="@color/writer"
                 android:padding="10dp"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
@@ -65,7 +62,6 @@
                      />
             </LinearLayout>
             <LinearLayout
-                android:background="@color/writer"
                 android:padding="10dp"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
@@ -81,7 +77,6 @@
             </LinearLayout>
             <LinearLayout 
                 android:padding="10dp"
-               android:background="@color/writer"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"

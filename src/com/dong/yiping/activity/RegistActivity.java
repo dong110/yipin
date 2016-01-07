@@ -190,37 +190,21 @@ public class RegistActivity extends BaseActivity {
 		
 		popUtil = new PopUtil(mContext);
 		
-		tv_IdName = $(R.id.tv_IdName);
 		rl_regist_stu = $(R.id.rl_regist_stu, true);
 		rl_regist_qiye = $(R.id.rl_regist_qiye, true);
 		iv_regist_stu = $(R.id.iv_regist_stu);
 		iv_regist_qiye = $(R.id.iv_regist_qiye);
-		tv_left_address = $(R.id.tv_left_addre);
 		
 		tv_regist_type = $(R.id.tv_regist_type);
 		et_regist_typename = $(R.id.et_regist_typename);
-		et_regist_card_num = $(R.id.et_regist_card_num);
-		et_regist_name = $(R.id.et_regist_name);
 		
 		et_regist_pwd = $(R.id.et_regist_pwd);
 		et_regist_pwd_confirm = $(R.id.et_regist_pwd_confirm);
 		et_regist_phonenum = $(R.id.et_regist_phonenum);
-		et_regist_email = $(R.id.et_regist_email);
-		et_regist_address = $(R.id.et_regist_address);
-		et_regist_stunum = $(R.id.et_regist_stunum);
 
-		ll_regist_school = $(R.id.ll_regist_school);
-		ll_regist_address = $(R.id.ll_regist_address);
-		ll_regist_stunum = $(R.id.ll_regist_stunum);
 		
 		tv_regist_regist_confirm = $(R.id.tv_regist_regist_confirm, true);
 
-		tv_regist_sheng = $(R.id.tv_regist_sheng);
-		tv_regist_shi = $(R.id.tv_regist_shi);
-		tv_regist_qu = $(R.id.tv_regist_qu);
-		rl_regist_sheng = $(R.id.rl_regist_sheng, true);
-		rl_regist_shi = $(R.id.rl_regist_shi, true);
-		rl_regist_qu = $(R.id.rl_regist_qu, true);
 		popUtil.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
@@ -292,31 +276,6 @@ public class RegistActivity extends BaseActivity {
 			// 确认注册
 			// 获取注册信息
 			regist_check();
-			break;
-			
-		case R.id.rl_regist_sheng:
-			//选择省
-			changeType = 1;
-			changeSheng();
-			break;
-			
-		case R.id.rl_regist_shi:
-			//选择市
-			changeType = 2;
-			if(sheng == null || TextUtils.isEmpty(sheng)){
-				ToastUtil.showToast(mContext, "请先选择省份");
-			}else{
-				changeShi();
-			}
-			break;
-		case R.id.rl_regist_qu:
-			//选择区
-			changeType = 3;
-			if(shi == null || TextUtils.isEmpty(shi)){
-				ToastUtil.showToast(mContext, "请先选择市");
-			}else{
-				changeQu();
-			}
 			break;
 		}
 	}

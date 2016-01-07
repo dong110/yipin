@@ -126,6 +126,14 @@
                android:launchMode="singleTask"
             android:screenOrientation="portrait"
             ></activity>
+        
+        <activity 
+            android:name="com.dong.yiping.activity.MyZhaoPinListActivity"
+             android:windowSoftInputMode="adjustPan"
+               android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            ></activity>
+        
     </application>
 
 </manifest>

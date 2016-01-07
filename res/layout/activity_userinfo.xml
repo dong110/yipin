@@ -16,16 +16,17 @@
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:orientation="vertical"
-            android:padding="10dp" >
+             >
 
             <LinearLayout
+                android:padding="10dp"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal" >
 
                 <TextView
                     style="@style/resume_text_one"
-                    android:text="姓名：" />
+                    android:text="真实姓名：" />
 
                 <EditText
                     
@@ -33,12 +34,26 @@
                     style="@style/resume_text_two"
                      />
             </LinearLayout>
-
-            <LinearLayout
+			<LinearLayout
+			   	android:padding="10dp"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:layout_marginTop="10dp"
+                android:orientation="horizontal" >
+
+                <TextView
+                    style="@style/resume_text_one"
+                    android:text="电话号码：" />
+
+                <EditText
+                    
+                    android:id="@+id/et_tel"
+                    style="@style/resume_text_two"
+                     />
+            </LinearLayout>
+            <LinearLayout
+                android:padding="10dp"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
                 android:orientation="horizontal" >
 
                 <TextView
@@ -52,44 +67,14 @@
             </LinearLayout>
 
             <LinearLayout
+                android:padding="10dp"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="top"
-                android:gravity="top"
                 android:orientation="horizontal" >
 
                 <TextView
                     style="@style/resume_text_one"
-                    android:gravity="top"
-                    android:text="自我评价：" />
-
-                <EditText
-                    android:id="@+id/et_pinjia"
-                    android:layout_width="0dp"
-                    android:layout_height="100dp"
-                    android:layout_gravity="bottom"
-                    android:layout_weight="7"
-                    android:background="@drawable/text_bg"
-                    android:gravity="top"
-                    android:hint="输入自我评价（140字以内）"
-                    android:padding="5dp" />
-                <EditText
-                    android:visibility="gone"
-                    android:id="@+id/et_pinjia_two"
-                    style="@style/resume_text_two" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:visibility="gone"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:layout_marginTop="20dp"
-                android:orientation="horizontal" >
-
-                <TextView
-                    style="@style/resume_text_one"
-                    android:text="求职意向：" />
+                    android:text="身份证号码：" />
 
                 <EditText
                     android:id="@+id/et_intedsy"
@@ -98,14 +83,14 @@
             </LinearLayout>
 
             <LinearLayout
-                 android:visibility="gone"
+                android:padding="10dp"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal" >
 
                 <TextView
                     style="@style/resume_text_one"
-                    android:text="工作经验：" />
+                    android:text="所在学校：" />
 
                 <EditText
                     android:id="@+id/working"
@@ -114,14 +99,14 @@
             </LinearLayout>
 
             <LinearLayout
-                 android:visibility="gone"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal" >
 
                 <TextView
+                    android:padding="10dp"
                     style="@style/resume_text_one"
-                    android:text="语言能力：" />
+                    android:text="所在年级：" />
 
                 <EditText
                     android:id="@+id/launager"
@@ -129,30 +114,6 @@
                      />
             </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:orientation="horizontal" >
-
-                <TextView
-                    style="@style/resume_text_one"
-                    android:text="我的头像：" />
-
-                <LinearLayout
-                    android:id="@+id/ll_upload_img"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="7"
-                    android:gravity="right" >
-
-                    <ImageView
-                        android:id="@+id/iv_icon"
-                        android:layout_width="80dp"
-                        android:layout_height="100dp"
-                        android:src="@drawable/resume_upload" />
-                </LinearLayout>
-            </LinearLayout>
         </LinearLayout>
     </com.dong.yiping.ui.BounceScrollView>
 	
@@ -162,17 +123,6 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         >
-     <TextView
-         android:visibility="gone"
-        android:id="@+id/tv_resume_xiugai"
-        android:layout_width="0dp"
-        android:layout_weight="1"
-        android:layout_height="wrap_content"
-        android:background="@color/one_blue"
-        android:gravity="center"
-        android:padding="10dp"
-        android:text="修改"
-        android:textSize="@dimen/text_size_18" />
     <TextView
         android:id="@+id/tv_resume_baocun"
         android:layout_width="0dp"

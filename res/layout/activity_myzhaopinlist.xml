@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    
+    <include layout="@layout/fragment_title_two"/>
+	
+    <com.dong.yiping.view.LJListView 
+        android:id="@+id/listview"
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        ></com.dong.yiping.view.LJListView>
+    <Button 
+        android:id="@+id/bt_fabuzhaopin"
+        android:textSize="@dimen/text_size_18"
+        android:textColor="@color/writer"
+        android:background="@color/yello"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:text="发布招聘"
+        />
+</LinearLayout>

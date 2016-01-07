@@ -54,6 +54,7 @@ import com.dong.yiping.activity.LoginActivity;
 import com.dong.yiping.activity.MainActivity;
 import com.dong.yiping.activity.ModifyPwdActivity;
 import com.dong.yiping.activity.MyResumesActivity;
+import com.dong.yiping.activity.MyZhaoPinListActivity;
 import com.dong.yiping.activity.PhoneIdentificationActivity;
 import com.dong.yiping.activity.UserCollectListActivity;
 import com.dong.yiping.activity.UserHistoryActivity;
@@ -166,14 +167,14 @@ public class ForeFragment extends BaseFragment implements OnClickListener {
 		LogUtil.i("username====", username + "");
 		Type = SPUtil.getInt(mContext, "type", 0);
 		if (Type == 0) {// 学生用户
-			myInfo.setVisibility(View.VISIBLE);
+			myInfo.setText("我的信息");
 			myResume.setText("我的简历");
 			tv_fragment_jilu.setText("职位申请记录");
 			
 		} else {// 公司用户
-			myResume.setText("公司信息");
+			myResume.setText("我的招聘");
 			tv_fragment_jilu.setText("面试邀请记录");
-			myInfo.setVisibility(View.GONE);
+			myInfo.setText("公司信息");
 		}
 	}
 
@@ -181,8 +182,14 @@ public class ForeFragment extends BaseFragment implements OnClickListener {
 	public void onClick(View view) {
 		switch (view.getId()) {
 		case R.id.myInfo:
-			mIntent = new Intent(mContext,UserInfoActivity.class);
-			startActivity(mIntent);
+			if (Type == 0) {// 学生用户
+				mIntent = new Intent(mContext,UserInfoActivity.class);
+				startActivity(mIntent);
+			}
+			if(Type == 1){
+				mIntent = new Intent(mContext,CompanyInfoActivity.class);
+				startActivity(mIntent);
+			}
 			
 			break;
 		case R.id.myResume:
@@ -190,7 +197,7 @@ public class ForeFragment extends BaseFragment implements OnClickListener {
 				mIntent = new Intent(mContext, MyResumesActivity.class);
 				
 			} else {// 公司用户
-				mIntent = new Intent(mContext, CompanyInfoActivity.class);
+				mIntent = new Intent(mContext, MyZhaoPinListActivity.class);
 			}
 			if(mIntent !=null){
 				mContext.startActivity(mIntent);

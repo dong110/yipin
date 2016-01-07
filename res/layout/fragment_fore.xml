@@ -48,7 +48,7 @@
             
             android:id="@+id/myInfo"
             style="@style/user_center_text"
-            android:text="我的信息"
+            android:text="我的信息/公司信息"
             />
          <include layout="@layout/line_user_center"/>
         
@@ -56,7 +56,7 @@
             
             android:id="@+id/myResume"
             style="@style/user_center_text"
-            android:text="我的简历/公司信息"
+            android:text="我的简历/我的招聘"
             />
          <include layout="@layout/line_user_center"/>
          

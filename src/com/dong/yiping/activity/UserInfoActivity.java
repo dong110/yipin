@@ -124,20 +124,12 @@ public class UserInfoActivity extends BaseActivity {
 		timeDialog = new TimeDialog(this, customTimeListener);
 		tv_title_center = $(R.id.tv_title_center);
 		iv_title_left = $(R.id.iv_title_left, true);
-		iv_icon = $(R.id.iv_icon);
-		List<Pic> listPic= MyApplication.getApplication().getUserBean().getObj().getPic();
-		/*if(listPic!= null && listPic.size()>0){
-			String img_url = MyApplication.getApplication().getUserBean().getObj().getPic().get(0).getOriginal();
-			Picasso.with(mContext).load(img_url).into(iv_icon);
-		}*/
 		
 		tv_resume_birthday = $(R.id.tv_resume_birthday, true);
-		tv_resume_xiugai = $(R.id.tv_resume_xiugai, true);
 		tv_resume_baocun = $(R.id.tv_resume_baocun, true);
 		ll_buts = $(R.id.ll_buts);
 		et_username = $(R.id.et_username);
 		et_pinjia = $(R.id.et_pinjia);
-		et_pinjia_two = $(R.id.et_pinjia_two);
 		et_intedsy = $(R.id.et_intedsy);
 		working = $(R.id.working);
 		launager = $(R.id.launager);
@@ -220,11 +212,6 @@ public class UserInfoActivity extends BaseActivity {
 		case R.id.tv_resume_baocun://保存信息
 			loadingUtil.showDialog();
 			saveUserInfo();
-			break;
-		case R.id.tv_resume_xiugai://修改信息
-			ToastUtil.showToast(mContext, "修改信息");
-			isChange = true;
-			setListener();
 			break;
 		}
 	}
