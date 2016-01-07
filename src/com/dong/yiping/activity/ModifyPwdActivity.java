@@ -8,6 +8,7 @@ import com.dong.yiping.R;
 import com.dong.yiping.bean.UserBean;
 import com.dong.yiping.utils.FormatUtils;
 import com.dong.yiping.utils.NetRunnable;
+import com.dong.yiping.utils.SPUtil;
 import com.dong.yiping.utils.ThreadPoolManager;
 import com.dong.yiping.utils.ToastUtil;
 
@@ -118,13 +119,13 @@ public class ModifyPwdActivity extends BaseActivity {
 			return;
 		}
 
-		String url = Constant.HOST + Constant.FINDPWD;
+		String url = Constant.HOST + Constant.MODIFYPWD;
 		Map<String, String> paramMap = new HashMap<String, String>();
 		// userId??
 		// TODO
-		paramMap.put("userId", "1");
+		paramMap.put("userId", SPUtil.getInt(mContext, "id", -1)+"");
 		paramMap.put("pwd", pwd);
-
+		
 		ThreadPoolManager.getInstance().addTask(
 				new NetRunnable(mHandler, url, paramMap,
 						Constant.TOPER_TYPE_MODIFYPWD));

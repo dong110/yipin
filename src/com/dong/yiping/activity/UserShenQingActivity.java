@@ -24,10 +24,13 @@ import com.dong.yiping.view.LJListView.IXListViewListener;
 import roboguice.inject.InjectExtra;
 import roboguice.inject.InjectView;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -43,7 +46,8 @@ public class UserShenQingActivity extends BaseActivity implements IXListViewList
 	@Inject Context mContext;
 	@InjectExtra(value="type",optional=true) int type; 
 	private boolean isShenQing= true;
-	
+	private GetJobBean getJobBean;
+	private GetZhaopinBean getZhaopin;
 	private YaoQingAdapter adapter;
 	private ThreeFragmentAdapter adapterTwo;
 	private List<ZhaoPin> listZhaopin;
@@ -59,7 +63,7 @@ public class UserShenQingActivity extends BaseActivity implements IXListViewList
 		public void handleMessage(android.os.Message msg) {
 			switch (msg.what) {
 			case Constant.HANDLER_TYPE_GETJOB:
-				GetJobBean getJobBean = (GetJobBean) msg.obj;
+				getJobBean = (GetJobBean) msg.obj;
 				if(isRefush){
 					resolveRefushData(getJobBean);
 				}else{
@@ -68,7 +72,7 @@ public class UserShenQingActivity extends BaseActivity implements IXListViewList
 				
 				break;
 			case Constant.HANDLER_TYPE_GETZHAOPIN:
-				GetZhaopinBean getZhaopin = (GetZhaopinBean) msg.obj;
+				getZhaopin = (GetZhaopinBean) msg.obj;
 				if(isRefush){
 					resolveRefushDataTwo(getZhaopin);
 				}else{
@@ -146,6 +150,28 @@ public class UserShenQingActivity extends BaseActivity implements IXListViewList
 				bt_yaoqing.setSelected(true);
 				isShenQing = false;
 				initData();
+			}
+		});
+		
+		listview.setOnItemClickListener(new OnItemClickListener() {
+			@Override
+			public void onItemClick(AdapterView<?> arg0, View arg1, int position,
+					long arg3) {
+				if(position>0){
+					position--;
+				}
+				if(type==0){
+					GetJob getJob = getJobBean.getList().get(position);
+					Intent mIntent = new Intent(mContext,JobMessageActivity.class);
+					mIntent.putExtra("getJob", getJob);
+					startActivity(mIntent);
+					
+				}else if(type==1){
+					ZhaoPin zhaoPin = getZhaopin.getList().get(position);
+					Intent mIntent = new Intent(mContext,GetJobDetailActivity.class);
+					mIntent.putExtra("ZhaoPin", zhaoPin);
+					startActivity(mIntent);
+				}
 			}
 		});
 		

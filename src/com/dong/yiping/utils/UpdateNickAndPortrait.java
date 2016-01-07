@@ -24,7 +24,7 @@ public class UpdateNickAndPortrait {
 	 * @return
 	 * @throws IOException
 	 */
-	public static void post(String actionUrl, Map<String, String> params,
+	public static String post(String actionUrl, Map<String, String> params,
 			Map<String, File> files) throws IOException {
 
 		String BOUNDARY = java.util.UUID.randomUUID().toString();
@@ -46,18 +46,21 @@ public class UpdateNickAndPortrait {
 
 		// 首先组拼文本类型的参数
 		StringBuilder sb = new StringBuilder();
-		for (Map.Entry<String, String> entry : params.entrySet()) {
-			sb.append(PREFIX);
-			sb.append(BOUNDARY);
-			sb.append(LINEND);
-			sb.append("Content-Disposition: form-data; name=\""
-					+ entry.getKey() + "\"" + LINEND);
-			sb.append("Content-Type: text/plain; charset=" + CHARSET + LINEND);
-			sb.append("Content-Transfer-Encoding: 8bit" + LINEND);
-			sb.append(LINEND);
-			sb.append(entry.getValue());
-			sb.append(LINEND);
+		if(params!=null){
+			for (Map.Entry<String, String> entry : params.entrySet()) {
+				sb.append(PREFIX);
+				sb.append(BOUNDARY);
+				sb.append(LINEND);
+				sb.append("Content-Disposition: form-data; name=\""
+						+ entry.getKey() + "\"" + LINEND);
+				sb.append("Content-Type: text/plain; charset=" + CHARSET + LINEND);
+				sb.append("Content-Transfer-Encoding: 8bit" + LINEND);
+				sb.append(LINEND);
+				sb.append(entry.getValue());
+				sb.append(LINEND);
+			}
 		}
+		
 
 		DataOutputStream outStream = new DataOutputStream(
 				conn.getOutputStream());
@@ -73,7 +76,7 @@ public class UpdateNickAndPortrait {
 				// name是post中传参的键 filename是文件的名称
 //				sb1.append("Content-Disposition: form-data; name=\"file\"; filename=\""
 //						+ file.getKey() + "\"" + LINEND);
-				sb1.append("Content-Disposition: form-data; name=\"original\"; filename=\""
+				sb1.append("Content-Disposition: form-data; name=\"file\"; filename=\""
 						+ "img.jpg" + "\""
 						 + LINEND);
 				sb1.append("Content-Type:image/x-png ; charset="        //application/octet-stream
@@ -97,6 +100,7 @@ public class UpdateNickAndPortrait {
 			outStream.write(end_data);
 			outStream.flush();
 			// 得到响应码
+			@SuppressWarnings("unused")
 			int res = conn.getResponseCode();
 				in = conn.getInputStream();
 				int ch;
@@ -107,7 +111,8 @@ public class UpdateNickAndPortrait {
 				Log.i("UpdateNickAndPortrait", sb2.toString());
 			outStream.close();
 			conn.disconnect();
-			
+			return sb2.toString();
 		}
+		return null;
 	}
 }

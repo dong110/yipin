@@ -56,7 +56,7 @@ public class NetUtil {
 		        }
 		        if(content != null){
 		        	content = content.substring(0, content.length()-1);
-			        out.writeBytes(content);
+			        out.write(content.getBytes("UTF-8"));
 		        }
 		        
 		        out.flush();

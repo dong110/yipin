@@ -20,9 +20,12 @@ import android.widget.AdapterView.OnItemClickListener;
 import com.dong.yiping.Constant;
 import com.dong.yiping.MyApplication;
 import com.dong.yiping.R;
+import com.dong.yiping.adapter.ComHistoryAdapter;
 import com.dong.yiping.adapter.UserCollectListAdapter;
 import com.dong.yiping.bean.GetJobBean;
+import com.dong.yiping.bean.GetZhaopinBean;
 import com.dong.yiping.bean.GetJobBean.GetJob;
+import com.dong.yiping.bean.GetZhaopinBean.ZhaoPin;
 import com.dong.yiping.utils.LoadingUtil;
 import com.dong.yiping.utils.NetRunnable;
 import com.dong.yiping.utils.SPUtil;
@@ -39,6 +42,7 @@ public class UserCollectListActivity extends BaseActivity implements IXListViewL
 	@InjectView(R.id.iv_title_left) ImageView iv_title_left;
 	
 	private List<GetJob> listGetJob;
+	private List<ZhaoPin> listZhaopin;
 	private boolean isRefush = true;
 	private int total;//总的条数
 	private int totalPages=0;//总的页数
@@ -46,9 +50,9 @@ public class UserCollectListActivity extends BaseActivity implements IXListViewL
 	private int currentNum=0;//当前第几条
 	private int pagerNum=10;//每页的条数
 	private LoadingUtil loadingUtil;
-	
-	private UserCollectListAdapter adapter;
-	
+	private int type = -1;
+	private UserCollectListAdapter adapter;//学生收藏
+	private ComHistoryAdapter ComAdapter;//企业收藏
 	private Handler mHandler = new Handler(){
 		public void handleMessage(android.os.Message msg) {
 			switch (msg.what) {
@@ -61,7 +65,17 @@ public class UserCollectListActivity extends BaseActivity implements IXListViewL
 				}
 				
 				break;
-				
+			case Constant.HANDLER_TYPE_GETZHAOPIN:
+				GetZhaopinBean getZhaopin = (GetZhaopinBean) msg.obj;
+				if(getZhaopin==null){
+					ToastUtil.showToast(mContext, "没有更多数据");
+				}
+				if(isRefush){
+					resolveRefushData(getZhaopin);
+				}else{
+					resolveLoadData(getZhaopin);
+				}
+				break;
 			case Constant.NET_ERROR:
 				//网络错误
 				ToastUtil.showToast(mContext, "网络错误！");
@@ -102,16 +116,29 @@ public class UserCollectListActivity extends BaseActivity implements IXListViewL
 		totalPages=0;
 		
 		String url = Constant.HOST+getLoadUrl(currentNum,pagerNum);
-		ThreadPoolManager.getInstance().addTask(new NetRunnable(mHandler,url,Constant.TOPER_TYPE_GETJOB));
+		if(type==0){
+			ThreadPoolManager.getInstance().addTask(new NetRunnable(mHandler,url,Constant.TOPER_TYPE_GETJOB));
+		}
+		if(type==1){
+			ThreadPoolManager.getInstance().addTask(new NetRunnable(mHandler,url,Constant.TOPER_TYPE_GETZHAOPIN));
+		}
 		
 	}
 	private void initView() {
-		
+		type = SPUtil.getInt(mContext, "type", -1);
 		loadingUtil = new LoadingUtil(mContext);
 		tv_title_center.setText("收藏夹");
 		listGetJob = new ArrayList<GetJobBean.GetJob>();
+		listZhaopin = new ArrayList<ZhaoPin>();
+		ComAdapter = new ComHistoryAdapter(mContext, listZhaopin);
 		adapter = new UserCollectListAdapter(mContext,listGetJob);
-		listview.setAdapter(adapter);
+		if(type==0){
+			listview.setAdapter(adapter);
+		}
+		if(type==1){
+			listview.setAdapter(ComAdapter);
+		}
+		
 		
 		listview.setPullLoadEnable(false,""); //如果不想让脚标显示数据可以mListView.setPullLoadEnable(false,null)或者mListView.setPullLoadEnable(false,"")
 		listview.setPullRefreshEnable(true);
@@ -126,14 +153,32 @@ public class UserCollectListActivity extends BaseActivity implements IXListViewL
 					position--;
 				}
 				
-				Intent intent = new Intent(UserCollectListActivity.this,JobMessageActivity.class);
+				/*Intent intent = new Intent(UserCollectListActivity.this,JobMessageActivity.class);
 				intent.putExtra("bannerListBean", MyApplication.getApplication().getBannerListBean());
 				intent.putExtra("getJob",listGetJob.get(position));
 				
-				startActivity(intent);
+				startActivity(intent);*/
+				
+				if(type==0){
+					Intent intent = new Intent(mContext,JobMessageActivity.class);
+					intent.putExtra("bannerListBean", MyApplication.getApplication().getBannerListBean());
+					intent.putExtra("getJob",listGetJob.get(position));
+					startActivity(intent);
+				}
+				if(type==1){
+					Intent mIntent = new Intent(mContext,GetJobDetailActivity.class);
+					mIntent.putExtra("ZhaoPin", listZhaopin.get(position));
+					startActivity(mIntent);
+				}
+				
 			}
 		});
 	}
+	
+	private void notifyComAdapter(List<ZhaoPin> listzhaoPin) {
+		ComAdapter.notyfyList(listZhaopin);
+	}
+	
 	/**
 	 * 刷新Listview数据
 	 * @param listGetJob
@@ -189,10 +234,61 @@ public class UserCollectListActivity extends BaseActivity implements IXListViewL
 		
 		
 	}
+	/**
+	 * 解析刷新数据  企业数据
+	 * @param getJobBean 
+	 */
+	private void resolveRefushData(GetZhaopinBean getZhaopin){
+		if(getZhaopin!=null && getZhaopin.getList()!=null &&getZhaopin.getList().size()>0){
+			total = getZhaopin.getTotal();
+			listZhaopin.clear();
+			for(ZhaoPin job : getZhaopin.getList()){
+				listZhaopin.add(job);
+			}
+			notifyComAdapter(listZhaopin);
+			setListView(total);
+		}
+		
+	}
 	
+	
+
+	/**
+	 * 解析加载数据  企业数据
+	 * @param getJobBean
+	 */
+	private void resolveLoadData(GetZhaopinBean getZhaopin){
+		if(getZhaopin!=null && getZhaopin.getList()!=null &&getZhaopin.getList().size()>0){
+			for(ZhaoPin zhaoPin : getZhaopin.getList()){
+				listZhaopin.add(zhaoPin);
+			}
+			ComAdapter.addList(listZhaopin);
+			listview.stopRefresh();
+			listview.stopLoadMore();
+			listview.setRefreshTime("刚刚");
+			if(currentPage < totalPages){
+				listview.setPullLoadEnable(true,"加载更多");
+			}else{
+				listview.setPullLoadEnable(false,"没有更多数据");
+			}
+		}else{
+			listview.stopRefresh();
+			listview.stopLoadMore();
+			listview.setRefreshTime("刚刚");
+			listview.setPullLoadEnable(false, null);
+		}
+	}
 	private String getLoadUrl(int currentNum,int pageNum){
-		//recruitCollectionList?userid=3&currentNum=0&pageNum=10
-		String str = "/recruitCollectionList?userid="+SPUtil.getInt(mContext, "id", -1)+"&currentNum="+currentNum+"&pageNum="+pageNum;
+		//recruitCollectionList?userid=3&currentNum=0&pageNum=10、、学生
+		//http://123.57.75.34:8082/users/api/resumeCollectionList?userid=1&currentNum=0&pageNum=5//企业
+		String str = null;
+		if(type==0){
+			str = "/recruitCollectionList?userid="+SPUtil.getInt(mContext, "id", -1)+"&currentNum="+currentNum+"&pageNum="+pageNum;
+		}
+		if(type==1){
+			str = "/resumeCollectionList?userid="+SPUtil.getInt(mContext, "id", -1)+"&currentNum="+currentNum+"&pageNum="+pageNum;
+		}
+		
 		return str;
 	}
 	

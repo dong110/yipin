@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.dong.yiping.Constant;
 import com.dong.yiping.R;
+import com.dong.yiping.bean.GetJobBean.GetJob;
 import com.dong.yiping.bean.GetZhaopinBean.ZhaoPin;
 import com.dong.yiping.bean.JobDetailBean;
 import com.dong.yiping.bean.UserBean;
@@ -31,24 +32,34 @@ public class GetJobDetailActivity extends BaseActivity{
 	private ImageView iv_resume_icon;
 	private TextView tv_resume_invite;
 	private TextView tv_resume_collect;
+	private TextView tv_birthday;
 	private TextView user_name;
 	private TextView tv_intention;
 	private TextView working;
 	private TextView subdate;
+	private TextView lange;
+	private TextView able;
 	private int type;//用户类型
 	private Context mContext;
-	
+	private JobDetailBean jobbean;
 	private Handler mHandler = new Handler(){
+		
+
 		public void handleMessage(android.os.Message msg) {
 			switch (msg.what) {
 			case Constant.HANDLER_TYPE_GETJOB_DETAIL:
-				JobDetailBean Jobbean = (JobDetailBean) msg.obj;
-				changeJobInfo(Jobbean);
+				jobbean = (JobDetailBean) msg.obj;
+				//获取到工作信息后获取个人信息
+				String user_info = Constant.HOST + Constant.USER_INFO;
+				Map<String, String> mapUser = new HashMap<String, String>();
+				mapUser.put("id", ""+jobbean.getUserid());
+				ThreadPoolManager.getInstance().addTask(new NetRunnable(mHandler, user_info, mapUser, Constant.TOPER_TYPE_GET_USERINFO));
+				
 				break;
 			case Constant.HANDLER_TYPE_GET_USERINFO:
 				UserBean bean = (UserBean) msg.obj;
 				changeUserInfo(bean);
-				
+				changeJobInfo(jobbean);
 				break;
 			case Constant.HANDLER_COLLECTJOB:
 				//收藏简历和收藏工作数据类型一样
@@ -71,6 +82,7 @@ public class GetJobDetailActivity extends BaseActivity{
 
 	};
 	private ZhaoPin zhaoPin;
+	private GetJob getJob;
 	
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -88,22 +100,19 @@ public class GetJobDetailActivity extends BaseActivity{
 	private void getIntentData() {
 		zhaoPin = (ZhaoPin) getIntent().getSerializableExtra("ZhaoPin");
 		
-		
 	}
 
 	private void initData() {
 		//http://123.57.75.34:8080/users/api/userInfo?id=8
 		//http://123.57.75.34:8080/users/api/resumeSimple?id=8
-		String user_info = Constant.HOST + Constant.USER_INFO;
-		Map<String, String> mapUser = new HashMap<String, String>();
-		mapUser.put("id", ""+SPUtil.getInt(mContext, "id", 1));
+		
 		int zhaoPinId = -1;
 		if(zhaoPin!=null){
 			zhaoPinId = zhaoPin.getId();
 		}
 		String get_job = Constant.HOST + Constant.GET_JOB_DETAIL+zhaoPinId;
 		ThreadPoolManager.getInstance().addTask(new NetRunnable(mHandler, get_job, Constant.TOPER_TYPE_GETJOB_DETAIL));
-		ThreadPoolManager.getInstance().addTask(new NetRunnable(mHandler, user_info, mapUser, Constant.TOPER_TYPE_GET_USERINFO));
+		
 	}
 
 	private void initView() {
@@ -112,13 +121,14 @@ public class GetJobDetailActivity extends BaseActivity{
 		iv_title_left = $(R.id.iv_title_left, true);
 		iv_title_right = $(R.id.iv_title_right, true);
 		tv_title_center.setText("求职详情");
-		
+		tv_birthday= $(R.id.tv_birthday, true);
 		iv_resume_icon = $(R.id.iv_resume_icon);
 		user_name = $(R.id.user_name);
 		tv_intention = $(R.id.tv_intention);
 		working = $(R.id.working);
 		subdate = $(R.id.subdate);
-		
+		lange = $(R.id.lange);
+		able = $(R.id.able);
 		tv_resume_invite = $(R.id.tv_resume_invite, true);
 		tv_resume_collect = $(R.id.tv_resume_collect, true);
 	}
@@ -129,7 +139,8 @@ public class GetJobDetailActivity extends BaseActivity{
 	 */
 	private void changeUserInfo(UserBean bean) {
 		if(bean!=null){
-			user_name.setText(bean.getObj().getUsername());
+			user_name.setText(bean.getObj().getUserInfo().getName());
+			tv_birthday.setText(bean.getObj().getUserInfo().getBirthday());
 		}
 		
 		
@@ -143,8 +154,9 @@ public class GetJobDetailActivity extends BaseActivity{
 			tv_intention.setText("求职意向："+jobbean.getIntention());
 			working.setText("工作经历："+jobbean.getWorking());
 			subdate.setText("修改时间："+jobbean.getSubdate());
+			lange.setText("语言水平："+jobbean.getLange());
+			able.setText("工作能力："+jobbean.getAnble());
 		}
-		
 	};
 	
 	@Override
@@ -205,9 +217,8 @@ public class GetJobDetailActivity extends BaseActivity{
 			paramMap.put("id", zhaoPin.getId()+"");//招聘ID
 		}
 		paramMap.put("type", "0");//0 投简历 1邀面试
-		paramMap.put("userid", SPUtil.getInt(mContext, "id", -1)+"");//用户id
+		paramMap.put("userid", jobbean.getUserid()+"");//用户id
 		ThreadPoolManager.getInstance().addTask(new NetRunnable(mHandler, url,paramMap,Constant.TOPER_TYPE_COLLECTJOB));
-		
 	}
 
 	/**

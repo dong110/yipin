@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.dong.yiping.Constant;
+import com.dong.yiping.MyApplication;
 import com.dong.yiping.R;
 import com.dong.yiping.bean.JobDetailInfo;
 import com.dong.yiping.bean.GetZhaopinBean.ZhaoPin;
@@ -132,6 +133,13 @@ public class ResumeActivity extends BaseActivity {
 		et_launager = $(R.id.launager);
 		ll_upload_img = $(R.id.ll_upload_img,true);
 		
+		et_username.setFocusable(false);
+		et_username.setFocusableInTouchMode(false);
+		
+		et_pinjia.setFocusable(false);
+		et_pinjia.setFocusableInTouchMode(false);
+		tv_resume_birthday.setClickable(false);
+		
 		if(resumen != null){
 			et_username.setText(resumen.getName());
 			et_intedsy.setText(resumen.getIntention());
@@ -141,6 +149,8 @@ public class ResumeActivity extends BaseActivity {
 			tv_title_center.setText("修改简历");
 		}else{
 			tv_title_center.setText("添加简历");
+			et_username.setText(MyApplication.getApplication().getUserBean().getObj().getUserInfo().getName());
+			tv_resume_birthday.setText(MyApplication.getApplication().getUserBean().getObj().getUserInfo().getBirthday());
 		}
 		
 	}

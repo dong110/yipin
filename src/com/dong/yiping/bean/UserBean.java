@@ -13,7 +13,7 @@ public class UserBean {
 		private int id;
 		private ArrayList<Pic> pic;
 		
-		private class Pic{
+		public class Pic{
 			private int id;
 			private int isdefault;
 			private String original;

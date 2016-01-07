@@ -9,8 +9,7 @@
 
     <com.dong.yiping.ui.BounceScrollView
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/hand"
+        android:layout_height="0dp"
         android:layout_weight="1" >
 
         <LinearLayout
@@ -27,16 +26,16 @@
 
                 <ImageView
                     android:id="@+id/iv_resume_icon"
-                    android:layout_width="60dp"
-                    android:layout_height="80dp"
+                    android:layout_width="80dp"
+                    android:layout_height="100dp"
                     android:src="@drawable/applyinfo_img" />
 
                 <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="70dp"
+                    android:layout_width="3dp"
+                    android:layout_height="90dp"
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="20dp"
-                    android:src="@drawable/common_footer_bg" />
+                    android:background="@drawable/common_footer_bg" />
 
                 <LinearLayout
                     android:layout_width="fill_parent"
@@ -45,31 +44,27 @@
                     android:orientation="vertical" >
 
                     <TextView
+                        android:textSize="@dimen/text_size_18"
                         android:id="@+id/user_name"
                         android:layout_width="wrap_content"
                         android:layout_height="0dp"
                         android:layout_weight="2"
                         android:gravity="center"
                         android:textColor="@color/red"
-                        android:text="个人基本信息" />
+                        android:text="姓名" />
 
                     <TextView
+                        android:id="@+id/tv_birthday"
                         android:layout_width="wrap_content"
                         android:layout_height="0dp"
                         android:layout_weight="1"
-                        android:text="文本信息文本信息" />
+                        android:text="生日" />
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="0dp"
-                        android:layout_weight="1"
-                        android:text="文本信息文本信息" />
                 </LinearLayout>
             </LinearLayout>
             
             <TextView 
                 android:id="@+id/tv_intention"
-                android:background="@color/writer"
                 android:textSize="@dimen/text_size_17"
                 android:padding="10dp"
                 android:textColor="@color/red"
@@ -78,30 +73,36 @@
                 android:text="求职意向"
                 />
             <TextView 
+                
                 android:id="@+id/working"
-                android:background="@color/writer"
-                android:paddingLeft="10dp"
+                 android:padding="10dp"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:text="工作经历："
                 />
-            <LinearLayout 
-                android:padding="10dp"
-                android:orientation="horizontal"
+            
+                <TextView 
+                    android:padding="10dp"
+                    android:id="@+id/subdate"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/writer"
-                >
-                <TextView 
-                    android:id="@+id/subdate"
-                android:background="@color/writer"
-                android:layout_width="0dp"
-                android:layout_weight="3"
-                android:layout_height="wrap_content"
-                android:text="修改时间："
+                android:text="发布时间："
                 />
                 
-            </LinearLayout>
+            <TextView 
+                android:padding="10dp"
+                    android:id="@+id/lange"
+               android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="语言水平："
+                />
+            <TextView 
+                android:id="@+id/able"
+                 android:padding="10dp"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="工作能力："
+                />
         </LinearLayout>
     </com.dong.yiping.ui.BounceScrollView>
 

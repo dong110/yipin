@@ -17,6 +17,8 @@ import org.apache.http.entity.mime.HttpMultipartMode;
 import org.apache.http.entity.mime.content.FileBody;
 import org.apache.http.entity.mime.content.StringBody;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import roboguice.inject.InjectView;
 import android.content.Context;
@@ -26,8 +28,10 @@ import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Handler;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
+import android.text.TextUtils;
 import android.util.Base64;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -42,6 +46,7 @@ import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import com.dong.yiping.Constant;
+import com.dong.yiping.MyApplication;
 import com.dong.yiping.R;
 import com.dong.yiping.activity.ComCollectListActivity;
 import com.dong.yiping.activity.CompanyInfoActivity;
@@ -54,10 +59,16 @@ import com.dong.yiping.activity.UserCollectListActivity;
 import com.dong.yiping.activity.UserHistoryActivity;
 import com.dong.yiping.activity.UserInfoActivity;
 import com.dong.yiping.activity.UserShenQingActivity;
+import com.dong.yiping.bean.UserBean.Obj.Pic;
+import com.dong.yiping.utils.LoadingUtil;
 import com.dong.yiping.utils.LogUtil;
 import com.dong.yiping.utils.MultipartEntityExt;
+import com.dong.yiping.utils.NetRunnable;
 import com.dong.yiping.utils.SPUtil;
+import com.dong.yiping.utils.ThreadPoolManager;
+import com.dong.yiping.utils.ToastUtil;
 import com.dong.yiping.utils.UpdateNickAndPortrait;
+import com.squareup.picasso.Picasso;
 
 public class ForeFragment extends BaseFragment implements OnClickListener {
 
@@ -90,7 +101,27 @@ public class ForeFragment extends BaseFragment implements OnClickListener {
 	private Context mContext;
 	private int Type;
 	private String username;
-
+	private LoadingUtil loadingUtil;
+	
+	private Handler mHandler = new Handler(){
+		public void handleMessage(android.os.Message msg) {
+			switch (msg.what) {
+			case Constant.HANDLER_TYPE_SAVE_USERICON:
+				int status = (Integer) msg.obj;
+				if(status == 0){
+					ToastUtil.showToast(mContext, "上传图片成功");
+					iv_fragmentfore_icon.setImageBitmap(lastPhoto);
+				}else{
+					ToastUtil.showToast(mContext, "上传图片失败");
+				}
+				break;
+			default:
+				break;
+			}
+			loadingUtil.hideDialog();
+		};
+	};
+	
 	public View onCreateView(LayoutInflater inflater,
 			@Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -124,8 +155,14 @@ public class ForeFragment extends BaseFragment implements OnClickListener {
 
 	private void initView() {
 		initImageSelect();
-		username = SPUtil.getString(mContext, "username", "");
-		tv_fragmentfore_username.setText(username);
+		loadingUtil = new LoadingUtil(mContext);
+		List<Pic> listPic= MyApplication.getApplication().getUserBean().getObj().getPic();
+		if(listPic!= null && listPic.size()>0){
+			String img_url = MyApplication.getApplication().getUserBean().getObj().getPic().get(0).getOriginal();
+			Picasso.with(mContext).load(img_url).into(iv_fragmentfore_icon);
+		}
+		
+		tv_fragmentfore_username.setText(MyApplication.getApplication().getUserBean().getObj().getUserInfo().getName());
 		LogUtil.i("username====", username + "");
 		Type = SPUtil.getInt(mContext, "type", 0);
 		if (Type == 0) {// 学生用户
@@ -177,8 +214,6 @@ public class ForeFragment extends BaseFragment implements OnClickListener {
 		case R.id.tv_collection:
 			mIntent = new Intent(mContext, UserCollectListActivity.class);
 			if (Type == 0) {// 学生用户
-				
-
 			} else {// 公司用户
 				//mIntent = new Intent(mContext, ComCollectListActivity.class);
 			}
@@ -425,12 +460,12 @@ public class ForeFragment extends BaseFragment implements OnClickListener {
 				}
 
 				// 用户头像图片显示==================================================
-				iv_fragmentfore_icon.setImageBitmap(lastPhoto);
+				
 				
 				//String ImageString = getPstr(filePath);
 				// 上传用户图片
+				loadingUtil.showDialog();
 				upLoadImage(file);
-
 			}
 
 		}
@@ -444,66 +479,33 @@ public class ForeFragment extends BaseFragment implements OnClickListener {
 		new Thread(){
 			public void run() {
 				try {
-					String actionUrl = Constant.HOST + Constant.UPLOAD_USER_IMG;
-					Map<String, String> params = new HashMap<String, String>();
-					//params.put("userId", SPUtil.getInt(mContext, "id", -1)+"");
-					params.put("userid", "4");
-					params.put("isdefault", "1");
-					params.put("thumbnail", "1");
-					List<File> fileList = new ArrayList<File>();
-					fileList.add(file);
-					
+					String actionUrl = Constant.UPLOAD_FILE;
 					Map<String, File> files = new HashMap<String, File>();
-					files.put("original", file);
-					updateFilesTwo(actionUrl, params, fileList);				
-					//UpdateNickAndPortrait.post(actionUrl, params, files);
-					//UploadFileUtil.post(actionUrl, params, fileList);
+					files.put("file", file);
+					String result = UpdateNickAndPortrait.post(actionUrl, null, files);
+					JSONObject js= new JSONObject(result);
+					//String status = js.getString("status");
+					String fileName = js.getString("fileName");
+					if(fileName!=null && !TextUtils.isEmpty(fileName)){
+						String url = Constant.HOST + Constant.UPLOAD_USER_IMG;
+						Map<String, String> paramsMap = new HashMap<String, String>();
+						paramsMap.put("userid", SPUtil.getInt(mContext, "id", -1)+"");
+						paramsMap.put("isdefault", "1");
+						paramsMap.put("thumbnail", "1");
+						paramsMap.put("original", fileName);
+						ThreadPoolManager.getInstance().addTask(new NetRunnable(mHandler, url, paramsMap, Constant.TOPER_TYPE_SAVE_USERICON));
+					}
+					
 				} catch (Exception e) {
+					mHandler.sendEmptyMessage(0);
+					loadingUtil.hideDialog();
 					e.printStackTrace();
 				}
 				
 			};
 		}.start();
 	}
-	public int updateFilesTwo(String url,Map<String, String> map_parm,List<File> files){
-		int code = 1;
-		try {
-			HttpClient httpclient = new DefaultHttpClient();
-			 HttpPost httpPost = new HttpPost(url);
-			 MultipartEntityExt mulentity = new MultipartEntityExt(HttpMultipartMode.BROWSER_COMPATIBLE,
-					 new MultipartEntityExt.ProgressListener() {
-						
-						@Override
-						public void transferred(long totalUploaded) {
-							 /*int per = (int) (((float) totalUploaded / (float) mAvatarLength) * 100);
-			                    if (per > 100){
-			                        per = 100;
-			                    }*/
-			                    //onProgressUpdate(per);
-			                    
-							
-						}
-					});
-			 for(String str:map_parm.keySet()){
-				 mulentity.addPart(str, new StringBody(map_parm.get(str)));
-			 }
-			 
-			 for(File file:files){
-				 mulentity.addPart("original", new FileBody(new File(file.getAbsolutePath())));
-			 }
-			 httpPost.setEntity(mulentity);
-			 HttpResponse response = httpclient.execute(httpPost);
-			 int state = response.getStatusLine().getStatusCode();
-			 if(state == 200){
-				 code=0;
-			 }
-
-		} catch (Exception e) {
-			code=1;
-			e.printStackTrace();
-		}
-		return code;
-	}
+	
 	// 将头像转换成Base64编码
 	public String getPstr(String pathname) {
 

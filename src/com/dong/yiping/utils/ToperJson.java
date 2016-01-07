@@ -103,8 +103,51 @@ public class ToperJson {
 			toperUpdateResume(result);
 			
 			break;
+		case Constant.TOPER_TYPE_SAVE_USERICON://保存用户头像
+			toperSaveUserImg(result);
+			
+			break;
+		case Constant.TOPER_TYPE_SAVE_USERINFO://保存用户信息
+			toperSaveUserInfo(result);
+			break;
 		}
 	}
+	/**
+	 * 保存用户信息
+	 * @param result
+	 */
+	private void toperSaveUserInfo(String result) {
+		Message msg = handler.obtainMessage();
+		msg.what = Constant.HANDLER_TYPE_SAVE_USERINFO;
+		try {
+			JSONObject js = new JSONObject(result);
+			int status = js.getInt("status");
+			msg.obj = status;
+		} catch (Exception e) {
+			msg.obj = 1;
+			e.printStackTrace();
+		}
+		handler.sendMessage(msg);
+	}
+
+	/**
+	 * 保存用户头像
+	 * @param result 
+	 */
+	private void toperSaveUserImg(String result) {
+		Message msg = handler.obtainMessage();
+		msg.what = Constant.HANDLER_TYPE_SAVE_USERICON;
+		try {
+			JSONObject js = new JSONObject(result);
+			int status = js.getInt("status");
+			msg.obj = status;
+		} catch (Exception e) {
+			msg.obj = 1;
+			e.printStackTrace();
+		}
+		handler.sendMessage(msg);
+	}
+
 	/**
 	 * 跟新简历
 	 * @param result

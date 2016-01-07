@@ -17,6 +17,7 @@ import com.dong.yiping.bean.GetZhaopinBean;
 import com.dong.yiping.bean.GetJobBean.GetJob;
 import com.dong.yiping.bean.GetZhaopinBean.ZhaoPin;
 import com.dong.yiping.bean.JobDetailInfo;
+import com.dong.yiping.utils.DisplayUtils;
 import com.dong.yiping.utils.LoadingUtil;
 import com.dong.yiping.utils.NetRunnable;
 import com.dong.yiping.utils.SPUtil;
@@ -225,7 +226,7 @@ public class JobMessageActivity extends BaseActivity {
 	}
 	//获取简历列表
 	private void getResumeList(){
-		String url = Constant.HOST + Constant.GET_Resume_List + "7";
+		String url = Constant.HOST + Constant.GET_Resume_List + SPUtil.getInt(mContext, "id", -1)+"&status=1";
 		//String url = Constant.HOST + Constant.GET_Resume_List + SPUtil.getInt(mContext, "id", -1);
 		ThreadPoolManager.getInstance().addTask(new NetRunnable(mHandler, url, Constant.TOPER_TYPE_GET_RESUME_LIST));
 	}
@@ -238,6 +239,7 @@ public class JobMessageActivity extends BaseActivity {
 		//自适配长、框设置
 		final PopupWindow dg = new PopupWindow(view, LayoutParams.WRAP_CONTENT,
 				LayoutParams.WRAP_CONTENT);
+		dg.setHeight(DisplayUtils.getScreenH(mContext)/2);
 		ListView listView = (ListView) view.findViewById(R.id.pop_listview);
 		listView.setAdapter(adapter);
 		listView.setOnItemClickListener(new OnItemClickListener() {

@@ -48,7 +48,6 @@ public class CompanyInfoActivity extends BaseActivity {
 				ToastUtil.showToast(mContext, "职位公司数据为空！");
 				break;
 			case Constant.NET_SUCCESS:
-
 				//填充页面数据
 
 				break;

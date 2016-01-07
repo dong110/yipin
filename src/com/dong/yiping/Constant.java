@@ -26,6 +26,8 @@ public class Constant {
 	public static final int TOPER_TYPE_COLLECTJOB = 117;
 	public static final int TOPER_TYPE_ISUSERNAME = 118;
 	public static final int TOPER_TYPE_UPDATE_RESUME = 119;
+	public static final int TOPER_TYPE_SAVE_USERINFO = 10;
+	public static final int TOPER_TYPE_SAVE_USERICON= 11;
 	
 	public static final int HANDLER_BANNERLIST = 120;
 	public static final int HANDLER_TYPE_GETJOB = 121;
@@ -44,6 +46,9 @@ public class Constant {
 	public static final int HANDLER_COLLECTJOB = 134;
 	public static final int HANDLER_TYPE_ISUSERNAME = 135;
 	public static final int HANDLER_TYPE_UPDATE_RESUME = 136;
+	public static final int HANDLER_TYPE_SAVE_USERINFO = 137;
+	public static final int HANDLER_TYPE_SAVE_USERICON= 138;
+	
 	public static final String HOST = "http://123.57.75.34:8082/users/api";
 	
 	public static final String LOGIN = "/userLogin";//登录
@@ -72,8 +77,8 @@ public class Constant {
 	public static final String APPLYJOB = "/noticeUpdate";//申请接口
 	public static final String COLLECT = "/collectionUpdate";//收藏接口
 	public static final String UPLOAD_IMG = "/imageUpload";//上传图片
-	public static final String UPLOAD_USER_IMG = "/infoPicUpdate";//上传用户头像
+	public static final String UPLOAD_USER_IMG = "/infoPicUpdate";//保存用户头像
 	public static final String UPDATE_RESUME = "/resumeUpdate";//修改简历
-	
-	
+	public static final String UPLOAD_FILE = "http://123.57.75.34:8080/imageUpload";
+	public static final String UPDATE_UNSER_INFO = "/userInfoUpdate";//跟新用户信息
 }

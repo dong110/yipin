@@ -31,7 +31,7 @@
 
                 <EditText
                     style="@style/resume_text_two"
-                    android:text="产品经理（实习生）" />
+                     />
             </LinearLayout>
             
             <LinearLayout
@@ -47,7 +47,7 @@
 
                 <EditText
                     style="@style/resume_text_two"
-                    android:text="早8晚5/周一~周五" />
+                     />
             </LinearLayout>
             <LinearLayout
                 android:background="@color/writer"
@@ -62,7 +62,7 @@
 
                 <EditText
                     style="@style/resume_text_two"
-                    android:text="2000~2999/月" />
+                     />
             </LinearLayout>
             <LinearLayout
                 android:background="@color/writer"
@@ -77,7 +77,7 @@
 
                 <EditText
                     style="@style/resume_text_two"
-                    android:text="五险一金，带薪年假，旅游" />
+                     />
             </LinearLayout>
             <LinearLayout 
                 android:padding="10dp"

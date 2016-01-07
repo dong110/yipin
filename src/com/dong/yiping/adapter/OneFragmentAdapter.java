@@ -24,7 +24,7 @@ public class OneFragmentAdapter extends BaseAdapter{
 	private GetZhaopinBean getZhaopin;
 	private StarCompanyBean starCompanyBean;
 	private StarStudentBean starStudentBean;
-	public boolean isGetJob = true;
+	public boolean isGetJob = false;
 	private int TYPE_ONE = 0;
 	private int type_two = 1;
 	private int type_three = 2;
@@ -136,7 +136,7 @@ public class OneFragmentAdapter extends BaseAdapter{
 					public void onClick(View v) {
 						get_Zhaopin.setSelected(false);
 						bt_getJob.setSelected(true);
-						isGetJob = true;
+						isGetJob = false;
 						notifyDataSetChanged();
 					}
 				});
@@ -146,7 +146,7 @@ public class OneFragmentAdapter extends BaseAdapter{
 					public void onClick(View v) {
 						get_Zhaopin.setSelected(true);
 						bt_getJob.setSelected(false);
-						isGetJob = false;
+						isGetJob = true;
 						notifyDataSetChanged();
 					}
 				});
